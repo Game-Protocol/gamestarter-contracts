@@ -16,6 +16,9 @@
 ## Tokens Graph
 ![tokens_graph](images/tokens_graph.png)
 
-## Crowdsale cantract types
+## Crowdsale contract types
+
+1. Standard contract
+2. Bonus contract
 
 
