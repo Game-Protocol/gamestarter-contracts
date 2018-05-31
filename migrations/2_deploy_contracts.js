@@ -1,13 +1,17 @@
+var verifyCode = require('../scripts/verifyCode');
 var toTimestamp = require('../scripts/toTimestamp');
 
-var SubToken = artifacts.require("SubToken");
-var StandardCrowdsale = artifacts.require("StandardCrowdsale");
+var GPToken = artifacts.require("./GPToken.sol");
+var GPTCrowdsale = artifacts.require("./GPTCrowdsale.sol");
 
 
 module.exports = function (deployer) {
-
   var wallet = process.env.WALLET;
-  var feeWallet = process.env.BENEFICIARY;
+  var feeWallet = process.env.FEEWALLET;
+  var team = process.env.TEAM;
+  var advisors = process.env.ADVISORS;
+  var bountyProgram = process.env.BOUNTYPROGRAM;
+  var gameSupportFund = process.env.GAMESUPPORTFUND;
 
   var start = toTimestamp.getTimeStampMinutesFromNow(5); 
   var end = toTimestamp.getTimeStampMinutesFromNow(10);
@@ -17,10 +21,15 @@ module.exports = function (deployer) {
 
   var rate = new web3.BigNumber(2000); // exchange rate
 
-  deployer.deploy(SubToken).then(function () {
-    deployer.deploy(StandardCrowdsale, start, end, rate, wallet, feeWallet, SubToken.address).then(function (){
-      SubToken.deployed().then(function (instance){
-        instance.transferOwnership(StandardCrowdsale.address); // Transfer ownership to crowdsale
+  verifyCode.flatten();
+
+  deployer.deploy(GPToken).then(function () {
+    var types = ["uint256" ,"uint256" ,"uint256" ,"address" ,"address" ,"address" ,"address" , "address" , "address"];
+    var params = [start, end, rate, wallet, gameSupportFund, bountyProgram, advisors, team, GPToken.address];
+    verifyCode.toABI("GPTCrowdsale.abi.txt", types, params);
+    deployer.deploy(GPTCrowdsale, start, end, rate, wallet, gameSupportFund, bountyProgram, advisors, team, GPToken.address).then(function (){
+      GPToken.deployed().then(function (instance){
+        instance.transferOwnership(GPTCrowdsale.address); // Transfer ownership to crowdsale
       });
     });
   });

@@ -1,7 +1,7 @@
-const advanceBlock = require('../../helpers/advanceToBlock');
-const increaseTime = require('../../helpers/increaseTime');
-const latestTime = require('../../helpers/latestTime');
-const ether = require('../../helpers/ether');
+const advanceBlock = require('../helpers/advanceToBlock');
+const increaseTime = require('../helpers/increaseTime');
+const latestTime = require('../helpers/latestTime');
+const ether = require('../helpers/ether');
 const EVMRevert = "revert";
 
 const BigNumber = web3.BigNumber;
@@ -11,20 +11,24 @@ const should = require('chai')
   .use(require('chai-bignumber')(BigNumber))
   .should();
 
-const StandardCrowdsale = artifacts.require('StandardCrowdsale');
-const MockToken = artifacts.require('MockToken');
+const GPTCrowdsale = artifacts.require('GPTCrowdsale');
+const GPToken = artifacts.require('GPToken');
 
-contract('StandardCrowdsale_Timed', function (accounts) {
+contract('GPTCrowdsale_Timed', function (accounts) {
   const rate = new BigNumber(1000);
   const value = ether.ether(2);
   const tokenSupply = new BigNumber('15e25');
-  const expectedTokenAmount = rate.mul(value);
+  const expectedTokenAmount = rate.mul(value).mul(1.2);
 
   const owner = accounts[0];
   const investor = accounts[1];
   const wallet = accounts[2];
   const purchaser = accounts[3];
-  const feeWallet = accounts[4];
+
+  const walletGameSupportFund = accounts[4];
+  const walletBountyProgram = accounts[5];
+  const walletAdvisorsAndPartnership = accounts[6];
+  const walletTeam = accounts[7];
 
   const authorized = investor;
   const unauthorized = accounts[8]
@@ -39,22 +43,26 @@ contract('StandardCrowdsale_Timed', function (accounts) {
     this.openingTime = latestTime.latestTime() + increaseTime.duration.weeks(1);
     this.closingTime = this.openingTime + increaseTime.duration.weeks(5);
     this.afterClosingTime = this.closingTime + increaseTime.duration.seconds(1);
-    this.token = await MockToken.new();
-    this.crowdsale = await StandardCrowdsale.new(
+    this.token = await GPToken.new();
+    this.crowdsale = await GPTCrowdsale.new(
       this.openingTime,
       this.closingTime,
       rate,
       wallet,
-      feeWallet,
+      walletGameSupportFund,
+      walletBountyProgram,
+      walletAdvisorsAndPartnership,
+      walletTeam,
       this.token.address,
       { from: owner }
     );
     await this.token.transferOwnership(this.crowdsale.address);
-    // await this.crowdsale.addToWhitelist(owner);
-    // await this.crowdsale.addToWhitelist(investor);
-    // await this.crowdsale.addToWhitelist(purchaser);
+    await this.crowdsale.addToWhitelist(owner);
+    await this.crowdsale.addToWhitelist(investor);
+    await this.crowdsale.addToWhitelist(purchaser);
   });
 
+  //  Timed ---------------------------------------------------------------------------
   describe('timed crowdsale', function () {
     it('should be ended only after end', async function () {
       let ended = await this.crowdsale.hasClosed();
@@ -83,4 +91,5 @@ contract('StandardCrowdsale_Timed', function (accounts) {
       });
     });
   });
+  // Timed ---------------------------------------------------------------------------
 });

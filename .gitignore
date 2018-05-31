@@ -1,6 +1,8 @@
 .vscode
-node_modules
-.env
 build
+/node_modules
+.env
+/out
 GameStarter.xlsx
-Bancor
+Crowdsale.xlsx
+instructions.txt

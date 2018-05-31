@@ -1,6 +1,9 @@
 var HDWalletProvider = require("truffle-hdwallet-provider");
 require('dotenv').config();
 
+var key = process.env.MNENOMIC;
+var api = process.env.INFURA_API_KEY;
+
 module.exports = {
   networks: {
     development: {
@@ -9,19 +12,23 @@ module.exports = {
       network_id: "*", // Match any network id
       gas: 4600000
     },
-    mainnet: {
-      provider: new HDWalletProvider(process.env.MNENOMIC, "https://mainnet.infura.io/" + process.env.INFURA_API_KEY),
-      network_id: 2,
-    },
-    ropsten: {
-      provider: new HDWalletProvider(process.env.MNENOMIC, "https://ropsten.infura.io/" + process.env.INFURA_API_KEY),
-      network_id: 3,
-      gas: 4600000
-    },
-    rinkeby: {
-      provider: new HDWalletProvider(process.env.MNENOMIC, "https://rinkeby.infura.io/" + process.env.INFURA_API_KEY),
-      network_id: 4,
-    }
+    // commented out until the truffle issue is fixed
+    // "Command doesn't return and stuck at `Saving artifacts...` when using hdwallet provider." 
+    // https://github.com/trufflesuite/truffle-migrate/issues/14
+
+    // mainnet: {
+    //   provider: new HDWalletProvider(key, "https://mainnet.infura.io/" + api),
+    //   network_id: 2,
+    // },
+    // ropsten: {
+    //   provider: new HDWalletProvider(key, "https://ropsten.infura.io/" + api),
+    //   network_id: 3,
+    //   gas: 4600000
+    // },
+    // rinkeby: {
+    //   provider: new HDWalletProvider(key, "https://rinkeby.infura.io/" + api),
+    //   network_id: 4,
+    // }
   },
   solc: {
     optimizer: {

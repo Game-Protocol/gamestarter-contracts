@@ -1,4 +1,4 @@
-pragma solidity ^0.4.23;
+pragma solidity ^0.4.24;
 
 import "../token/SubToken.sol";
 import "openzeppelin-solidity/contracts/crowdsale/distribution/FinalizableCrowdsale.sol";
@@ -9,8 +9,6 @@ import "openzeppelin-solidity/contracts/crowdsale/Crowdsale.sol";
  * @title StandardCrowdsale
  * @dev Standard Crowdsale contract.
  * The way to add new features to a base crowdsale is by multiple inheritance.
- * In this example we are providing following extensions:
- *
  * After adding multiple features it's good practice to run integration tests
  * to ensure that subcontracts works together as intended.
  */
@@ -56,13 +54,8 @@ contract StandardCrowdsale is FinalizableCrowdsale, MintedCrowdsale {
     function finalization() internal onlyOwner {
         super.finalization();
 
-        // Create a converter that connects GPT and the token of this crowdsale
-        // Transfer some GPT and mint a percent (5% of the sold tokens) to the converter
-
-
-
-        // Disable token minting from this point
-        SubToken(token).finishMinting();
+        // // Disable token minting from this point
+        // SubToken(token).finishMinting();
 
         // Re-enable transfers and burn after the token sale.
         SubToken(token).unpause();
