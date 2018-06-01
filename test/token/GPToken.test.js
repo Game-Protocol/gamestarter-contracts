@@ -1,5 +1,5 @@
 const decodeLogs = require('../helpers/decodeLogs');
-const GPToken = artifacts.require('GPToken.sol');
+const GPToken = artifacts.require('GPToken');
 
 const BigNumber = web3.BigNumber;
 

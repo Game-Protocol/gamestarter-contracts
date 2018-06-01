@@ -88,11 +88,6 @@ contract('GPTCrowdsale_Finalazation', function (accounts) {
         balance.should.be.bignumber.equal(expectedAdvisorsTokenAmount);
       });
 
-      // it('tokens delivered to team', async function () {
-      //   let balance = await this.token.balanceOf(walletTeam);
-      //   balance.should.be.bignumber.equal(expectedTeamTokenAmount);
-      // });
-
       it('finished minting', async function () {
         const mintingFinished = await this.token.mintingFinished.call();
         assert.equal(mintingFinished, true);

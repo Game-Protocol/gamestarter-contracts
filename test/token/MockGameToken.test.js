@@ -1,5 +1,5 @@
 const decodeLogs = require('../helpers/decodeLogs');
-const MockToken = artifacts.require('MockToken');
+const MockGameToken = artifacts.require('MockGameToken');
 
 const BigNumber = web3.BigNumber;
 
@@ -8,12 +8,12 @@ require('chai')
   .use(require('chai-bignumber')(BigNumber))
   .should();
 
-contract('MockToken', accounts => {
+contract('MockGameToken', accounts => {
   let token;
   const creator = accounts[0];
 
   beforeEach(async function () {
-    token = await MockToken.new({ from: creator });
+    token = await MockGameToken.new({ from: creator });
     await token.mint(creator, 150*10**6*10**18);
   });
 

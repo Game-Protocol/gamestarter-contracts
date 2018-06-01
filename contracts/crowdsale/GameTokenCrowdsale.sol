@@ -1,18 +1,18 @@
 pragma solidity ^0.4.24;
 
-import "../token/SubToken.sol";
+import "../token/GameToken.sol";
 import "openzeppelin-solidity/contracts/crowdsale/distribution/FinalizableCrowdsale.sol";
 import "openzeppelin-solidity/contracts/crowdsale/emission/MintedCrowdsale.sol";
 import "openzeppelin-solidity/contracts/crowdsale/Crowdsale.sol";
 
 /**
- * @title StandardCrowdsale
- * @dev Standard Crowdsale contract.
+ * @title GameTokenCrowdsale
+ * @dev GameToken Crowdsale contract.
  * The way to add new features to a base crowdsale is by multiple inheritance.
  * After adding multiple features it's good practice to run integration tests
  * to ensure that subcontracts works together as intended.
  */
-contract StandardCrowdsale is FinalizableCrowdsale, MintedCrowdsale {
+contract GameTokenCrowdsale is FinalizableCrowdsale, MintedCrowdsale {
 
     address public feeWallet;
 
@@ -22,7 +22,7 @@ contract StandardCrowdsale is FinalizableCrowdsale, MintedCrowdsale {
         uint256 _rate,
         address _wallet,
         address _feeWallet, 
-        SubToken _token
+        GameToken _token
     ) 
         public
         Crowdsale(_rate, _wallet, _token)
@@ -55,12 +55,12 @@ contract StandardCrowdsale is FinalizableCrowdsale, MintedCrowdsale {
         super.finalization();
 
         // // Disable token minting from this point
-        // SubToken(token).finishMinting();
+        // GameToken(token).finishMinting();
 
         // Re-enable transfers and burn after the token sale.
-        SubToken(token).unpause();
+        GameToken(token).unpause();
 
         // Transfer ownership of the token to the owner of the crowdsale
-        SubToken(token).transferOwnership(owner);
+        GameToken(token).transferOwnership(owner);
     }
 }

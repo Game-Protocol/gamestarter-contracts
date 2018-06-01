@@ -5,9 +5,9 @@ import "openzeppelin-solidity/contracts/crowdsale/emission/MintedCrowdsale.sol";
 import "openzeppelin-solidity/contracts/crowdsale/validation/WhitelistedCrowdsale.sol";
 import "openzeppelin-solidity/contracts/crowdsale/emission/MintedCrowdsale.sol";
 import "openzeppelin-solidity/contracts/crowdsale/Crowdsale.sol";
+import "./validation/TokenCappedCrowdsale.sol";
 import "../token/GPToken.sol";
 import "../token/GPTTeamTokenTimelock.sol";
-import "./validation/TokenCappedCrowdsale.sol";
 
 /**
  * @title GPTCrowdsale

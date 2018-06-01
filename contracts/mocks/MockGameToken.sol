@@ -1,15 +1,15 @@
 pragma solidity ^0.4.24;
 
-import "../token/SubToken.sol";
+import "../token/GameToken.sol";
 
 /**
  * @title MockToken
  */
-contract MockToken is SubToken
+contract MockGameToken is GameToken
 {
     /**
     * @dev Constructor that gives msg.sender all of existing tokens
     */
-    constructor() public SubToken("Sub Token", "ST") {
+    constructor() public GameToken("Sub Token", "ST") {
     }
 }

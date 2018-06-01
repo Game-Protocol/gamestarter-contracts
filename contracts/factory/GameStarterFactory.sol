@@ -1,8 +1,8 @@
 pragma solidity ^0.4.24;
 
-import "../token/SubToken.sol";
+import "../token/GameToken.sol";
 import "../token/GPToken.sol";
-import "../crowdsale/StandardCrowdsale.sol";
+import "../crowdsale/GameTokenCrowdsale.sol";
 
 
 contract GameStarterFactory {
@@ -26,10 +26,10 @@ contract GameStarterFactory {
         public 
         returns(address _tokenAddress) 
     {
-        SubToken token = new SubToken(_tokenName, _tokenSymbol);
+        GameToken token = new GameToken(_tokenName, _tokenSymbol);
         address tokenAddress = address(token);
 
-        StandardCrowdsale crowdsale = new StandardCrowdsale(
+        GameTokenCrowdsale crowdsale = new GameTokenCrowdsale(
             _saleOpeningTime, 
             _saleClosingTime, 
             _rate,

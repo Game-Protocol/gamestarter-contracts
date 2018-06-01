@@ -1,25 +1,21 @@
 pragma solidity ^0.4.24;
 
-import "openzeppelin-solidity/contracts/ownership/NoOwner.sol";
-import "openzeppelin-solidity/contracts/token/ERC20/PausableToken.sol";
-import "openzeppelin-solidity/contracts/token/ERC20/DetailedERC20.sol";
-import "openzeppelin-solidity/contracts/token/ERC20/BurnableToken.sol";
-import "openzeppelin-solidity/contracts/token/ERC20/MintableToken.sol";
+import "./BaseToken.sol";
 import "../bancor/interfaces/ISmartToken.sol";
 
 /**
  * @title GPToken
  * @dev Game Protocol Token
- * Inherited from PausableToken, BurnableToken, ISmartToken, MintableToken, NoOwner
+ * Inherited from BaseToken
  * ISmartToken inheritence for bancor integration.
  * When deployed will start with a paused state until crowdsale is finished.
  */
-contract GPToken is PausableToken, BurnableToken, DetailedERC20, MintableToken, NoOwner, ISmartToken
+contract GPToken is BaseToken, ISmartToken
 {
     /**
-    * @dev Constructor that gives msg.sender all of existing tokens.
+    * @dev Constructor that pauses the token at the start until the end of the crowdsale
     */
-    constructor() public DetailedERC20("Game Protocol Token", "GPT", 18) {
+    constructor() public BaseToken("Game Protocol Token", "GPT", 18) {
         paused = true;
     }
 

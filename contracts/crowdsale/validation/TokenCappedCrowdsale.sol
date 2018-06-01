@@ -10,6 +10,7 @@ import "openzeppelin-solidity/contracts/crowdsale/Crowdsale.sol";
 contract TokenCappedCrowdsale is Crowdsale {
     using SafeMath for uint256;
 
+    // Maximum amount of tokens a crowdsale can allocate
     uint256 public tokenCap;
 
     // Amount of tokens allocated

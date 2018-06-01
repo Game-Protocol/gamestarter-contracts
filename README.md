@@ -8,6 +8,8 @@ Game Protocol crowdsale and token contracts, using OpenZeppelin v1.9.0
 * solidity : v0.4.24
 * ganache-cli : v6.1.0
 
+To run test > npm test
+
 # Game Starter
 
 GameStarter is a one-stop crowdfunding platform for new game projects.
@@ -48,5 +50,6 @@ GameStarter is a one-stop crowdfunding platform for new game projects.
 ## Questions
 
 1. Virtual balance?
-2. Connector vs converter?
-3. On buy token is issued?
+2. Just one converter?
+3. Connector vs converter?
+4. On buy, smart token is minted?
