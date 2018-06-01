@@ -2,11 +2,9 @@ pragma solidity ^0.4.18;
 
 import "./SmartTokenController.sol";
 import "./Managed.sol";
-import "./Utils.sol";
 import "./interfaces/ITokenConverter.sol";
 import "./interfaces/ISmartToken.sol";
 import "./interfaces/IBancorConverterExtensions.sol";
-import "./interfaces/IEtherToken.sol";
 
 /*
     Bancor Converter v0.8
@@ -41,8 +39,8 @@ contract BancorConverter is ITokenConverter, SmartTokenController, Managed {
         bool isSet;                     // used to tell if the mapping element is defined
     }
 
-    string public version = "0.8";
-    string public converterType = "bancor";
+    string public version = "0.1";
+    string public converterType = "game_protocol";
 
     IBancorConverterExtensions public extensions;       // bancor converter extensions contract
     IERC20Token[] public connectorTokens;               // ERC20 standard token addresses
@@ -56,8 +54,16 @@ contract BancorConverter is ITokenConverter, SmartTokenController, Managed {
     IERC20Token[] private convertPath;
 
     // triggered when a conversion between two tokens occurs (TokenConverter event)
-    event Conversion(address indexed _fromToken, address indexed _toToken, address indexed _trader, uint256 _amount, uint256 _return, 
-    int256 _conversionFee, uint256 _currentPriceN, uint256 _currentPriceD);
+    event Conversion(
+        address indexed _fromToken,
+        address indexed _toToken, 
+        address indexed _trader, 
+        uint256 _amount, 
+        uint256 _return, 
+        int256 _conversionFee, 
+        uint256 _currentPriceN, 
+        uint256 _currentPriceD
+    );
     // triggered when the conversion fee is updated
     event ConversionFeeUpdate(uint32 _prevFee, uint32 _newFee);
 
