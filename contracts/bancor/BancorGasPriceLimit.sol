@@ -1,6 +1,6 @@
-pragma solidity ^0.4.18;
-import "./Owned.sol";
-import "./Utils.sol";
+pragma solidity ^0.4.24;
+
+import "openzeppelin-solidity/contracts/ownership/Ownable.sol";
 import "./interfaces/IBancorGasPriceLimit.sol";
 
 /*
@@ -10,7 +10,7 @@ import "./interfaces/IBancorGasPriceLimit.sol";
     The gas price limit is universal to all converters and it can be updated by the owner to be in line
     with the network's current gas price.
 */
-contract BancorGasPriceLimit is IBancorGasPriceLimit, Owned, Utils {
+contract BancorGasPriceLimit is IBancorGasPriceLimit, Ownable {
     uint256 public gasPrice = 0 wei;    // maximum gas price for bancor transactions
     
     /**
@@ -18,10 +18,10 @@ contract BancorGasPriceLimit is IBancorGasPriceLimit, Owned, Utils {
 
         @param _gasPrice    gas price limit
     */
-    function BancorGasPriceLimit(uint256 _gasPrice)
+    constructor(uint256 _gasPrice)
         public
-        greaterThanZero(_gasPrice)
     {
+        require(_gasPrice > 0);
         gasPrice = _gasPrice;
     }
 
@@ -32,9 +32,9 @@ contract BancorGasPriceLimit is IBancorGasPriceLimit, Owned, Utils {
     */
     function setGasPrice(uint256 _gasPrice)
         public
-        ownerOnly
-        greaterThanZero(_gasPrice)
+        onlyOwner
     {
+        require(_gasPrice > 0);
         gasPrice = _gasPrice;
     }
 
@@ -46,8 +46,8 @@ contract BancorGasPriceLimit is IBancorGasPriceLimit, Owned, Utils {
     function validateGasPrice(uint256 _gasPrice)
         public
         view
-        greaterThanZero(_gasPrice)
     {
+        require(_gasPrice > 0);
         require(_gasPrice <= gasPrice);
     }
 }

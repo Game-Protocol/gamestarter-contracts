@@ -5,6 +5,10 @@ import "./Managed.sol";
 import "./interfaces/ITokenConverter.sol";
 import "./interfaces/ISmartToken.sol";
 import "./interfaces/IBancorConverterExtensions.sol";
+import "openzeppelin-solidity/contracts/token/ERC20/ERC20.sol";
+import "openzeppelin-solidity/contracts/token/ERC20/DetailedERC20.sol";
+import "openzeppelin-solidity/contracts/math/SafeMath.sol";
+
 
 /*
     Bancor Converter v0.8
@@ -28,6 +32,7 @@ import "./interfaces/IBancorConverterExtensions.sol";
     - Possibly add getters for the connector fields so that the client won't need to rely on the order in the struct
 */
 contract BancorConverter is ITokenConverter, SmartTokenController, Managed {
+    using SafeMath for uint256;
     uint32 private constant MAX_WEIGHT = 1000000;
     uint32 private constant MAX_CONVERSION_FEE = 1000000;
 
@@ -43,15 +48,15 @@ contract BancorConverter is ITokenConverter, SmartTokenController, Managed {
     string public converterType = "game_protocol";
 
     IBancorConverterExtensions public extensions;       // bancor converter extensions contract
-    IERC20Token[] public connectorTokens;               // ERC20 standard token addresses
-    IERC20Token[] public quickBuyPath;                  // conversion path that's used in order to buy the token with ETH
+    ERC20[] public connectorTokens;               // ERC20 standard token addresses
+    ERC20[] public quickBuyPath;                  // conversion path that's used in order to buy the token with ETH
     mapping (address => Connector) public connectors;   // connector token addresses -> connector data
     uint32 private totalConnectorWeight = 0;            // used to efficiently prevent increasing the total connector weight above 100%
     uint32 public maxConversionFee = 0;                 // maximum conversion fee for the lifetime of the contract, represented in ppm,
                                                         // 0...1000000 (0 = no fee, 100 = 0.01%, 1000000 = 100%)
     uint32 public conversionFee = 0;                    // current conversion fee, represented in ppm, 0...maxConversionFee
     bool public conversionsEnabled = true;              // true if token conversions is enabled, false if not
-    IERC20Token[] private convertPath;
+    ERC20[] private convertPath;
 
     // triggered when a conversion between two tokens occurs (TokenConverter event)
     event Conversion(
@@ -80,14 +85,14 @@ contract BancorConverter is ITokenConverter, SmartTokenController, Managed {
         ISmartToken _token, 
         IBancorConverterExtensions _extensions, 
         uint32 _maxConversionFee, 
-        IERC20Token _connectorToken, 
+        ERC20 _connectorToken, 
         uint32 _connectorWeight
     )
         public
         SmartTokenController(_token)
-        validAddress(_extensions)
         validMaxConversionFee(_maxConversionFee)
     {
+        require(_extensions != address(0));
         extensions = _extensions;
         maxConversionFee = _maxConversionFee;
 
@@ -96,13 +101,13 @@ contract BancorConverter is ITokenConverter, SmartTokenController, Managed {
     }
 
     // validates a connector token address - verifies that the address belongs to one of the connector tokens
-    modifier validConnector(IERC20Token _address) {
+    modifier validConnector(ERC20 _address) {
         require(connectors[_address].isSet);
         _;
     }
 
     // validates a token address - verifies that the address belongs to one of the convertible tokens
-    modifier validToken(IERC20Token _address) {
+    modifier validToken(ERC20 _address) {
         require(_address == token || connectors[_address].isSet);
         _;
     }
@@ -126,7 +131,7 @@ contract BancorConverter is ITokenConverter, SmartTokenController, Managed {
     }
 
     // validates a conversion path - verifies that the number of elements is odd and that maximum number of 'hops' is 10
-    modifier validConversionPath(IERC20Token[] _path) {
+    modifier validConversionPath(ERC20[] _path) {
         require(_path.length > 2 && _path.length <= (1 + 2 * 10) && _path.length % 2 == 1);
         _;
     }
@@ -188,10 +193,10 @@ contract BancorConverter is ITokenConverter, SmartTokenController, Managed {
     */
     function setExtensions(IBancorConverterExtensions _extensions)
         public
-        ownerOnly
-        validAddress(_extensions)
-        notThis(_extensions)
+        onlyOwner
     {
+        require(_extensions != address(0));
+        require(_extensions != address(this));
         extensions = _extensions;
     }
 
@@ -200,9 +205,9 @@ contract BancorConverter is ITokenConverter, SmartTokenController, Managed {
 
         @param _path    new quick buy path, see conversion path format in the BancorQuickConverter contract
     */
-    function setQuickBuyPath(IERC20Token[] _path)
+    function setQuickBuyPath(ERC20[] _path)
         public
-        ownerOnly
+        onlyOwner
         validConversionPath(_path)
     {
         quickBuyPath = _path;
@@ -211,7 +216,7 @@ contract BancorConverter is ITokenConverter, SmartTokenController, Managed {
     /*
         @dev allows the manager to clear the quick buy path
     */
-    function clearQuickBuyPath() public ownerOnly {
+    function clearQuickBuyPath() public onlyOwner {
         quickBuyPath.length = 0;
     }
 
@@ -256,7 +261,7 @@ contract BancorConverter is ITokenConverter, SmartTokenController, Managed {
         @return conversion fee amount
     */
     function getConversionFeeAmount(uint256 _amount) public view returns (uint256) {
-        return safeMul(_amount, conversionFee) / MAX_CONVERSION_FEE;
+        return _amount.mul(conversionFee).div(MAX_CONVERSION_FEE);
     }
 
     /**
@@ -267,14 +272,14 @@ contract BancorConverter is ITokenConverter, SmartTokenController, Managed {
         @param _weight                 constant connector weight, represented in ppm, 1-1000000
         @param _enableVirtualBalance   true to enable virtual balance for the connector, false to disable it
     */
-    function addConnector(IERC20Token _token, uint32 _weight, bool _enableVirtualBalance)
+    function addConnector(ERC20 _token, uint32 _weight, bool _enableVirtualBalance)
         public
-        ownerOnly
+        onlyOwner
         inactive
-        validAddress(_token)
-        notThis(_token)
         validConnectorWeight(_weight)
     {
+        require(_token != address(0));
+        require(_token != address(this));
         require(_token != token && !connectors[_token].isSet && totalConnectorWeight + _weight <= MAX_WEIGHT); // validate input
 
         connectors[_token].virtualBalance = 0;
@@ -295,9 +300,9 @@ contract BancorConverter is ITokenConverter, SmartTokenController, Managed {
         @param _enableVirtualBalance   true to enable virtual balance for the connector, false to disable it
         @param _virtualBalance         new connector's virtual balance
     */
-    function updateConnector(IERC20Token _connectorToken, uint32 _weight, bool _enableVirtualBalance, uint256 _virtualBalance)
+    function updateConnector(ERC20 _connectorToken, uint32 _weight, bool _enableVirtualBalance, uint256 _virtualBalance)
         public
-        ownerOnly
+        onlyOwner
         validConnector(_connectorToken)
         validConnectorWeight(_weight)
     {
@@ -318,9 +323,9 @@ contract BancorConverter is ITokenConverter, SmartTokenController, Managed {
         @param _connectorToken  connector token contract address
         @param _disable         true to disable the token, false to re-enable it
     */
-    function disableConnectorPurchases(IERC20Token _connectorToken, bool _disable)
+    function disableConnectorPurchases(ERC20 _connectorToken, bool _disable)
         public
-        ownerOnly
+        onlyOwner
         validConnector(_connectorToken)
     {
         connectors[_connectorToken].isPurchaseEnabled = !_disable;
@@ -333,7 +338,7 @@ contract BancorConverter is ITokenConverter, SmartTokenController, Managed {
 
         @return connector balance
     */
-    function getConnectorBalance(IERC20Token _connectorToken)
+    function getConnectorBalance(ERC20 _connectorToken)
         public
         view
         validConnector(_connectorToken)
@@ -352,7 +357,7 @@ contract BancorConverter is ITokenConverter, SmartTokenController, Managed {
 
         @return expected conversion return amount
     */
-    function getReturn(IERC20Token _fromToken, IERC20Token _toToken, uint256 _amount) public view returns (uint256) {
+    function getReturn(ERC20 _fromToken, ERC20 _toToken, uint256 _amount) public view returns (uint256) {
         require(_fromToken != _toToken); // validate input
 
         // conversion between the token and one of its connectors
@@ -363,7 +368,7 @@ contract BancorConverter is ITokenConverter, SmartTokenController, Managed {
 
         // conversion between 2 connectors
         uint256 purchaseReturnAmount = getPurchaseReturn(_fromToken, _amount);
-        return getSaleReturn(_toToken, purchaseReturnAmount, safeAdd(token.totalSupply(), purchaseReturnAmount));
+        return getSaleReturn(_toToken, purchaseReturnAmount, token.totalSupply().add(purchaseReturnAmount));
     }
 
     /**
@@ -374,7 +379,7 @@ contract BancorConverter is ITokenConverter, SmartTokenController, Managed {
 
         @return expected purchase return amount
     */
-    function getPurchaseReturn(IERC20Token _connectorToken, uint256 _depositAmount)
+    function getPurchaseReturn(ERC20 _connectorToken, uint256 _depositAmount)
         public
         view
         active
@@ -390,7 +395,7 @@ contract BancorConverter is ITokenConverter, SmartTokenController, Managed {
 
         // deduct the fee from the return amount
         uint256 feeAmount = getConversionFeeAmount(amount);
-        return safeSub(amount, feeAmount);
+        return amount.sub(feeAmount);
     }
 
     /**
@@ -401,7 +406,7 @@ contract BancorConverter is ITokenConverter, SmartTokenController, Managed {
 
         @return expected sale return amount
     */
-    function getSaleReturn(IERC20Token _connectorToken, uint256 _sellAmount) public view returns (uint256) {
+    function getSaleReturn(ERC20 _connectorToken, uint256 _sellAmount) public view returns (uint256) {
         return getSaleReturn(_connectorToken, _sellAmount, token.totalSupply());
     }
 
@@ -416,8 +421,8 @@ contract BancorConverter is ITokenConverter, SmartTokenController, Managed {
         @return conversion return amount
     */
     function convertInternal(
-        IERC20Token _fromToken, 
-        IERC20Token _toToken, 
+        ERC20 _fromToken, 
+        ERC20 _toToken, 
         uint256 _amount, 
         uint256 _minReturn
     ) 
@@ -448,7 +453,7 @@ contract BancorConverter is ITokenConverter, SmartTokenController, Managed {
 
         @return conversion return amount
     */
-    function convert(IERC20Token _fromToken, IERC20Token _toToken, uint256 _amount, uint256 _minReturn) public returns (uint256) {
+    function convert(ERC20 _fromToken, ERC20 _toToken, uint256 _amount, uint256 _minReturn) public returns (uint256) {
         convertPath = [_fromToken, token, _toToken];
         return quickConvert(convertPath, _amount, _minReturn);
     }
@@ -462,19 +467,19 @@ contract BancorConverter is ITokenConverter, SmartTokenController, Managed {
 
         @return buy return amount
     */
-    function buy(IERC20Token _connectorToken, uint256 _depositAmount, uint256 _minReturn)
+    function buy(ERC20 _connectorToken, uint256 _depositAmount, uint256 _minReturn)
         internal
         conversionsAllowed
-        greaterThanZero(_minReturn)
         returns (uint256)
     {
+        require(_minReturn > 0);
         uint256 amount = getPurchaseReturn(_connectorToken, _depositAmount);
         require(amount != 0 && amount >= _minReturn); // ensure the trade gives something in return and meets the minimum requested amount
 
         // update virtual balance if relevant
         Connector storage connector = connectors[_connectorToken];
         if (connector.isVirtualBalanceEnabled)
-            connector.virtualBalance = safeAdd(connector.virtualBalance, _depositAmount);
+            connector.virtualBalance = connector.virtualBalance.add(_depositAmount);
 
         // transfer _depositAmount funds from the caller in the connector token
         assert(_connectorToken.transferFrom(msg.sender, this, _depositAmount));
@@ -494,12 +499,12 @@ contract BancorConverter is ITokenConverter, SmartTokenController, Managed {
 
         @return sell return amount
     */
-    function sell(IERC20Token _connectorToken, uint256 _sellAmount, uint256 _minReturn)
+    function sell(ERC20 _connectorToken, uint256 _sellAmount, uint256 _minReturn)
         internal
         conversionsAllowed
-        greaterThanZero(_minReturn)
         returns (uint256)
     {
+        require(_minReturn > 0);
         require(_sellAmount <= token.balanceOf(msg.sender)); // validate input
 
         uint256 amount = getSaleReturn(_connectorToken, _sellAmount);
@@ -513,7 +518,7 @@ contract BancorConverter is ITokenConverter, SmartTokenController, Managed {
         // update virtual balance if relevant
         Connector storage connector = connectors[_connectorToken];
         if (connector.isVirtualBalanceEnabled)
-            connector.virtualBalance = safeSub(connector.virtualBalance, amount);
+            connector.virtualBalance = connector.virtualBalance.sub(amount);
 
         // destroy _sellAmount from the caller's balance in the smart token
         token.destroy(msg.sender, _sellAmount);
@@ -535,7 +540,7 @@ contract BancorConverter is ITokenConverter, SmartTokenController, Managed {
 
         @return tokens issued in return
     */
-    function quickConvert(IERC20Token[] _path, uint256 _amount, uint256 _minReturn)
+    function quickConvert(ERC20[] _path, uint256 _amount, uint256 _minReturn)
         public
         payable
         validConversionPath(_path)
@@ -560,7 +565,7 @@ contract BancorConverter is ITokenConverter, SmartTokenController, Managed {
         @return tokens issued in return
     */
     function quickConvertPrioritized(
-        IERC20Token[] _path, 
+        ERC20[] _path, 
         uint256 _amount, 
         uint256 _minReturn, 
         uint256 _block, 
@@ -574,7 +579,7 @@ contract BancorConverter is ITokenConverter, SmartTokenController, Managed {
         validConversionPath(_path)
         returns (uint256)
     {
-        IERC20Token fromToken = _path[0];
+        ERC20 fromToken = _path[0];
         IBancorQuickConverter quickConverter = extensions.quickConverter();
 
         // we need to transfer the source tokens from the caller to the quick converter,
@@ -596,7 +601,7 @@ contract BancorConverter is ITokenConverter, SmartTokenController, Managed {
     }
 
     // deprecated, backward compatibility
-    function change(IERC20Token _fromToken, IERC20Token _toToken, uint256 _amount, uint256 _minReturn) public returns (uint256) {
+    function change(ERC20 _fromToken, ERC20 _toToken, uint256 _amount, uint256 _minReturn) public returns (uint256) {
         return convertInternal(_fromToken, _toToken, _amount, _minReturn);
     }
 
@@ -609,21 +614,21 @@ contract BancorConverter is ITokenConverter, SmartTokenController, Managed {
 
         @return sale return amount
     */
-    function getSaleReturn(IERC20Token _connectorToken, uint256 _sellAmount, uint256 _totalSupply)
+    function getSaleReturn(ERC20 _connectorToken, uint256 _sellAmount, uint256 _totalSupply)
         private
         view
         active
         validConnector(_connectorToken)
-        greaterThanZero(_totalSupply)
         returns (uint256)
     {
+        require(_totalSupply > 0);
         Connector storage connector = connectors[_connectorToken];
         uint256 connectorBalance = getConnectorBalance(_connectorToken);
         uint256 amount = extensions.formula().calculateSaleReturn(_totalSupply, connectorBalance, connector.weight, _sellAmount);
 
         // deduct the fee from the return amount
         uint256 feeAmount = getConversionFeeAmount(amount);
-        return safeSub(amount, feeAmount);
+        return amount.sub(feeAmount);
     }
 
     /**
@@ -635,23 +640,23 @@ contract BancorConverter is ITokenConverter, SmartTokenController, Managed {
         @param _returnAmount    amount returned (in the target token)
         @param isPurchase       true if it's a purchase, false if it's a sale
     */
-    function dispatchConversionEvent(IERC20Token _connectorToken, uint256 _amount, uint256 _returnAmount, bool isPurchase) private {
+    function dispatchConversionEvent(ERC20 _connectorToken, uint256 _amount, uint256 _returnAmount, bool isPurchase) private {
         Connector storage connector = connectors[_connectorToken];
 
         // calculate the new price using the simple price formula
         // price = connector balance / (supply * weight)
         // weight is represented in ppm, so multiplying by 1000000
-        uint256 connectorAmount = safeMul(getConnectorBalance(_connectorToken), MAX_WEIGHT);
-        uint256 tokenAmount = safeMul(token.totalSupply(), connector.weight);
+        uint256 connectorAmount = getConnectorBalance(_connectorToken).mul(MAX_WEIGHT);
+        uint256 tokenAmount = token.totalSupply().mul(connector.weight);
 
         // normalize values
-        uint8 tokenDecimals = token.decimals();
-        uint8 connectorTokenDecimals = _connectorToken.decimals();
+        uint8 tokenDecimals = DetailedERC20(token).decimals();
+        uint8 connectorTokenDecimals = DetailedERC20(_connectorToken).decimals();
         if (tokenDecimals != connectorTokenDecimals) {
             if (tokenDecimals > connectorTokenDecimals)
-                connectorAmount = safeMul(connectorAmount, 10 ** uint256(tokenDecimals - connectorTokenDecimals));
+                connectorAmount = connectorAmount.mul(10 ** uint256(tokenDecimals - connectorTokenDecimals));
             else
-                tokenAmount = safeMul(tokenAmount, 10 ** uint256(connectorTokenDecimals - tokenDecimals));
+                tokenAmount = tokenAmount.mul(10 ** uint256(connectorTokenDecimals - tokenDecimals));
         }
 
         uint256 feeAmount = getConversionFeeAmount(_returnAmount);

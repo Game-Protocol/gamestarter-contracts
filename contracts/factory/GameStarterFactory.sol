@@ -9,7 +9,7 @@ contract GameStarterFactory {
 
     address public feeWallet;
 
-    event NewGame(address indexed _owner, address indexed _token, address indexed _converter, address _crowdsale);
+    event NewGame(address indexed _owner, address _token, address _converter, address _crowdsale);
     
     constructor (GPToken _token, address _feeWallet) public {
         feeWallet = _feeWallet;

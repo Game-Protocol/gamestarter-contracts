@@ -1,8 +1,8 @@
 .vscode
 build
-/node_modules
+node_modules
 .env
-/out
+out
 GameStarter.xlsx
 Crowdsale.xlsx
 instructions.txt

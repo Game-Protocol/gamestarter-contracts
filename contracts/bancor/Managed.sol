@@ -1,4 +1,4 @@
-pragma solidity ^0.4.18;
+pragma solidity ^0.4.24;
 
 /*
     Provides support and utilities for contract management
@@ -12,7 +12,7 @@ contract Managed {
     /**
         @dev constructor
     */
-    function Managed() public {
+    constructor() public {
         manager = msg.sender;
     }
 
@@ -39,7 +39,7 @@ contract Managed {
     */
     function acceptManagement() public {
         require(msg.sender == newManager);
-        ManagerUpdate(manager, newManager);
+        emit ManagerUpdate(manager, newManager);
         manager = newManager;
         newManager = address(0);
     }

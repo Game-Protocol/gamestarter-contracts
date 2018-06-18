@@ -1,6 +1,7 @@
-pragma solidity ^0.4.18;
-import "./TokenHolder.sol";
+pragma solidity ^0.4.24;
+
 import "./interfaces/ISmartToken.sol";
+import "openzeppelin-solidity/contracts/ownership/Ownable.sol";
 
 /*
     The smart token controller is an upgradable part of the smart token that allows
@@ -18,16 +19,16 @@ import "./interfaces/ISmartToken.sol";
     doesn't allow executing any function on the token, for a trustless solution.
     Doing that will also remove the owner's ability to upgrade the controller.
 */
-contract SmartTokenController is TokenHolder {
+contract SmartTokenController is Ownable {
     ISmartToken public token;   // smart token
 
     /**
         @dev constructor
     */
-    function SmartTokenController(ISmartToken _token)
+    constructor(ISmartToken _token)
         public
-        validAddress(_token)
     {
+        require(_token != address(0));
         token = _token;
     }
 
@@ -50,16 +51,8 @@ contract SmartTokenController is TokenHolder {
 
         @param _newOwner    new token owner
     */
-    function transferTokenOwnership(address _newOwner) public ownerOnly {
+    function transferTokenOwnership(address _newOwner) public onlyOwner {
         token.transferOwnership(_newOwner);
-    }
-
-    /**
-        @dev used by a new owner to accept a token ownership transfer
-        can only be called by the contract owner
-    */
-    function acceptTokenOwnership() public ownerOnly {
-        token.acceptOwnership();
     }
 
     /**
@@ -68,26 +61,7 @@ contract SmartTokenController is TokenHolder {
 
         @param _disable    true to disable transfers, false to enable them
     */
-    function disableTokenTransfers(bool _disable) public ownerOnly {
+    function disableTokenTransfers(bool _disable) public onlyOwner {
         token.disableTransfers(_disable);
-    }
-
-    /**
-        @dev withdraws tokens held by the controller and sends them to an account
-        can only be called by the owner
-
-        @param _token   ERC20 token contract address
-        @param _to      account to receive the new amount
-        @param _amount  amount to withdraw
-    */
-    function withdrawFromToken(
-        IERC20Token _token, 
-        address _to, 
-        uint256 _amount
-    ) 
-        public
-        ownerOnly
-    {
-        ITokenHolder(token).withdrawTokens(_token, _to, _amount);
     }
 }

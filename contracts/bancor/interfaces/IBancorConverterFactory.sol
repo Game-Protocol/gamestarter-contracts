@@ -1,7 +1,7 @@
-pragma solidity ^0.4.18;
+pragma solidity ^0.4.24;
 import "./ISmartToken.sol";
-import "./IERC20Token.sol";
 import "./IBancorConverterExtensions.sol";
+import "openzeppelin-solidity/contracts/token/ERC20/DetailedERC20.sol";
 
 /*
     Bancor Converter Factory interface
@@ -11,7 +11,7 @@ contract IBancorConverterFactory {
         ISmartToken _token, 
         IBancorConverterExtensions _extensions, 
         uint32 _maxConversionFee, 
-        IERC20Token _connectorToken, 
+        DetailedERC20 _connectorToken, 
         uint32 _connectorWeight
     ) 
         public 

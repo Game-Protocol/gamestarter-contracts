@@ -1,11 +1,13 @@
-pragma solidity ^0.4.18;
-import "./Owned.sol";
+pragma solidity ^0.4.24;
+
 import "./interfaces/IBancorConverterFactory.sol";
+import "openzeppelin-solidity/contracts/ownership/Ownable.sol";
+
 
 /*
     Bancor converter dedicated interface
 */
-contract IBancorConverter is IOwned {
+contract IBancorConverter is Ownable {
     function token() public view returns (ISmartToken) {}
     function extensions() public view returns (IBancorConverterExtensions) {}
     function quickBuyPath(uint256 _index) public view returns (IERC20Token) {}
@@ -52,7 +54,7 @@ contract IBancorConverter is IOwned {
     back to the original owner.
     The address of the new converter is available in the ConverterUpgrade event.
 */
-contract BancorConverterUpgrader is Owned {
+contract BancorConverterUpgrader is Ownable {
     IBancorConverterFactory public bancorConverterFactory;  // bancor converter factory contract
 
     // triggered when the contract accept a converter ownership

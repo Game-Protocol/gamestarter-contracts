@@ -1,4 +1,4 @@
-pragma solidity ^0.4.18;
+pragma solidity ^0.4.24;
 import "./BancorConverter.sol";
 import "./interfaces/IBancorConverterFactory.sol";
 
@@ -33,7 +33,7 @@ contract BancorConverterFactory is IBancorConverterFactory {
         ISmartToken _token,
         IBancorConverterExtensions _extensions,
         uint32 _maxConversionFee,
-        IERC20Token _connectorToken,
+        DetailedERC20 _connectorToken,
         uint32 _connectorWeight
     ) 
         public 

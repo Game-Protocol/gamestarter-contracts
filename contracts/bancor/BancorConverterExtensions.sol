@@ -1,6 +1,6 @@
 pragma solidity ^0.4.18;
-import "./TokenHolder.sol";
 import "./interfaces/IBancorConverterExtensions.sol";
+import "openzeppelin-solidity/contracts/ownership/Ownable.sol";
 
 /**
     @dev the BancorConverterExtensions contract is an owned contract that serves as a single point of access
@@ -8,7 +8,7 @@ import "./interfaces/IBancorConverterExtensions.sol";
     it allows upgrading these contracts without the need to update each and every
     BancorConverter contract instance individually.
 */
-contract BancorConverterExtensions is IBancorConverterExtensions, TokenHolder {
+contract BancorConverterExtensions is IBancorConverterExtensions, Ownable {
     IBancorFormula public formula;  // bancor calculation formula contract
     IBancorGasPriceLimit public gasPriceLimit; // bancor universal gas price limit contract
     IBancorQuickConverter public quickConverter; // bancor quick converter contract
@@ -22,10 +22,10 @@ contract BancorConverterExtensions is IBancorConverterExtensions, TokenHolder {
     */
     constructor(IBancorFormula _formula, IBancorGasPriceLimit _gasPriceLimit, IBancorQuickConverter _quickConverter)
         public
-        validAddress(_formula)
-        validAddress(_gasPriceLimit)
-        validAddress(_quickConverter)
     {
+        require(_formula != address(0));
+        require(_gasPriceLimit != address(0));
+        require(_quickConverter != address(0));
         formula = _formula;
         gasPriceLimit = _gasPriceLimit;
         quickConverter = _quickConverter;
@@ -38,10 +38,10 @@ contract BancorConverterExtensions is IBancorConverterExtensions, TokenHolder {
     */
     function setFormula(IBancorFormula _formula)
         public
-        ownerOnly
-        validAddress(_formula)
-        notThis(_formula)
+        onlyOwner
     {
+        require(_formula != address(0));
+        require(_formula != address(this));
         formula = _formula;
     }
 
@@ -52,10 +52,10 @@ contract BancorConverterExtensions is IBancorConverterExtensions, TokenHolder {
     */
     function setGasPriceLimit(IBancorGasPriceLimit _gasPriceLimit)
         public
-        ownerOnly
-        validAddress(_gasPriceLimit)
-        notThis(_gasPriceLimit)
+        onlyOwner
     {
+        require(_gasPriceLimit != address(0));
+        require(_gasPriceLimit != address(this));
         gasPriceLimit = _gasPriceLimit;
     }
 
@@ -66,10 +66,10 @@ contract BancorConverterExtensions is IBancorConverterExtensions, TokenHolder {
     */
     function setQuickConverter(IBancorQuickConverter _quickConverter)
         public
-        ownerOnly
-        validAddress(_quickConverter)
-        notThis(_quickConverter)
+        onlyOwner
     {
+        require(_quickConverter != address(0));
+        require(_quickConverter != address(this));
         quickConverter = _quickConverter;
     }
 }

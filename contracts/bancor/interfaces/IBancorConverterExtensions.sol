@@ -1,4 +1,5 @@
-pragma solidity ^0.4.18;
+pragma solidity ^0.4.24;
+
 import "./IBancorFormula.sol";
 import "./IBancorGasPriceLimit.sol";
 import "./IBancorQuickConverter.sol";

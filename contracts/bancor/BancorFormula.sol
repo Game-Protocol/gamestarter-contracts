@@ -341,7 +341,7 @@ contract BancorFormula is IBancorFormula, Utils {
     */
     function floorLog2(uint256 _n) internal pure returns (uint8) {
         uint8 res = 0;
-
+        
         if (_n < 256) {
             // At most 8 iterations
             while (_n > 1) {

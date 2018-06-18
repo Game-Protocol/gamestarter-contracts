@@ -1,7 +1,7 @@
 pragma solidity ^0.4.18;
-import "./TokenHolder.sol";
-import "./Owned.sol";
-import "./Utils.sol";
+
+import "openzeppelin-solidity/contracts/ownership/CanReclaimToken.sol";
+import "openzeppelin-solidity/contracts/math/SafeMath.sol";
 import "./interfaces/ISmartToken.sol";
 
 /*
@@ -11,11 +11,12 @@ import "./interfaces/ISmartToken.sol";
 
     'Owned' is specified here for readability reasons
 */
-contract BancorPriceFloor is Owned, TokenHolder {
+contract BancorPriceFloor is CanReclaimToken {
+    using SafeMath for uint256;
     uint256 public constant TOKEN_PRICE_N = 1;      // crowdsale price in wei (numerator)
     uint256 public constant TOKEN_PRICE_D = 100;    // crowdsale price in wei (denominator)
 
-    string public version = '0.1';
+    string public version = "0.1";
     ISmartToken public token; // smart token the contract allows selling
 
     /**
@@ -23,10 +24,10 @@ contract BancorPriceFloor is Owned, TokenHolder {
 
         @param _token   smart token the contract allows selling
     */
-    function BancorPriceFloor(ISmartToken _token)
+    constructor(ISmartToken _token)
         public
-        validAddress(_token)
     {
+        require(_token != address(0));
         token = _token;
     }
 
@@ -39,7 +40,7 @@ contract BancorPriceFloor is Owned, TokenHolder {
     function sell() public returns (uint256 amount) {
         uint256 allowance = token.allowance(msg.sender, this); // get the full allowance amount
         assert(token.transferFrom(msg.sender, this, allowance)); // transfer all tokens from the sender to the contract
-        uint256 etherValue = safeMul(allowance, TOKEN_PRICE_N) / TOKEN_PRICE_D; // calculate ETH value of the tokens
+        uint256 etherValue = allowance.add(TOKEN_PRICE_N) / TOKEN_PRICE_D; // calculate ETH value of the tokens
         msg.sender.transfer(etherValue); // send the ETH amount to the seller
         return etherValue;
     }
@@ -49,7 +50,7 @@ contract BancorPriceFloor is Owned, TokenHolder {
 
         @param _amount  amount of ETH to withdraw
     */
-    function withdraw(uint256 _amount) public ownerOnly {
+    function withdraw(uint256 _amount) public onlyOwner {
         msg.sender.transfer(_amount); // send the amount
     }
 

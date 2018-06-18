@@ -1,4 +1,7 @@
 pragma solidity ^0.4.18;
+
+import "openzeppelin-solidity/contracts/ownership/Ownable.sol";
+import "openzeppelin-solidity/contracts/ownership/NoOwner.sol";
 import "./TokenHolder.sol";
 import "./interfaces/IBancorQuickConverter.sol";
 import "./interfaces/IEtherToken.sol";
@@ -22,7 +25,7 @@ import "./interfaces/ITokenConverter.sol";
     Format:
     [source token, smart token, to token, smart token, to token...]
 */
-contract BancorQuickConverter is IBancorQuickConverter, TokenHolder {
+contract BancorQuickConverter is IBancorQuickConverter, Ownable, NoOwner {
     address public signerAddress = 0x0; // verified address that allows conversions with higher gas price
     IBancorGasPriceLimit public gasPriceLimit; // bancor universal gas price limit contract
     mapping (address => bool) public etherTokens;   // list of all supported ether tokens

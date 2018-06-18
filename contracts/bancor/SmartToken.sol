@@ -8,9 +8,6 @@ import "openzeppelin-solidity/contracts/token/ERC20/BurnableToken.sol";
 import "openzeppelin-solidity/contracts/token/ERC20/MintableToken.sol";
 
 contract SmartToken is PausableToken, BurnableToken, DetailedERC20, MintableToken, NoOwner, ISmartToken {
-    string public version = "0.3";
-
-    bool public transfersEnabled = true;    // true if transfer/transferFrom are enabled, false if not
 
     // triggered when a smart token is deployed - the _token address is defined for forward compatibility, in case we want to trigger the event from a factory
     event NewSmartToken(address _token);
