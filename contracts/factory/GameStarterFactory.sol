@@ -3,15 +3,18 @@ pragma solidity ^0.4.24;
 import "../token/GameToken.sol";
 import "../token/GPToken.sol";
 import "../crowdsale/GameTokenCrowdsale.sol";
+import "../bancor/BancorConverter.sol";
 
 
 contract GameStarterFactory {
 
+    BancorConverter converter;
     address public feeWallet;
 
-    event NewGame(address indexed _owner, address _token, address _converter, address _crowdsale);
+    event NewGame(address indexed _owner, address indexed _token, address _crowdsale);
     
-    constructor (GPToken _token, address _feeWallet) public {
+    constructor (BancorConverter _converter, address _feeWallet) public {
+        converter = _converter;
         feeWallet = _feeWallet;
     }
 
@@ -37,11 +40,13 @@ contract GameStarterFactory {
             feeWallet, 
             token
         );
+        // Add a connector between the Game Protocol Token 
+        // and the created GameToken using the converter
+        converter.addConnector(token, 10000, false);
+
         address crowdsaleAddress = address(crowdsale);
-        address converterAddress = crowdsaleAddress;
-        emit NewGame(_owner, tokenAddress, converterAddress, crowdsaleAddress);
+        emit NewGame(_owner, tokenAddress, crowdsaleAddress);
 
         return tokenAddress;
     }
-
 }

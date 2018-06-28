@@ -120,8 +120,8 @@ contract GPTCrowdsale is FinalizableCrowdsale, MintedCrowdsale, WhitelistedCrowd
         uint256 tokensLeft = CROWDSALE_ALLOCATION - tokensAllocated;
         _deliverTokens(walletGameSupportFund, tokensLeft);
 
-        // Disable token minting from this point
-        GPToken(token).finishMinting();
+        // // Disable token minting from this point
+        // GPToken(token).finishMinting();
 
         // Re-enable transfers and burn after the token sale.
         GPToken(token).unpause();

@@ -24,7 +24,7 @@ contract('GPToken', accounts => {
 
   it('has a symbol', async function () {
     const symbol = await token.symbol();
-    assert.equal(symbol, "GPT");
+    assert.equal(symbol, "GXT");
   });
 
   it('has 18 decimals', async function () {

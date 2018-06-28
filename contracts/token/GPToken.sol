@@ -15,7 +15,7 @@ contract GPToken is BaseToken, ISmartToken
     /**
     * @dev Constructor that pauses the token at the start until the end of the crowdsale
     */
-    constructor() public BaseToken("Game Protocol Token", "GPT", 18) {
+    constructor() public BaseToken("Game Protocol Token", "GXT", 18) {
         paused = true;
     }
 
