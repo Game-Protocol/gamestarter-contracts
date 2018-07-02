@@ -13,7 +13,7 @@ contract('MockGameToken', accounts => {
   const creator = accounts[0];
 
   beforeEach(async function () {
-    token = await MockGameToken.new({ from: creator });
+    token = await MockGameToken.new("token1", { from: creator });
     await token.mint(creator, 150*10**6*10**18);
   });
 

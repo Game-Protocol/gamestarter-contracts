@@ -37,7 +37,7 @@ contract('GameTokenCrowdsale', function (accounts) {
     this.openingTime = latestTime.latestTime() + increaseTime.duration.weeks(1);
     this.closingTime = this.openingTime + increaseTime.duration.weeks(5);
     this.afterClosingTime = this.closingTime + increaseTime.duration.seconds(1);
-    this.token = await MockGameToken.new();
+    this.token = await MockGameToken.new("Token1");
     this.crowdsale = await GameTokenCrowdsale.new(
       this.openingTime,
       this.closingTime,

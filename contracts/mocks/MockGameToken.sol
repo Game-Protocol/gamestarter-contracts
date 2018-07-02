@@ -10,6 +10,6 @@ contract MockGameToken is GameToken
     /**
     * @dev Constructor that gives msg.sender all of existing tokens
     */
-    constructor() public GameToken("Sub Token", "ST") {
+    constructor(string _name) public GameToken(_name, "MGT") {
     }
 }

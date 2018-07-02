@@ -26,4 +26,25 @@ contract SmartToken is PausableToken, BurnableToken, DetailedERC20, MintableToke
     {
         emit NewSmartToken(address(this));
     }
+
+    // =================================================================================================================
+    //                                      Impl ISmartToken
+    // =================================================================================================================
+
+    function disableTransfers(bool _disable) public {
+        if(_disable) {
+            super.pause();
+        }
+        else {
+            super.unpause();
+        }
+    }
+
+    function issue(address _to, uint256 _amount) public {
+        require(super.mint(_to, _amount));
+    }
+
+    function destroy(address _from, uint256 _amount) public {
+        super._burn(_from, _amount);
+    }
 }

@@ -17,17 +17,24 @@ module.exports = {
     // https://github.com/trufflesuite/truffle-migrate/issues/14
 
     mainnet: {
-      provider: function() { new HDWalletProvider(key, "https://mainnet.infura.io/" + api) },
+      provider: function () {
+        new HDWalletProvider(key, "https://mainnet.infura.io/" + api)
+      },
       network_id: 2,
     },
     ropsten: {
-      provider: function() { new HDWalletProvider(key, "https://ropsten.infura.io/" + api) },
+      provider: function () {
+        new HDWalletProvider(key, "https://ropsten.infura.io/" + api)
+      },
       network_id: 3,
       gas: 4600000
     },
     rinkeby: {
-      provider: function() { new HDWalletProvider(key, "https://rinkeby.infura.io/" + api) },
+      provider: function () {
+        new HDWalletProvider(key, "https://rinkeby.infura.io/" + api)
+      },
       network_id: 4,
+      gas: 4600000
     }
   },
   solc: {

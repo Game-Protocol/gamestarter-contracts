@@ -78,15 +78,11 @@ contract BancorConverter is ITokenConverter, SmartTokenController, Managed {
         @param  _token              smart token governed by the converter
         @param  _extensions         address of a bancor converter extensions contract
         @param  _maxConversionFee   maximum conversion fee, represented in ppm
-        @param  _connectorToken     optional, initial connector, allows defining the first connector at deployment time
-        @param  _connectorWeight    optional, weight for the initial connector
     */
     constructor(
         ISmartToken _token, 
         IBancorConverterExtensions _extensions, 
-        uint32 _maxConversionFee, 
-        ERC20 _connectorToken, 
-        uint32 _connectorWeight
+        uint32 _maxConversionFee
     )
         public
         SmartTokenController(_token)
@@ -95,9 +91,6 @@ contract BancorConverter is ITokenConverter, SmartTokenController, Managed {
         require(_extensions != address(0));
         extensions = _extensions;
         maxConversionFee = _maxConversionFee;
-
-        if (_connectorToken != address(0))
-            addConnector(_connectorToken, _connectorWeight, false);
     }
 
     // validates a connector token address - verifies that the address belongs to one of the connector tokens

@@ -12,7 +12,7 @@ To run test > npm test
 
 # Game Starter
 
-GameStarter is a one-stop crowdfunding platform base on the blockchain for new game projects.
+GameStarter is a one-stop crowdfunding platform based on the blockchain for new game projects.
 
 ## Short Use Case
 
@@ -28,7 +28,7 @@ GameStarter is a one-stop crowdfunding platform base on the blockchain for new g
 ## Sequence of events
 
 1. Deploy GPToken - `params=()`
-2. Deploy GXTCrowdsale - `params=(openTime, closeTime, rate, wallet, gameSupport, bounty, advisors, team, token)`
+2. Deploy GPTCrowdsale - `params=(openTime, closeTime, rate, wallet, gameSupport, bounty, advisors, team, token)`
 3. Deploy Converter - `params=(GPToken, IBancorConverterExtensions, _maxConversionFee)`
 4. Deploy GameStarterFactory - `params=(GPToken, Converter, feeWallet)`
 
