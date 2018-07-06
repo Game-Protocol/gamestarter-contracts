@@ -3,7 +3,8 @@ pragma solidity ^0.4.24;
 import "../token/GameToken.sol";
 import "../token/GPToken.sol";
 import "../crowdsale/GameTokenCrowdsale.sol";
-import "../bancor/BancorConverter.sol";
+
+import "bancor-contracts/solidity/contracts/converter/BancorConverter.sol";
 
 
 contract GameStarterFactory {
@@ -42,7 +43,7 @@ contract GameStarterFactory {
         );
         // Add a connector between the Game Protocol Token 
         // and the created GameToken using the converter
-        converter.addConnector(token, 10000, false);
+        // converter.addConnector(token, 10000, false);
 
         address crowdsaleAddress = address(crowdsale);
         emit NewGame(_owner, tokenAddress, crowdsaleAddress);

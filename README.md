@@ -52,4 +52,5 @@ GameStarter is a one-stop crowdfunding platform based on the blockchain for new 
 1. Virtual balance?
 2. Just one converter?
 3. Connector vs converter?
-4. If you want to buy GXT using subtoken, is GXT minted in the converter?
+4. Active converter?
+5. If you want to buy GXT using subtoken, is GXT minted in the converter?

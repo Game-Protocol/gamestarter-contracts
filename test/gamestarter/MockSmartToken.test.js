@@ -1,5 +1,5 @@
 const decodeLogs = require('../helpers/decodeLogs');
-const MockGameToken = artifacts.require('MockGameToken');
+const MockSmartToken = artifacts.require('MockSmartToken');
 
 const BigNumber = web3.BigNumber;
 
@@ -8,23 +8,23 @@ require('chai')
   .use(require('chai-bignumber')(BigNumber))
   .should();
 
-contract('MockGameToken', accounts => {
+contract('MockSmartToken', accounts => {
   let token;
   const creator = accounts[0];
 
   beforeEach(async function () {
-    token = await MockGameToken.new("Sub Token", { from: creator });
+    token = await MockSmartToken.new("Smart Token", "MST", { from: creator });
     await token.mint(creator, 150*10**6*10**18);
   });
 
   it('has a name', async function () {
     const name = await token.name();
-    assert.equal(name, "Sub Token");
+    assert.equal(name, "Smart Token");
   });
 
   it('has a symbol', async function () {
     const symbol = await token.symbol();
-    assert.equal(symbol, "MGT");
+    assert.equal(symbol, "MST");
   });
 
   it('has 18 decimals', async function () {
@@ -33,11 +33,11 @@ contract('MockGameToken', accounts => {
   });
 
   it("cant transfer when paused", async function() {
+    await token.pause().should.be.fulfilled;
     await token.transfer(accounts[1], 100*10**6*10**18).should.be.rejected;
   });
 
   it("should return correct balances after transfer", async function() {
-    await token.unpause();
     let transfer = await token.transfer(accounts[1], 100*10**6*10**18);
 
     let firstAccountBalance = await token.balanceOf(accounts[0]);

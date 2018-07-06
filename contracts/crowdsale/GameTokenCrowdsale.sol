@@ -1,9 +1,9 @@
 pragma solidity ^0.4.24;
 
 import "../token/GameToken.sol";
-import "openzeppelin-solidity/contracts/crowdsale/distribution/FinalizableCrowdsale.sol";
-import "openzeppelin-solidity/contracts/crowdsale/emission/MintedCrowdsale.sol";
-import "openzeppelin-solidity/contracts/crowdsale/Crowdsale.sol";
+import "zeppelin-solidity/contracts/crowdsale/distribution/FinalizableCrowdsale.sol";
+import "zeppelin-solidity/contracts/crowdsale/emission/MintedCrowdsale.sol";
+import "zeppelin-solidity/contracts/crowdsale/Crowdsale.sol";
 
 /**
  * @title GameTokenCrowdsale
