@@ -8,31 +8,22 @@ module.exports = {
   networks: {
     development: {
       host: "localhost",
-      port: 8545, // 8545 for console version of ganache | 7545 for application version
+      port: 8545,
       network_id: "*", // Match any network id
-      gas: 4600000
+      gasPrice: 20000000000,
+      gas: 5712388
     },
-    // commented out until the truffle issue is fixed
-    // "Command doesn't return and stuck at `Saving artifacts...` when using hdwallet provider." 
-    // https://github.com/trufflesuite/truffle-migrate/issues/14
-
     mainnet: {
-      provider: function () {
-        new HDWalletProvider(key, "https://mainnet.infura.io/" + api)
-      },
+      provider: () => new HDWalletProvider(key, "https://mainnet.infura.io/" + api),
       network_id: 2,
     },
     ropsten: {
-      provider: function () {
-        new HDWalletProvider(key, "https://ropsten.infura.io/" + api)
-      },
+      provider: () => new HDWalletProvider(key, "https://ropsten.infura.io/" + api),
       network_id: 3,
       gas: 4600000
     },
     rinkeby: {
-      provider: function () {
-        new HDWalletProvider(key, "https://rinkeby.infura.io/" + api)
-      },
+      provider: () => new HDWalletProvider(key, "https://rinkeby.infura.io/" + api),
       network_id: 4,
       gas: 4600000
     }
@@ -40,7 +31,7 @@ module.exports = {
   solc: {
     optimizer: {
       enabled: true,
-      runs: 200
+      runs: 5000000
     }
   }
 };

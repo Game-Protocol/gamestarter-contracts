@@ -27,6 +27,7 @@ contract('GameTokenCrowdsale', function (accounts) {
   const investor = accounts[1];
   const wallet = accounts[2];
   const feeWallet = accounts[3];
+  const feePercent = new BigNumber(5);
 
   before(async function () {
     // Advance to the next block to correctly read time in the solidity "now" function interpreted by ganache
@@ -44,6 +45,7 @@ contract('GameTokenCrowdsale', function (accounts) {
       rate,
       wallet,
       feeWallet,
+      feePercent,
       this.token.address,
       { from: owner }
     );

@@ -1,13 +1,13 @@
 pragma solidity ^0.4.24;
 
 import "bancor-contracts/solidity/contracts/token/interfaces/ISmartToken.sol";
-import "zeppelin-solidity/contracts/ownership/NoOwner.sol";
-import "zeppelin-solidity/contracts/ownership/Claimable.sol";
-import "zeppelin-solidity/contracts/token/ERC20/BurnableToken.sol";
-import "zeppelin-solidity/contracts/token/ERC20/DetailedERC20.sol";
-import "zeppelin-solidity/contracts/token/ERC20/PausableToken.sol";
-import "zeppelin-solidity/contracts/token/ERC20/MintableToken.sol";
-import "zeppelin-solidity/contracts/token/ERC20/ERC20.sol";
+import "openzeppelin-solidity/contracts/ownership/NoOwner.sol";
+import "openzeppelin-solidity/contracts/ownership/Claimable.sol";
+import "openzeppelin-solidity/contracts/token/ERC20/BurnableToken.sol";
+import "openzeppelin-solidity/contracts/token/ERC20/DetailedERC20.sol";
+import "openzeppelin-solidity/contracts/token/ERC20/PausableToken.sol";
+import "openzeppelin-solidity/contracts/token/ERC20/MintableToken.sol";
+import "openzeppelin-solidity/contracts/token/ERC20/ERC20.sol";
 import "../IMintable.sol";
 
 /**
@@ -46,6 +46,7 @@ contract SmartToken is ERC20, IMintable, ISmartToken, DetailedERC20, BurnableTok
     }
 
     function destroy(address _from, uint256 _amount) public onlyOwner {
+        require(_from != address(0));
         super._burn(_from, _amount);
         emit Destruction(_amount);
     }

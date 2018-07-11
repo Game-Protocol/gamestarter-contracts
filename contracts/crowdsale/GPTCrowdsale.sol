@@ -1,9 +1,9 @@
 pragma solidity ^0.4.24;
 
-import "zeppelin-solidity/contracts/crowdsale/distribution/FinalizableCrowdsale.sol";
-import "zeppelin-solidity/contracts/crowdsale/validation/WhitelistedCrowdsale.sol";
-import "zeppelin-solidity/contracts/crowdsale/emission/MintedCrowdsale.sol";
-import "zeppelin-solidity/contracts/crowdsale/Crowdsale.sol";
+import "openzeppelin-solidity/contracts/crowdsale/distribution/FinalizableCrowdsale.sol";
+import "openzeppelin-solidity/contracts/crowdsale/validation/WhitelistedCrowdsale.sol";
+import "openzeppelin-solidity/contracts/crowdsale/emission/MintedCrowdsale.sol";
+import "openzeppelin-solidity/contracts/crowdsale/Crowdsale.sol";
 import "./validation/TokenCappedCrowdsale.sol";
 import "../token/GPToken.sol";
 import "../token/GPTTeamTokenTimelock.sol";

@@ -88,14 +88,14 @@ contract('GPTCrowdsale_Finalazation', function (accounts) {
         balance.should.be.bignumber.equal(expectedAdvisorsTokenAmount);
       });
 
-      it('finished minting', async function () {
-        const mintingFinished = await this.token.mintingFinished.call();
-        assert.equal(mintingFinished, true);
-      });
+      // it('finished minting', async function () {
+      //   const mintingFinished = await this.token.mintingFinished.call();
+      //   assert.equal(mintingFinished, true);
+      // });
 
-      it('cant mint more', async function () {
-        await this.token.mint(owner, value, { from: owner }).should.be.rejectedWith(EVMRevert);
-      });
+      // it('cant mint more', async function () {
+      //   await this.token.mint(owner, value, { from: owner }).should.be.rejectedWith(EVMRevert);
+      // });
 
       it('token unpaused', async function () {
         const paused = await this.token.paused();

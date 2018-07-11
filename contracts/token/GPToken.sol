@@ -1,6 +1,5 @@
 pragma solidity ^0.4.24;
 
-import "./BaseToken.sol";
 import "./bancor/SmartToken.sol";
 
 /**
@@ -10,22 +9,12 @@ import "./bancor/SmartToken.sol";
  * SmartToken inheritence for bancor integration.
  * When deployed will start with a paused state until crowdsale is finished.
  */
-// contract GPToken is SmartToken
-// {
-//     /**
-//     * @dev Constructor that pauses the token at the start until the end of the crowdsale
-//     */
-//     constructor() public SmartToken("Game Protocol Token", "GXT", 18) {
-//         paused = true;
-//     }
-// }
-
-contract GPToken is BaseToken
+contract GPToken is SmartToken
 {
     /**
     * @dev Constructor that pauses the token at the start until the end of the crowdsale
     */
-    constructor() public BaseToken("Game Protocol Token", "GXT", 18) {
+    constructor() public SmartToken("Game Protocol Token", "GXT", 18) {
         paused = true;
     }
 }
