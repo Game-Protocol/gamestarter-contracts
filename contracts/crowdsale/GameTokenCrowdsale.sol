@@ -5,7 +5,7 @@ import "../payment/RefundEscrowWithFee.sol";
 import "openzeppelin-solidity/contracts/crowdsale/distribution/FinalizableCrowdsale.sol";
 import "openzeppelin-solidity/contracts/crowdsale/emission/MintedCrowdsale.sol";
 import "openzeppelin-solidity/contracts/crowdsale/Crowdsale.sol";
-// import "openzeppelin-solidity/contracts/math/SafeMath.sol";
+import "./distribution/RefundableCrowdsale.sol";
 
 /**
  * @title GameTokenCrowdsale
@@ -14,14 +14,10 @@ import "openzeppelin-solidity/contracts/crowdsale/Crowdsale.sol";
  * After adding multiple features it's good practice to run integration tests
  * to ensure that subcontracts works together as intended.
  */
-contract GameTokenCrowdsale is FinalizableCrowdsale, MintedCrowdsale {
-    using SafeMath for uint256;
+contract GameTokenCrowdsale is RefundableCrowdsale, MintedCrowdsale {
 
-    // minimum amount of funds to be raised in weis
-    uint256 public goal;
-
-    // refund escrow used to hold funds while crowdsale is running
-    RefundEscrowWithFee private escrow;
+    address public feeWallet;
+    uint8 public feePercent;
 
     constructor (
         uint _goal,
@@ -35,36 +31,19 @@ contract GameTokenCrowdsale is FinalizableCrowdsale, MintedCrowdsale {
     ) 
         public
         Crowdsale(_rate, _wallet, _token)
+        RefundableCrowdsale(_goal)
         TimedCrowdsale(_openingTime, _closingTime)
     {
-        require(_goal > 0);
-        escrow = new RefundEscrowWithFee(wallet, _feeWallet, _feePercent);
-        goal = _goal;
+        feeWallet = _feeWallet;
+        feePercent = _feePercent;
     }
 
-    /**
-    * @dev Checks whether funding goal was reached.
-    * @return Whether funding goal was reached
-    */
-    function goalReached() public view returns (bool) {
-        return weiRaised >= goal;
-    }
+    // =================================================================================================================
+    //                                      Impl RefundableCrowdsale
+    // =================================================================================================================
 
-    /**
-    * @dev Investors can claim refunds here if crowdsale is unsuccessful
-    */
-    function claimRefund() public {
-        require(isFinalized);
-        require(!goalReached());
-
-        escrow.withdraw(msg.sender);
-    }
-
-    /**
-    * @dev Overrides Crowdsale fund forwarding, sending funds to escrow.
-    */
-    function _forwardFunds() internal {
-        escrow.deposit.value(msg.value)(msg.sender);
+    function _createEscrow() internal {
+        escrow = new RefundEscrowWithFee(wallet, feeWallet, feePercent);
     }
 
     // =================================================================================================================
@@ -72,13 +51,6 @@ contract GameTokenCrowdsale is FinalizableCrowdsale, MintedCrowdsale {
     // =================================================================================================================
 
     function finalization() internal onlyOwner {
-        if (goalReached()) {
-            escrow.close();
-            escrow.beneficiaryWithdraw();
-        } else {
-            escrow.enableRefunds();
-        }
-
         super.finalization();
 
         // Disable token minting from this point
