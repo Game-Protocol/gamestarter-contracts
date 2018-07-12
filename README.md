@@ -33,7 +33,7 @@ GameStarter is a one-stop crowdfunding platform based on the blockchain for new 
 4. Deploy GameStarterFactory - `params=(GPToken, Converter, feeWallet)`
 
 5. For every new game, call createGame function from GameStarterFactory - params=(owner, tokenName, tokenSymbol, openTime, closeTime, rate)  inside the function the following will happen:
-    * Deploy SubToken - `params(tokenName, tokenSymbol)`
+    * Deploy SubToken - `params=(tokenName, tokenSymbol)`
     * Deploy Crowdsale for the sub token - `params=(openTime, closeTime, rate, owner, feeWallet, SubToken)`
     * Call addConnector function in Convertor - `params=(SubToken, weight, enableVirtualBalance)`
     * Call updateConnector function in Convertor - `params=(SubToken, weight, enableVirtualBalance, virtualBalance)`
@@ -43,7 +43,7 @@ GameStarter is a one-stop crowdfunding platform based on the blockchain for new 
 
 ## Crowdsale contract types
 
-1. Basic crowdsale will be mintable and finilizable.
+1. Basic crowdsale will be mintable and refundable.
 2. Bonus crowdsale will add to the Basic crowdsale bonuses depending on the time invested.
 3. ...
 

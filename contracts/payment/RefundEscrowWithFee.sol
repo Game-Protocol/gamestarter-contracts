@@ -4,9 +4,7 @@ import "./RefundEscrow.sol";
 
 /**
  * @title RefundEscrowWithFee
- * @dev Escrow that holds funds for a beneficiary, deposited from multiple parties.
- * The contract owner may close the deposit period, and allow for either withdrawal
- * by the beneficiary, or refunds to the depositors.
+ * @dev RefundEscrow with fee.
  */
 contract RefundEscrowWithFee is RefundEscrow {
 
@@ -16,6 +14,8 @@ contract RefundEscrowWithFee is RefundEscrow {
     /**
     * @dev Constructor.
     * @param _beneficiary The beneficiary of the deposits.
+    * @param _feeWallet The Wallet to deposit the fee.
+    * @param _feePercent The percent of the deposits that will be transfered to the fee wallet.
     */
     constructor(address _beneficiary, address _feeWallet, uint8 _feePercent) public RefundEscrow(_beneficiary) {
         require(_feeWallet != address(0));
@@ -26,7 +26,7 @@ contract RefundEscrowWithFee is RefundEscrow {
     }
 
     /**
-    * @dev Withdraws the beneficiary's funds.
+    * @dev Withdraws the beneficiary's funds after transfering the fee to the fee wallet
     */
     function beneficiaryWithdraw() public {
         require(state == State.Closed);

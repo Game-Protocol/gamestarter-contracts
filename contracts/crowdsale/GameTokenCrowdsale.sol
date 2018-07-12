@@ -2,7 +2,7 @@ pragma solidity ^0.4.24;
 
 import "../token/GameToken.sol";
 import "../payment/RefundEscrowWithFee.sol";
-import "openzeppelin-solidity/contracts/crowdsale/distribution/FinalizableCrowdsale.sol";
+import "openzeppelin-solidity/contracts/crowdsale/validation/WhitelistedCrowdsale.sol";
 import "openzeppelin-solidity/contracts/crowdsale/emission/MintedCrowdsale.sol";
 import "openzeppelin-solidity/contracts/crowdsale/Crowdsale.sol";
 import "./distribution/RefundableCrowdsale.sol";
@@ -14,7 +14,7 @@ import "./distribution/RefundableCrowdsale.sol";
  * After adding multiple features it's good practice to run integration tests
  * to ensure that subcontracts works together as intended.
  */
-contract GameTokenCrowdsale is RefundableCrowdsale, MintedCrowdsale {
+contract GameTokenCrowdsale is RefundableCrowdsale, MintedCrowdsale, WhitelistedCrowdsale {
 
     address public feeWallet;
     uint8 public feePercent;

@@ -7,20 +7,20 @@ const EVMRevert = "revert";
 const BigNumber = web3.BigNumber;
 
 const should = require('chai')
-    .use(require('chai-as-promised'))
-    .use(require('chai-bignumber')(BigNumber))
-    .should();
+  .use(require('chai-as-promised'))
+  .use(require('chai-bignumber')(BigNumber))
+  .should();
 
 const GameToken = artifacts.require('GameToken');
 
 contract('CreatingNewGame', function (accounts) {
 
-    before(async function () {
-        await advanceBlock.advanceBlock();
-    });
+  before(async function () {
+    await advanceBlock.advanceBlock();
+  });
 
-    beforeEach(async function () {
-        
-    });
+  beforeEach(async function () {
+
+  });
 
 });
