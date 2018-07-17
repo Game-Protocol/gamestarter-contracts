@@ -1,11 +1,11 @@
 pragma solidity ^0.4.24;
 
-import "../token/GameToken.sol";
-import "../payment/RefundEscrowWithFee.sol";
-import "openzeppelin-solidity/contracts/crowdsale/validation/WhitelistedCrowdsale.sol";
 import "openzeppelin-solidity/contracts/crowdsale/emission/MintedCrowdsale.sol";
 import "openzeppelin-solidity/contracts/crowdsale/Crowdsale.sol";
-import "./distribution/RefundableCrowdsale.sol";
+import "../token/GameToken.sol";
+import "../payment/RefundEscrowWithFee.sol";
+import "../crowdsale/distribution/RefundableCrowdsale.sol";
+import "../crowdsale/validation/TwoWayWhitelistedCrowdsale.sol";
 
 /**
  * @title GameTokenCrowdsale
@@ -14,13 +14,13 @@ import "./distribution/RefundableCrowdsale.sol";
  * After adding multiple features it's good practice to run integration tests
  * to ensure that subcontracts works together as intended.
  */
-contract GameTokenCrowdsale is RefundableCrowdsale, MintedCrowdsale, WhitelistedCrowdsale {
+contract GameTokenCrowdsale is RefundableCrowdsale, MintedCrowdsale, TwoWayWhitelistedCrowdsale {
 
     address public feeWallet;
     uint8 public feePercent;
 
     constructor (
-        uint _goal,
+        uint256 _goal,
         uint256 _openingTime,
         uint256 _closingTime,
         uint256 _rate,
@@ -61,5 +61,5 @@ contract GameTokenCrowdsale is RefundableCrowdsale, MintedCrowdsale, Whitelisted
 
         // Transfer ownership of the token to the owner of the crowdsale
         GameToken(token).transferOwnership(owner);
-    }
+    } 
 }

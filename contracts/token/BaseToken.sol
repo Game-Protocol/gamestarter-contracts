@@ -12,7 +12,7 @@ import "openzeppelin-solidity/contracts/token/ERC20/MintableToken.sol";
 /**
  * @title BaseToken
  * @dev Base Token
- * Inherited from PausableToken, BurnableToken, ISmartToken, MintableToken, NoOwner
+ * Inherited from PausableToken, BurnableToken, IERC20Token, MintableToken, NoOwner
  * When deployed will start with a paused state until crowdsale is finished.
  */
 contract BaseToken is ERC20, IERC20Token, PausableToken, BurnableToken, DetailedERC20, MintableToken, NoOwner {

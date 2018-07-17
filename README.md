@@ -10,7 +10,7 @@ Game Protocol crowdsale and token contracts, using OpenZeppelin v1.9.0
 
 To run test > npm test
 
-# Game Starter
+## Game Starter
 
 GameStarter is a one-stop crowdfunding platform based on the blockchain for new game projects.
 
@@ -39,6 +39,7 @@ GameStarter is a one-stop crowdfunding platform based on the blockchain for new 
     * Call updateConnector function in Convertor - `params=(SubToken, weight, enableVirtualBalance, virtualBalance)`
 
 ## Tokens Graph
+
 ![tokens_graph](images/tokens_graph.png)
 
 ## Crowdsale contract types
@@ -53,6 +54,7 @@ GameStarter is a one-stop crowdfunding platform based on the blockchain for new 
 2. Just one converter?
 3. Connector vs converter?
 4. Active converter?
-5. After the converter is activated how can we add new subtokens to trade with the main token
-6. If you want to buy GXT using subtoken, is GXT minted in the converter?
-7. How are conversion paths saved?
+5. After the converter is activated how can we add new subtokens to trade with the main token?
+6. can we use bancors deployed converter factory to create our converter?
+7. If you want to buy GXT using subtoken, is GXT minted in the converter?
+8. How are conversion paths saved?

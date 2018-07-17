@@ -1,6 +1,6 @@
 pragma solidity ^0.4.24;
 
-import "./RefundEscrow.sol";
+import "openzeppelin-solidity/contracts/payment/RefundEscrow.sol";
 
 /**
  * @title RefundEscrowWithFee
@@ -22,7 +22,6 @@ contract RefundEscrowWithFee is RefundEscrow {
         require(_feePercent > 0 && _feePercent < 100);
         feeWallet = _feeWallet;
         feePercent = _feePercent;
-        state = State.Active;
     }
 
     /**
@@ -32,6 +31,6 @@ contract RefundEscrowWithFee is RefundEscrow {
         require(state == State.Closed);
         uint256 fee = address(this).balance.mul(feePercent).div(100);
         feeWallet.transfer(fee);
-        beneficiary.transfer(address(this).balance);
+        super.beneficiaryWithdraw();
     }
 }
