@@ -1,9 +1,8 @@
 pragma solidity ^0.4.24;
 
 import "openzeppelin-solidity/contracts/crowdsale/distribution/FinalizableCrowdsale.sol";
-import "openzeppelin-solidity/contracts/crowdsale/validation/WhitelistedCrowdsale.sol";
 import "openzeppelin-solidity/contracts/crowdsale/emission/MintedCrowdsale.sol";
-import "openzeppelin-solidity/contracts/crowdsale/Crowdsale.sol";
+import "../crowdsale/validation/TwoWayWhitelistedCrowdsale.sol";
 import "./validation/TokenCappedCrowdsale.sol";
 import "../token/GPToken.sol";
 import "../token/GPTTeamTokenTimelock.sol";
@@ -15,7 +14,7 @@ import "../token/GPTTeamTokenTimelock.sol";
  * After adding multiple features it's good practice to run integration tests
  * to ensure that subcontracts works together as intended.
  */
-contract GPTCrowdsale is FinalizableCrowdsale, MintedCrowdsale, WhitelistedCrowdsale, TokenCappedCrowdsale {
+contract GPTCrowdsale is FinalizableCrowdsale, MintedCrowdsale, TokenCappedCrowdsale, TwoWayWhitelistedCrowdsale {
 
     uint256 constant public GPT_UNIT = 10 ** 18;
     uint256 constant public TOTAL_SUPPLY = 150 * 10**6 * GPT_UNIT;                          // Total supply of 150 milion tokens

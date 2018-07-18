@@ -57,9 +57,9 @@ contract('GPTCrowdsale_Timed', function (accounts) {
       { from: owner }
     );
     await this.token.transferOwnership(this.crowdsale.address);
-    await this.crowdsale.addToWhitelist(owner);
-    await this.crowdsale.addToWhitelist(investor);
-    await this.crowdsale.addToWhitelist(purchaser);
+    await this.crowdsale.addAddressToWhitelist(owner);
+    await this.crowdsale.addAddressToWhitelist(investor);
+    await this.crowdsale.addAddressToWhitelist(purchaser);
   });
 
   //  Timed ---------------------------------------------------------------------------

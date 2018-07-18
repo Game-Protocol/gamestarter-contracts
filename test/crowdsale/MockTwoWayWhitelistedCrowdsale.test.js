@@ -1,67 +1,27 @@
-const advanceBlock = require('../helpers/advanceToBlock');
-const increaseTime = require('../helpers/increaseTime');
-const latestTime = require('../helpers/latestTime');
 const ether = require('../helpers/ether');
-const EVMRevert = "revert";
 
 const BigNumber = web3.BigNumber;
 
-const should = require('chai')
+require('chai')
   .use(require('chai-as-promised'))
-  .use(require('chai-bignumber')(BigNumber))
   .should();
 
-const GPTCrowdsale = artifacts.require('GPTCrowdsale');
-const GPToken = artifacts.require('GPToken');
+const WhitelistedCrowdsale = artifacts.require('MockTwoWayWhitelistedCrowdsale');
+const Token = artifacts.require('GPToken');
 
-contract('GPTCrowdsale_Whitelist', function (accounts) {
-  const rate = new BigNumber(1000);
-  const value = ether.ether(2);
-  const tokenSupply = new BigNumber('15e25');
-  const expectedTokenAmount = rate.mul(value).mul(1.2);
+contract('MockTwoWayWhitelistedCrowdsale', function ([creator, wallet, authorized, unauthorized, anotherAuthorized]) {
+  const rate = 1;
+  const value = ether.ether(42);
+  const tokenSupply = new BigNumber('1e22');
 
-  const owner = accounts[0];
-  const investor = accounts[1];
-  const wallet = accounts[2];
-  const purchaser = accounts[3];
+  describe('on chain whitelisting', function () {
 
-  const walletGameSupportFund = accounts[4];
-  const walletBountyProgram = accounts[5];
-  const walletAdvisorsAndPartnership = accounts[6];
-  const walletTeam = accounts[7];
-
-  const authorized = investor;
-  const unauthorized = accounts[8]
-  const anotherAuthorized = accounts[9];
-
-  before(async function () {
-    // Advance to the next block to correctly read time in the solidity "now" function interpreted by ganache
-    await advanceBlock.advanceBlock();
-  });
-
-  beforeEach(async function () {
-    this.openingTime = latestTime.latestTime() + increaseTime.duration.weeks(1);
-    this.closingTime = this.openingTime + increaseTime.duration.weeks(5);
-    this.afterClosingTime = this.closingTime + increaseTime.duration.seconds(1);
-    this.token = await GPToken.new();
-    this.crowdsale = await GPTCrowdsale.new(
-      this.openingTime,
-      this.closingTime,
-      rate,
-      wallet,
-      walletGameSupportFund,
-      walletBountyProgram,
-      walletAdvisorsAndPartnership,
-      walletTeam,
-      this.token.address,
-      { from: owner }
-    );
-    await this.token.transferOwnership(this.crowdsale.address);
-  });
-
-  describe('whitelisting', function () {
     beforeEach(async function () {
-      await increaseTime.increaseTimeTo(this.openingTime);
+      this.token = await Token.new();
+      await this.token.mint(creator, tokenSupply);
+      await this.token.unpause();
+      this.crowdsale = await WhitelistedCrowdsale.new(rate, wallet, this.token.address);
+      await this.token.transfer(this.crowdsale.address, tokenSupply);
     });
 
     describe('single user whitelisting', function () {
@@ -71,12 +31,13 @@ contract('GPTCrowdsale_Whitelist', function (accounts) {
 
       describe('accepting payments', function () {
         it('should accept payments to whitelisted (from whichever buyers)', async function () {
+          await this.crowdsale.sendTransaction({ value, from: authorized }).should.be.fulfilled;
           await this.crowdsale.buyTokens(authorized, { value: value, from: authorized }).should.be.fulfilled;
           await this.crowdsale.buyTokens(authorized, { value: value, from: unauthorized }).should.be.fulfilled;
         });
 
         it('should reject payments to not whitelisted (from whichever buyers)', async function () {
-          await this.crowdsale.send(value).should.be.rejected;
+          await this.crowdsale.sendTransaction({ value, from: unauthorized }).should.be.rejected;
           await this.crowdsale.buyTokens(unauthorized, { value: value, from: unauthorized }).should.be.rejected;
           await this.crowdsale.buyTokens(unauthorized, { value: value, from: authorized }).should.be.rejected;
         });
@@ -133,6 +94,20 @@ contract('GPTCrowdsale_Whitelist', function (accounts) {
           isntAuthorized.should.equal(false);
         });
       });
+    });
+  });
+
+  describe('off chain whitelisting', function () {
+    beforeEach(async function () {
+      this.token = await Token.new();
+      await this.token.mint(creator, tokenSupply);
+      await this.token.unpause();
+      this.crowdsale = await WhitelistedCrowdsale.new(rate, wallet, this.token.address);
+      await this.token.transfer(this.crowdsale.address, tokenSupply);
+    });
+
+    it('sign works', async function () {
+      
     });
   });
 });

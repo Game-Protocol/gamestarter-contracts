@@ -71,9 +71,9 @@ contract('GPTCrowdsale_Bonuses', function (accounts) {
     );
     await this.token.transferOwnership(this.crowdsale.address);
     await this.token.claimOwnership({ from: this.crowdsale.address });
-    await this.crowdsale.addToWhitelist(owner);
-    await this.crowdsale.addToWhitelist(investor);
-    await this.crowdsale.addToWhitelist(purchaser);
+    await this.crowdsale.addAddressToWhitelist(owner);
+    await this.crowdsale.addAddressToWhitelist(investor);
+    await this.crowdsale.addAddressToWhitelist(purchaser);
   });
 
   describe('bonuses', function () {

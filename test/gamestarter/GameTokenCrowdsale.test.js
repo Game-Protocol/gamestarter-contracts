@@ -54,8 +54,8 @@ contract('GameTokenCrowdsale', function (accounts) {
       { from: owner }
     );
     await this.token.transferOwnership(this.crowdsale.address);
-    await this.crowdsale.addToWhitelist(investor);
-    await this.crowdsale.addToWhitelist(investor2);
+    await this.crowdsale.addAddressToWhitelist(investor);
+    await this.crowdsale.addAddressToWhitelist(investor2);
   });
 
   describe('transfers', function () {
@@ -102,7 +102,7 @@ contract('GameTokenCrowdsale', function (accounts) {
       await this.crowdsale.finalize({ from: owner }).should.be.fulfilled;
     });
 
-    it('verify refund', function () {
+    it('verify refund', async function () {
       await this.crowdsale.claimRefund({ from: investor }).should.be.fulfilled;
 
     });

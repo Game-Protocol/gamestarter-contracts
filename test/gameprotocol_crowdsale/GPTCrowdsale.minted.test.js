@@ -58,9 +58,9 @@ contract('GPTCrowdsale_Minted', function (accounts) {
   describe('minting tests', function () {
     beforeEach(async function () {
       await increaseTime.increaseTimeTo(this.openingTime);
-      await this.crowdsale.addToWhitelist(owner);
-      await this.crowdsale.addToWhitelist(investor);
-      await this.crowdsale.addToWhitelist(purchaser);
+      await this.crowdsale.addAddressToWhitelist(owner);
+      await this.crowdsale.addAddressToWhitelist(investor);
+      await this.crowdsale.addAddressToWhitelist(purchaser);
     });
 
     describe('accepting payments', function () {
