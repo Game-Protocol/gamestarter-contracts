@@ -27,10 +27,10 @@ GameStarter is a one-stop crowdfunding platform based on the blockchain for new 
 
 ## Sequence of events
 
-1. Deploy GPToken - `params=()`
-2. Deploy GPTCrowdsale - `params=(openTime, closeTime, rate, wallet, gameSupport, bounty, advisors, team, token)`
-3. Deploy Converter - `params=(GPToken, IBancorConverterExtensions, _maxConversionFee)`
-4. Deploy GameStarterFactory - `params=(GPToken, Converter, feeWallet)`
+1. Deploy GXToken - `params=()`
+2. Deploy GXTCrowdsale - `params=(openTime, closeTime, rate, wallet, gameSupport, bounty, advisors, team, token)`
+3. Deploy Converter - `params=(GXToken, IBancorConverterExtensions, _maxConversionFee)`
+4. Deploy GameStarterFactory - `params=(GXToken, Converter, feeWallet)`
 
 5. For every new game, call createGame function from GameStarterFactory - params=(owner, tokenName, tokenSymbol, openTime, closeTime, rate)  inside the function the following will happen:
     * Deploy SubToken - `params=(tokenName, tokenSymbol)`

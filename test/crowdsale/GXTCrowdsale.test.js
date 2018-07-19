@@ -6,10 +6,10 @@ require('chai')
   .use(require('chai-as-promised'))
   .should();
 
-const WhitelistedCrowdsale = artifacts.require('MockTwoWayWhitelistedCrowdsale');
-const Token = artifacts.require('GPToken');
+const WhitelistedCrowdsale = artifacts.require('MockGXTCrowdsale');
+const Token = artifacts.require('GXToken');
 
-contract('MockTwoWayWhitelistedCrowdsale', function ([creator, wallet, authorized, unauthorized, anotherAuthorized]) {
+contract('GXTCrowdsale', function ([owner, wallet, authorized, unauthorized, anotherAuthorized]) {
   const rate = 1;
   const value = ether.ether(42);
   const tokenSupply = new BigNumber('1e22');
@@ -18,10 +18,9 @@ contract('MockTwoWayWhitelistedCrowdsale', function ([creator, wallet, authorize
 
     beforeEach(async function () {
       this.token = await Token.new();
-      await this.token.mint(creator, tokenSupply);
-      await this.token.unpause();
       this.crowdsale = await WhitelistedCrowdsale.new(rate, wallet, this.token.address);
-      await this.token.transfer(this.crowdsale.address, tokenSupply);
+      await this.token.transferOwnership(this.crowdsale.address);
+      await this.crowdsale.claimTokenOwnership();
     });
 
     describe('single user whitelisting', function () {
@@ -100,7 +99,7 @@ contract('MockTwoWayWhitelistedCrowdsale', function ([creator, wallet, authorize
   describe('off chain whitelisting', function () {
     beforeEach(async function () {
       this.token = await Token.new();
-      await this.token.mint(creator, tokenSupply);
+      await this.token.mint(owner, tokenSupply);
       await this.token.unpause();
       this.crowdsale = await WhitelistedCrowdsale.new(rate, wallet, this.token.address);
       await this.token.transfer(this.crowdsale.address, tokenSupply);

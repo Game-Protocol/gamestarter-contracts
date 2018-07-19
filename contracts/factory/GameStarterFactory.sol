@@ -1,7 +1,7 @@
 pragma solidity ^0.4.24;
 
 import "../token/GameToken.sol";
-import "../token/GPToken.sol";
+import "../token/GXToken.sol";
 import "../crowdsale/GameTokenCrowdsale.sol";
 
 // import "bancor-contracts/solidity/contracts/converter/BancorConverter.sol";
@@ -19,12 +19,12 @@ contract GameStarterFactory {
     BancorConverterFactory factory;
     address public feeWallet;
     uint8 public feePercent;
-    GPToken public gpToken;
+    GXToken public gpToken;
     IContractRegistry public registery;
 
     event NewGame(address indexed _owner, address indexed _token, address _crowdsale);
     
-    constructor (GPToken _gpToken,IContractRegistry _registery, BancorConverterFactory _factory, address _feeWallet, uint8 _feePercent) public {
+    constructor (GXToken _gpToken,IContractRegistry _registery, BancorConverterFactory _factory, address _feeWallet, uint8 _feePercent) public {
         gpToken = _gpToken;
         registery = _registery;
         factory = _factory;

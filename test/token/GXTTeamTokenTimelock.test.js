@@ -9,10 +9,10 @@ require('chai')
   .use(require('chai-bignumber')(BigNumber))
   .should();
 
-const GPToken = artifacts.require('GPToken.sol');
-const GPTTeamTokenTimelock = artifacts.require('GPTTeamTokenTimelock.sol');
+const GXToken = artifacts.require('GXToken.sol');
+const GXTTeamTokenTimelock = artifacts.require('GXTTeamTokenTimelock.sol');
 
-contract('GPTTeamTokenTimelock', accounts => {
+contract('GXTTeamTokenTimelock', accounts => {
   const owner = accounts[0];
   const beneficiary = accounts[1];
 
@@ -25,9 +25,9 @@ contract('GPTTeamTokenTimelock', accounts => {
 
 
   beforeEach(async function () {
-    this.token = await GPToken.new({ from: owner });
+    this.token = await GXToken.new({ from: owner });
     this.releaseTime = latestTime.latestTime() + increaseTime.duration.weeks(1);
-    this.timelock = await GPTTeamTokenTimelock.new(this.token.address, beneficiary, this.releaseTime);
+    this.timelock = await GXTTeamTokenTimelock.new(this.token.address, beneficiary, this.releaseTime);
     let transfer = await this.token.mint(this.timelock.address, team_tokens, { from: owner });
     await this.token.unpause({ from: owner });
 

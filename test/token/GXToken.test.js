@@ -1,5 +1,5 @@
 const decodeLogs = require('../helpers/decodeLogs');
-const GPToken = artifacts.require('GPToken');
+const GXToken = artifacts.require('GXToken');
 
 const BigNumber = web3.BigNumber;
 
@@ -8,12 +8,12 @@ require('chai')
   .use(require('chai-bignumber')(BigNumber))
   .should();
 
-contract('GPToken', accounts => {
+contract('GXToken', accounts => {
   let token;
   const creator = accounts[0];
 
   beforeEach(async function () {
-    token = await GPToken.new({ from: creator });
+    token = await GXToken.new({ from: creator });
     await token.mint(creator, 150*10**6*10**18);
   });
 

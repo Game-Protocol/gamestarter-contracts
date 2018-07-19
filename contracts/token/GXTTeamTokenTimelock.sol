@@ -4,11 +4,11 @@ import "openzeppelin-solidity/contracts/token/ERC20/SafeERC20.sol";
 import "openzeppelin-solidity/contracts/math/SafeMath.sol";
 
 /**
- * @title GPTTeamTokenTimelock
+ * @title GXTTeamTokenTimelock
  * @dev TokenTimelock is a token holder contract that will allow a
  * beneficiary to extract the tokens after a given release time
  */
-contract GPTTeamTokenTimelock {
+contract GXTTeamTokenTimelock {
     using SafeERC20 for ERC20Basic;
     using SafeMath for uint256;
 

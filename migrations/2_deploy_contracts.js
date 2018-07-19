@@ -1,8 +1,8 @@
 var verifyCode = require('../scripts/verifyCode');
 var toTimestamp = require('../scripts/toTimestamp');
 
-var GPToken = artifacts.require("./GPToken.sol");
-var GPTCrowdsale = artifacts.require("./GPTCrowdsale.sol");
+var GXToken = artifacts.require("./GXToken.sol");
+var GXTCrowdsale = artifacts.require("./GXTCrowdsale.sol");
 
 
 module.exports = function (deployer) {
@@ -23,13 +23,13 @@ module.exports = function (deployer) {
 
   verifyCode.flatten();
 
-  deployer.deploy(GPToken).then(function () {
+  deployer.deploy(GXToken).then(function () {
     var types = ["uint256" ,"uint256" ,"uint256" ,"address" ,"address" ,"address" ,"address" , "address" , "address"];
-    var params = [start, end, rate, wallet, gameSupportFund, bountyProgram, advisors, team, GPToken.address];
-    verifyCode.toABI("GPTCrowdsale.abi.txt", types, params);
-    deployer.deploy(GPTCrowdsale, start, end, rate, wallet, gameSupportFund, bountyProgram, advisors, team, GPToken.address).then(function (){
-      GPToken.deployed().then(function (instance){
-        instance.transferOwnership(GPTCrowdsale.address); // Transfer ownership to crowdsale
+    var params = [start, end, rate, wallet, gameSupportFund, bountyProgram, advisors, team, GXToken.address];
+    verifyCode.toABI("GXTCrowdsale.abi.txt", types, params);
+    deployer.deploy(GXTCrowdsale, start, end, rate, wallet, gameSupportFund, bountyProgram, advisors, team, GXToken.address).then(function (){
+      GXToken.deployed().then(function (instance){
+        instance.transferOwnership(GXTCrowdsale.address); // Transfer ownership to crowdsale
       });
     });
   });

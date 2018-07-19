@@ -11,10 +11,10 @@ const should = require('chai')
   .use(require('chai-bignumber')(BigNumber))
   .should();
 
-const GPTCrowdsale = artifacts.require('GPTCrowdsale');
-const GPToken = artifacts.require('GPToken');
+const GXTCrowdsale = artifacts.require('GXTCrowdsale');
+const GXToken = artifacts.require('GXToken');
 
-contract('GPTCrowdsale_Finalizable', function (accounts) {
+contract('GXTCrowdsale_Finalizable', function (accounts) {
   const rate = new BigNumber(1000);
   const value = ether.ether(2);
   const tokenSupply = new BigNumber('15e25');
@@ -38,8 +38,8 @@ contract('GPTCrowdsale_Finalizable', function (accounts) {
     this.openingTime = latestTime.latestTime() + increaseTime.duration.weeks(1);
     this.closingTime = this.openingTime + increaseTime.duration.weeks(5);
     this.afterClosingTime = this.closingTime + increaseTime.duration.seconds(1);
-    this.token = await GPToken.new();
-    this.crowdsale = await GPTCrowdsale.new(
+    this.token = await GXToken.new();
+    this.crowdsale = await GXTCrowdsale.new(
       this.openingTime,
       this.closingTime,
       rate,
