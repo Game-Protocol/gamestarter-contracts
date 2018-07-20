@@ -1,0 +1,362 @@
+{
+  "contractName": "IBancorGasPriceLimit",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "gasPrice",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "validateGasPrice",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "pragma solidity ^0.4.23;\r\n\r\n/*\r\n    Bancor Gas Price Limit interface\r\n*/\r\ncontract IBancorGasPriceLimit {\r\n    function gasPrice() public view returns (uint256) {}\r\n    function validateGasPrice(uint256) public view;\r\n}\r\n",
+  "sourcePath": "bancor-contracts\\solidity\\contracts\\converter\\interfaces\\IBancorGasPriceLimit.sol",
+  "ast": {
+    "absolutePath": "bancor-contracts/solidity/contracts/converter/interfaces/IBancorGasPriceLimit.sol",
+    "exportedSymbols": {
+      "IBancorGasPriceLimit": [
+        4405
+      ]
+    },
+    "id": 4406,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 4393,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".23"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:29"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": false,
+        "id": 4405,
+        "linearizedBaseContracts": [
+          4405
+        ],
+        "name": "IBancorGasPriceLimit",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": {
+              "id": 4398,
+              "nodeType": "Block",
+              "src": "161:2:29",
+              "statements": []
+            },
+            "documentation": null,
+            "id": 4399,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": true,
+            "modifiers": [],
+            "name": "gasPrice",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 4394,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "128:2:29"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 4397,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 4396,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 4399,
+                  "src": "152:7:29",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 4395,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "152:7:29",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "151:9:29"
+            },
+            "scope": 4405,
+            "src": "111:52:29",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": null,
+            "documentation": null,
+            "id": 4404,
+            "implemented": false,
+            "isConstructor": false,
+            "isDeclaredConst": true,
+            "modifiers": [],
+            "name": "validateGasPrice",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 4402,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 4401,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 4404,
+                  "src": "195:7:29",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 4400,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "195:7:29",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "194:9:29"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 4403,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "215:0:29"
+            },
+            "scope": 4405,
+            "src": "169:47:29",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 4406,
+        "src": "74:145:29"
+      }
+    ],
+    "src": "0:221:29"
+  },
+  "legacyAST": {
+    "absolutePath": "bancor-contracts/solidity/contracts/converter/interfaces/IBancorGasPriceLimit.sol",
+    "exportedSymbols": {
+      "IBancorGasPriceLimit": [
+        4405
+      ]
+    },
+    "id": 4406,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 4393,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".23"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:29"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": false,
+        "id": 4405,
+        "linearizedBaseContracts": [
+          4405
+        ],
+        "name": "IBancorGasPriceLimit",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": {
+              "id": 4398,
+              "nodeType": "Block",
+              "src": "161:2:29",
+              "statements": []
+            },
+            "documentation": null,
+            "id": 4399,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": true,
+            "modifiers": [],
+            "name": "gasPrice",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 4394,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "128:2:29"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 4397,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 4396,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 4399,
+                  "src": "152:7:29",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 4395,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "152:7:29",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "151:9:29"
+            },
+            "scope": 4405,
+            "src": "111:52:29",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": null,
+            "documentation": null,
+            "id": 4404,
+            "implemented": false,
+            "isConstructor": false,
+            "isDeclaredConst": true,
+            "modifiers": [],
+            "name": "validateGasPrice",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 4402,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 4401,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 4404,
+                  "src": "195:7:29",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 4400,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "195:7:29",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "194:9:29"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 4403,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "215:0:29"
+            },
+            "scope": 4405,
+            "src": "169:47:29",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 4406,
+        "src": "74:145:29"
+      }
+    ],
+    "src": "0:221:29"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.4.24+commit.e67f0147.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "2.0.1",
+  "updatedAt": "2018-07-20T13:46:21.502Z"
+}

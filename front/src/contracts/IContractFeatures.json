@@ -1,0 +1,523 @@
+{
+  "contractName": "IContractFeatures",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "_contract",
+          "type": "address"
+        },
+        {
+          "name": "_features",
+          "type": "uint256"
+        }
+      ],
+      "name": "isSupported",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_features",
+          "type": "uint256"
+        },
+        {
+          "name": "_enable",
+          "type": "bool"
+        }
+      ],
+      "name": "enableFeatures",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "pragma solidity ^0.4.23;\r\n\r\n/*\r\n    Contract Features interface\r\n*/\r\ncontract IContractFeatures {\r\n    function isSupported(address _contract, uint256 _features) public view returns (bool);\r\n    function enableFeatures(uint256 _features, bool _enable) public;\r\n}\r\n",
+  "sourcePath": "bancor-contracts\\solidity\\contracts\\utility\\interfaces\\IContractFeatures.sol",
+  "ast": {
+    "absolutePath": "bancor-contracts/solidity/contracts/utility/interfaces/IContractFeatures.sol",
+    "exportedSymbols": {
+      "IContractFeatures": [
+        5632
+      ]
+    },
+    "id": 5633,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 5615,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".23"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:42"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": false,
+        "id": 5632,
+        "linearizedBaseContracts": [
+          5632
+        ],
+        "name": "IContractFeatures",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": null,
+            "documentation": null,
+            "id": 5624,
+            "implemented": false,
+            "isConstructor": false,
+            "isDeclaredConst": true,
+            "modifiers": [],
+            "name": "isSupported",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 5620,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5617,
+                  "name": "_contract",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5624,
+                  "src": "124:17:42",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 5616,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "124:7:42",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 5619,
+                  "name": "_features",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5624,
+                  "src": "143:17:42",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 5618,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "143:7:42",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "123:38:42"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 5623,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5622,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5624,
+                  "src": "183:4:42",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 5621,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "183:4:42",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "182:6:42"
+            },
+            "scope": 5632,
+            "src": "103:86:42",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": null,
+            "documentation": null,
+            "id": 5631,
+            "implemented": false,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "enableFeatures",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 5629,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5626,
+                  "name": "_features",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5631,
+                  "src": "219:17:42",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 5625,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "219:7:42",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 5628,
+                  "name": "_enable",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5631,
+                  "src": "238:12:42",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 5627,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "238:4:42",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "218:33:42"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 5630,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "258:0:42"
+            },
+            "scope": 5632,
+            "src": "195:64:42",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 5633,
+        "src": "69:193:42"
+      }
+    ],
+    "src": "0:264:42"
+  },
+  "legacyAST": {
+    "absolutePath": "bancor-contracts/solidity/contracts/utility/interfaces/IContractFeatures.sol",
+    "exportedSymbols": {
+      "IContractFeatures": [
+        5632
+      ]
+    },
+    "id": 5633,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 5615,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".23"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:42"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": false,
+        "id": 5632,
+        "linearizedBaseContracts": [
+          5632
+        ],
+        "name": "IContractFeatures",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": null,
+            "documentation": null,
+            "id": 5624,
+            "implemented": false,
+            "isConstructor": false,
+            "isDeclaredConst": true,
+            "modifiers": [],
+            "name": "isSupported",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 5620,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5617,
+                  "name": "_contract",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5624,
+                  "src": "124:17:42",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 5616,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "124:7:42",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 5619,
+                  "name": "_features",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5624,
+                  "src": "143:17:42",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 5618,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "143:7:42",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "123:38:42"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 5623,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5622,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5624,
+                  "src": "183:4:42",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 5621,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "183:4:42",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "182:6:42"
+            },
+            "scope": 5632,
+            "src": "103:86:42",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": null,
+            "documentation": null,
+            "id": 5631,
+            "implemented": false,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "enableFeatures",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 5629,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5626,
+                  "name": "_features",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5631,
+                  "src": "219:17:42",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 5625,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "219:7:42",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 5628,
+                  "name": "_enable",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5631,
+                  "src": "238:12:42",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 5627,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "238:4:42",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "218:33:42"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 5630,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "258:0:42"
+            },
+            "scope": 5632,
+            "src": "195:64:42",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 5633,
+        "src": "69:193:42"
+      }
+    ],
+    "src": "0:264:42"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.4.24+commit.e67f0147.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "2.0.1",
+  "updatedAt": "2018-07-20T13:46:21.507Z"
+}

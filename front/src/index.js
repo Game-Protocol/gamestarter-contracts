@@ -5,9 +5,11 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import { DrizzleProvider } from "drizzle-react";
 
-import TutorialToken from "../../contracts/TutorialToken.json";
+import Token from "./contracts/GXToken.json";
+import Crowdsale from "./contracts/GXTCrowdsale.json";
 
-console.log(TutorialToken);
+console.log("Token: " + Token);
+console.log("Crowdsale: " + Crowdsale);
 
 const options = {
     web3: {
@@ -17,7 +19,7 @@ const options = {
         url: "ws://127.0.0.1:7545"
       }
     },
-    contracts: [TutorialToken],
+    contracts: [Token, Crowdsale],
     events: {}
   };
 

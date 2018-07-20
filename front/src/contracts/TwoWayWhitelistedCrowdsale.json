@@ -1,0 +1,1428 @@
+{
+  "contractName": "TwoWayWhitelistedCrowdsale",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "_operator",
+          "type": "address"
+        },
+        {
+          "name": "_role",
+          "type": "string"
+        }
+      ],
+      "name": "checkRole",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_bouncer",
+          "type": "address"
+        }
+      ],
+      "name": "removeBouncer",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "ROLE_WHITELISTED",
+      "outputs": [
+        {
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "_operator",
+          "type": "address"
+        },
+        {
+          "name": "_role",
+          "type": "string"
+        }
+      ],
+      "name": "hasRole",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_operators",
+          "type": "address[]"
+        }
+      ],
+      "name": "removeAddressesFromWhitelist",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_operator",
+          "type": "address"
+        }
+      ],
+      "name": "removeAddressFromWhitelist",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "rate",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "weiRaised",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "wallet",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [],
+      "name": "renounceOwnership",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_operator",
+          "type": "address"
+        }
+      ],
+      "name": "addAddressToWhitelist",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_bouncer",
+          "type": "address"
+        }
+      ],
+      "name": "addBouncer",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "owner",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "_operator",
+          "type": "address"
+        }
+      ],
+      "name": "whitelist",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "ROLE_BOUNCER",
+      "outputs": [
+        {
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_operators",
+          "type": "address[]"
+        }
+      ],
+      "name": "addAddressesToWhitelist",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "transferOwnership",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "token",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "payable": true,
+      "stateMutability": "payable",
+      "type": "fallback"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "operator",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "name": "role",
+          "type": "string"
+        }
+      ],
+      "name": "RoleAdded",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "operator",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "name": "role",
+          "type": "string"
+        }
+      ],
+      "name": "RoleRemoved",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "previousOwner",
+          "type": "address"
+        }
+      ],
+      "name": "OwnershipRenounced",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "previousOwner",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "OwnershipTransferred",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "purchaser",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "name": "beneficiary",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "name": "value",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "TokenPurchase",
+      "type": "event"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_beneficiary",
+          "type": "address"
+        },
+        {
+          "name": "_sig",
+          "type": "bytes"
+        }
+      ],
+      "name": "buyTokensSigned",
+      "outputs": [],
+      "payable": true,
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_beneficiary",
+          "type": "address"
+        }
+      ],
+      "name": "buyTokens",
+      "outputs": [],
+      "payable": true,
+      "stateMutability": "payable",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "pragma solidity ^0.4.24;\r\n\r\nimport \"../../access/ControlledAccess.sol\";\r\nimport \"openzeppelin-solidity/contracts/access/Whitelist.sol\";\r\nimport \"openzeppelin-solidity/contracts/access/SignatureBouncer.sol\";\r\nimport \"openzeppelin-solidity/contracts/crowdsale/Crowdsale.sol\";\r\n\r\ncontract TwoWayWhitelistedCrowdsale is Crowdsale, Whitelist, SignatureBouncer {\r\n\r\n    /**\r\n    * @dev buyTokensSigned, buy tokens with an off chain whitelisting method using signature.\r\n    */\r\n    function buyTokensSigned(address _beneficiary, bytes _sig) onlyValidSignature(_sig) public payable {\r\n        super.buyTokens(_beneficiary);\r\n    }\r\n\r\n    /**\r\n    * @dev Override buyToken for the on chain whitelisting method\r\n    */\r\n    function buyTokens(address _beneficiary) onlyIfWhitelisted(_beneficiary) public payable {\r\n        super.buyTokens(_beneficiary);\r\n    }\r\n}",
+  "sourcePath": "D:\\Vlad\\CryptoCurrency\\Truffle Projects\\Game_Starter\\contracts\\crowdsale\\validation\\TwoWayWhitelistedCrowdsale.sol",
+  "ast": {
+    "absolutePath": "/D/Vlad/CryptoCurrency/Truffle Projects/Game_Starter/contracts/crowdsale/validation/TwoWayWhitelistedCrowdsale.sol",
+    "exportedSymbols": {
+      "TwoWayWhitelistedCrowdsale": [
+        788
+      ]
+    },
+    "id": 789,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 745,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".24"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:5"
+      },
+      {
+        "absolutePath": "/D/Vlad/CryptoCurrency/Truffle Projects/Game_Starter/contracts/access/ControlledAccess.sol",
+        "file": "../../access/ControlledAccess.sol",
+        "id": 746,
+        "nodeType": "ImportDirective",
+        "scope": 789,
+        "sourceUnit": 65,
+        "src": "28:43:5",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "openzeppelin-solidity/contracts/access/Whitelist.sol",
+        "file": "openzeppelin-solidity/contracts/access/Whitelist.sol",
+        "id": 747,
+        "nodeType": "ImportDirective",
+        "scope": 789,
+        "sourceUnit": 6163,
+        "src": "73:62:5",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "openzeppelin-solidity/contracts/access/SignatureBouncer.sol",
+        "file": "openzeppelin-solidity/contracts/access/SignatureBouncer.sol",
+        "id": 748,
+        "nodeType": "ImportDirective",
+        "scope": 789,
+        "sourceUnit": 6045,
+        "src": "137:69:5",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "openzeppelin-solidity/contracts/crowdsale/Crowdsale.sol",
+        "file": "openzeppelin-solidity/contracts/crowdsale/Crowdsale.sol",
+        "id": 749,
+        "nodeType": "ImportDirective",
+        "scope": 789,
+        "sourceUnit": 6391,
+        "src": "208:65:5",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 750,
+              "name": "Crowdsale",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 6390,
+              "src": "316:9:5",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_Crowdsale_$6390",
+                "typeString": "contract Crowdsale"
+              }
+            },
+            "id": 751,
+            "nodeType": "InheritanceSpecifier",
+            "src": "316:9:5"
+          },
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 752,
+              "name": "Whitelist",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 6162,
+              "src": "327:9:5",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_Whitelist_$6162",
+                "typeString": "contract Whitelist"
+              }
+            },
+            "id": 753,
+            "nodeType": "InheritanceSpecifier",
+            "src": "327:9:5"
+          },
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 754,
+              "name": "SignatureBouncer",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 6044,
+              "src": "338:16:5",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_SignatureBouncer_$6044",
+                "typeString": "contract SignatureBouncer"
+              }
+            },
+            "id": 755,
+            "nodeType": "InheritanceSpecifier",
+            "src": "338:16:5"
+          }
+        ],
+        "contractDependencies": [
+          6044,
+          6162,
+          6390,
+          6974,
+          7081
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": false,
+        "id": 788,
+        "linearizedBaseContracts": [
+          788,
+          6044,
+          6162,
+          7081,
+          6974,
+          6390
+        ],
+        "name": "TwoWayWhitelistedCrowdsale",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": {
+              "id": 771,
+              "nodeType": "Block",
+              "src": "575:48:5",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 768,
+                        "name": "_beneficiary",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 757,
+                        "src": "602:12:5",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 765,
+                        "name": "super",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 8285,
+                        "src": "586:5:5",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_super$_TwoWayWhitelistedCrowdsale_$788",
+                          "typeString": "contract super TwoWayWhitelistedCrowdsale"
+                        }
+                      },
+                      "id": 767,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "buyTokens",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 6299,
+                      "src": "586:15:5",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_internal_nonpayable$_t_address_$returns$__$",
+                        "typeString": "function (address)"
+                      }
+                    },
+                    "id": 769,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "586:29:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 770,
+                  "nodeType": "ExpressionStatement",
+                  "src": "586:29:5"
+                }
+              ]
+            },
+            "documentation": "@dev buyTokensSigned, buy tokens with an off chain whitelisting method using signature.\r",
+            "id": 772,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [
+              {
+                "arguments": [
+                  {
+                    "argumentTypes": null,
+                    "id": 762,
+                    "name": "_sig",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 759,
+                    "src": "554:4:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_memory_ptr",
+                      "typeString": "bytes memory"
+                    }
+                  }
+                ],
+                "id": 763,
+                "modifierName": {
+                  "argumentTypes": null,
+                  "id": 761,
+                  "name": "onlyValidSignature",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 5808,
+                  "src": "535:18:5",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_modifier$_t_bytes_memory_ptr_$",
+                    "typeString": "modifier (bytes memory)"
+                  }
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "535:24:5"
+              }
+            ],
+            "name": "buyTokensSigned",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 760,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 757,
+                  "name": "_beneficiary",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 772,
+                  "src": "501:20:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 756,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "501:7:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 759,
+                  "name": "_sig",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 772,
+                  "src": "523:10:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 758,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "523:5:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "500:34:5"
+            },
+            "payable": true,
+            "returnParameters": {
+              "id": 764,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "575:0:5"
+            },
+            "scope": 788,
+            "src": "476:147:5",
+            "stateMutability": "payable",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 786,
+              "nodeType": "Block",
+              "src": "803:48:5",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 783,
+                        "name": "_beneficiary",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 774,
+                        "src": "830:12:5",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 780,
+                        "name": "super",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 8285,
+                        "src": "814:5:5",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_super$_TwoWayWhitelistedCrowdsale_$788",
+                          "typeString": "contract super TwoWayWhitelistedCrowdsale"
+                        }
+                      },
+                      "id": 782,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "buyTokens",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 6299,
+                      "src": "814:15:5",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_internal_nonpayable$_t_address_$returns$__$",
+                        "typeString": "function (address)"
+                      }
+                    },
+                    "id": 784,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "814:29:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 785,
+                  "nodeType": "ExpressionStatement",
+                  "src": "814:29:5"
+                }
+              ]
+            },
+            "documentation": "@dev Override buyToken for the on chain whitelisting method\r",
+            "id": 787,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [
+              {
+                "arguments": [
+                  {
+                    "argumentTypes": null,
+                    "id": 777,
+                    "name": "_beneficiary",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 774,
+                    "src": "774:12:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  }
+                ],
+                "id": 778,
+                "modifierName": {
+                  "argumentTypes": null,
+                  "id": 776,
+                  "name": "onlyIfWhitelisted",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 6066,
+                  "src": "756:17:5",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_modifier$_t_address_$",
+                    "typeString": "modifier (address)"
+                  }
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "756:31:5"
+              }
+            ],
+            "name": "buyTokens",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 775,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 774,
+                  "name": "_beneficiary",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 787,
+                  "src": "734:20:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 773,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "734:7:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "733:22:5"
+            },
+            "payable": true,
+            "returnParameters": {
+              "id": 779,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "803:0:5"
+            },
+            "scope": 788,
+            "src": "715:136:5",
+            "stateMutability": "payable",
+            "superFunction": 6299,
+            "visibility": "public"
+          }
+        ],
+        "scope": 789,
+        "src": "277:577:5"
+      }
+    ],
+    "src": "0:854:5"
+  },
+  "legacyAST": {
+    "absolutePath": "/D/Vlad/CryptoCurrency/Truffle Projects/Game_Starter/contracts/crowdsale/validation/TwoWayWhitelistedCrowdsale.sol",
+    "exportedSymbols": {
+      "TwoWayWhitelistedCrowdsale": [
+        788
+      ]
+    },
+    "id": 789,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 745,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".24"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:5"
+      },
+      {
+        "absolutePath": "/D/Vlad/CryptoCurrency/Truffle Projects/Game_Starter/contracts/access/ControlledAccess.sol",
+        "file": "../../access/ControlledAccess.sol",
+        "id": 746,
+        "nodeType": "ImportDirective",
+        "scope": 789,
+        "sourceUnit": 65,
+        "src": "28:43:5",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "openzeppelin-solidity/contracts/access/Whitelist.sol",
+        "file": "openzeppelin-solidity/contracts/access/Whitelist.sol",
+        "id": 747,
+        "nodeType": "ImportDirective",
+        "scope": 789,
+        "sourceUnit": 6163,
+        "src": "73:62:5",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "openzeppelin-solidity/contracts/access/SignatureBouncer.sol",
+        "file": "openzeppelin-solidity/contracts/access/SignatureBouncer.sol",
+        "id": 748,
+        "nodeType": "ImportDirective",
+        "scope": 789,
+        "sourceUnit": 6045,
+        "src": "137:69:5",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "openzeppelin-solidity/contracts/crowdsale/Crowdsale.sol",
+        "file": "openzeppelin-solidity/contracts/crowdsale/Crowdsale.sol",
+        "id": 749,
+        "nodeType": "ImportDirective",
+        "scope": 789,
+        "sourceUnit": 6391,
+        "src": "208:65:5",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 750,
+              "name": "Crowdsale",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 6390,
+              "src": "316:9:5",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_Crowdsale_$6390",
+                "typeString": "contract Crowdsale"
+              }
+            },
+            "id": 751,
+            "nodeType": "InheritanceSpecifier",
+            "src": "316:9:5"
+          },
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 752,
+              "name": "Whitelist",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 6162,
+              "src": "327:9:5",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_Whitelist_$6162",
+                "typeString": "contract Whitelist"
+              }
+            },
+            "id": 753,
+            "nodeType": "InheritanceSpecifier",
+            "src": "327:9:5"
+          },
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 754,
+              "name": "SignatureBouncer",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 6044,
+              "src": "338:16:5",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_SignatureBouncer_$6044",
+                "typeString": "contract SignatureBouncer"
+              }
+            },
+            "id": 755,
+            "nodeType": "InheritanceSpecifier",
+            "src": "338:16:5"
+          }
+        ],
+        "contractDependencies": [
+          6044,
+          6162,
+          6390,
+          6974,
+          7081
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": false,
+        "id": 788,
+        "linearizedBaseContracts": [
+          788,
+          6044,
+          6162,
+          7081,
+          6974,
+          6390
+        ],
+        "name": "TwoWayWhitelistedCrowdsale",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": {
+              "id": 771,
+              "nodeType": "Block",
+              "src": "575:48:5",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 768,
+                        "name": "_beneficiary",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 757,
+                        "src": "602:12:5",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 765,
+                        "name": "super",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 8285,
+                        "src": "586:5:5",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_super$_TwoWayWhitelistedCrowdsale_$788",
+                          "typeString": "contract super TwoWayWhitelistedCrowdsale"
+                        }
+                      },
+                      "id": 767,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "buyTokens",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 6299,
+                      "src": "586:15:5",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_internal_nonpayable$_t_address_$returns$__$",
+                        "typeString": "function (address)"
+                      }
+                    },
+                    "id": 769,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "586:29:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 770,
+                  "nodeType": "ExpressionStatement",
+                  "src": "586:29:5"
+                }
+              ]
+            },
+            "documentation": "@dev buyTokensSigned, buy tokens with an off chain whitelisting method using signature.\r",
+            "id": 772,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [
+              {
+                "arguments": [
+                  {
+                    "argumentTypes": null,
+                    "id": 762,
+                    "name": "_sig",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 759,
+                    "src": "554:4:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_memory_ptr",
+                      "typeString": "bytes memory"
+                    }
+                  }
+                ],
+                "id": 763,
+                "modifierName": {
+                  "argumentTypes": null,
+                  "id": 761,
+                  "name": "onlyValidSignature",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 5808,
+                  "src": "535:18:5",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_modifier$_t_bytes_memory_ptr_$",
+                    "typeString": "modifier (bytes memory)"
+                  }
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "535:24:5"
+              }
+            ],
+            "name": "buyTokensSigned",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 760,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 757,
+                  "name": "_beneficiary",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 772,
+                  "src": "501:20:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 756,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "501:7:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 759,
+                  "name": "_sig",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 772,
+                  "src": "523:10:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 758,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "523:5:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "500:34:5"
+            },
+            "payable": true,
+            "returnParameters": {
+              "id": 764,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "575:0:5"
+            },
+            "scope": 788,
+            "src": "476:147:5",
+            "stateMutability": "payable",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 786,
+              "nodeType": "Block",
+              "src": "803:48:5",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 783,
+                        "name": "_beneficiary",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 774,
+                        "src": "830:12:5",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 780,
+                        "name": "super",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 8285,
+                        "src": "814:5:5",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_super$_TwoWayWhitelistedCrowdsale_$788",
+                          "typeString": "contract super TwoWayWhitelistedCrowdsale"
+                        }
+                      },
+                      "id": 782,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "buyTokens",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 6299,
+                      "src": "814:15:5",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_internal_nonpayable$_t_address_$returns$__$",
+                        "typeString": "function (address)"
+                      }
+                    },
+                    "id": 784,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "814:29:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 785,
+                  "nodeType": "ExpressionStatement",
+                  "src": "814:29:5"
+                }
+              ]
+            },
+            "documentation": "@dev Override buyToken for the on chain whitelisting method\r",
+            "id": 787,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [
+              {
+                "arguments": [
+                  {
+                    "argumentTypes": null,
+                    "id": 777,
+                    "name": "_beneficiary",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 774,
+                    "src": "774:12:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  }
+                ],
+                "id": 778,
+                "modifierName": {
+                  "argumentTypes": null,
+                  "id": 776,
+                  "name": "onlyIfWhitelisted",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 6066,
+                  "src": "756:17:5",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_modifier$_t_address_$",
+                    "typeString": "modifier (address)"
+                  }
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "756:31:5"
+              }
+            ],
+            "name": "buyTokens",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 775,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 774,
+                  "name": "_beneficiary",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 787,
+                  "src": "734:20:5",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 773,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "734:7:5",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "733:22:5"
+            },
+            "payable": true,
+            "returnParameters": {
+              "id": 779,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "803:0:5"
+            },
+            "scope": 788,
+            "src": "715:136:5",
+            "stateMutability": "payable",
+            "superFunction": 6299,
+            "visibility": "public"
+          }
+        ],
+        "scope": 789,
+        "src": "277:577:5"
+      }
+    ],
+    "src": "0:854:5"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.4.24+commit.e67f0147.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "2.0.1",
+  "updatedAt": "2018-07-20T13:46:21.484Z"
+}

@@ -1,0 +1,954 @@
+{
+  "contractName": "IMintable",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "mintingFinished",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "to",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "Mint",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [],
+      "name": "MintFinished",
+      "type": "event"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_to",
+          "type": "address"
+        },
+        {
+          "name": "_amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "mint",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [],
+      "name": "finishMinting",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "pragma solidity ^0.4.24;\r\n\r\ncontract IMintable {\r\n\r\n    event Mint(address indexed to, uint256 amount);\r\n    event MintFinished();\r\n\r\n    bool public mintingFinished = false;\r\n\r\n    modifier canMint() {\r\n        require(!mintingFinished);\r\n        _;\r\n    }\r\n\r\n    function mint(address _to, uint256 _amount) public returns (bool);\r\n\r\n    function finishMinting() public returns (bool);\r\n}",
+  "sourcePath": "D:\\Vlad\\CryptoCurrency\\Truffle Projects\\Game_Starter\\contracts\\token\\IMintable.sol",
+  "ast": {
+    "absolutePath": "/D/Vlad/CryptoCurrency/Truffle Projects/Game_Starter/contracts/token/IMintable.sol",
+    "exportedSymbols": {
+      "IMintable": [
+        1481
+      ]
+    },
+    "id": 1482,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1446,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".24"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:18"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": false,
+        "id": 1481,
+        "linearizedBaseContracts": [
+          1481
+        ],
+        "name": "IMintable",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 1452,
+            "name": "Mint",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 1451,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1448,
+                  "indexed": true,
+                  "name": "to",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1452,
+                  "src": "67:18:18",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1447,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "67:7:18",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1450,
+                  "indexed": false,
+                  "name": "amount",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1452,
+                  "src": "87:14:18",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1449,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "87:7:18",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "66:36:18"
+            },
+            "src": "56:47:18"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 1454,
+            "name": "MintFinished",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 1453,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "127:2:18"
+            },
+            "src": "109:21:18"
+          },
+          {
+            "constant": false,
+            "id": 1457,
+            "name": "mintingFinished",
+            "nodeType": "VariableDeclaration",
+            "scope": 1481,
+            "src": "138:35:18",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bool",
+              "typeString": "bool"
+            },
+            "typeName": {
+              "id": 1455,
+              "name": "bool",
+              "nodeType": "ElementaryTypeName",
+              "src": "138:4:18",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bool",
+                "typeString": "bool"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "66616c7365",
+              "id": 1456,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "bool",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "168:5:18",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_bool",
+                "typeString": "bool"
+              },
+              "value": "false"
+            },
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 1465,
+              "nodeType": "Block",
+              "src": "201:56:18",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 1461,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "nodeType": "UnaryOperation",
+                        "operator": "!",
+                        "prefix": true,
+                        "src": "220:16:18",
+                        "subExpression": {
+                          "argumentTypes": null,
+                          "id": 1460,
+                          "name": "mintingFinished",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 1457,
+                          "src": "221:15:18",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_bool",
+                            "typeString": "bool"
+                          }
+                        },
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      ],
+                      "id": 1459,
+                      "name": "require",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [
+                        8238,
+                        8239
+                      ],
+                      "referencedDeclaration": 8238,
+                      "src": "212:7:18",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
+                        "typeString": "function (bool) pure"
+                      }
+                    },
+                    "id": 1462,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "212:25:18",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 1463,
+                  "nodeType": "ExpressionStatement",
+                  "src": "212:25:18"
+                },
+                {
+                  "id": 1464,
+                  "nodeType": "PlaceholderStatement",
+                  "src": "248:1:18"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 1466,
+            "name": "canMint",
+            "nodeType": "ModifierDefinition",
+            "parameters": {
+              "id": 1458,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "198:2:18"
+            },
+            "src": "182:75:18",
+            "visibility": "internal"
+          },
+          {
+            "body": null,
+            "documentation": null,
+            "id": 1475,
+            "implemented": false,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "mint",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1471,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1468,
+                  "name": "_to",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1475,
+                  "src": "279:11:18",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1467,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "279:7:18",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1470,
+                  "name": "_amount",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1475,
+                  "src": "292:15:18",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1469,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "292:7:18",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "278:30:18"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 1474,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1473,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1475,
+                  "src": "325:4:18",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 1472,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "325:4:18",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "324:6:18"
+            },
+            "scope": 1481,
+            "src": "265:66:18",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": null,
+            "documentation": null,
+            "id": 1480,
+            "implemented": false,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "finishMinting",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1476,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "361:2:18"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 1479,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1478,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1480,
+                  "src": "380:4:18",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 1477,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "380:4:18",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "379:6:18"
+            },
+            "scope": 1481,
+            "src": "339:47:18",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 1482,
+        "src": "28:361:18"
+      }
+    ],
+    "src": "0:389:18"
+  },
+  "legacyAST": {
+    "absolutePath": "/D/Vlad/CryptoCurrency/Truffle Projects/Game_Starter/contracts/token/IMintable.sol",
+    "exportedSymbols": {
+      "IMintable": [
+        1481
+      ]
+    },
+    "id": 1482,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1446,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".24"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:18"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": false,
+        "id": 1481,
+        "linearizedBaseContracts": [
+          1481
+        ],
+        "name": "IMintable",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 1452,
+            "name": "Mint",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 1451,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1448,
+                  "indexed": true,
+                  "name": "to",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1452,
+                  "src": "67:18:18",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1447,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "67:7:18",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1450,
+                  "indexed": false,
+                  "name": "amount",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1452,
+                  "src": "87:14:18",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1449,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "87:7:18",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "66:36:18"
+            },
+            "src": "56:47:18"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 1454,
+            "name": "MintFinished",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 1453,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "127:2:18"
+            },
+            "src": "109:21:18"
+          },
+          {
+            "constant": false,
+            "id": 1457,
+            "name": "mintingFinished",
+            "nodeType": "VariableDeclaration",
+            "scope": 1481,
+            "src": "138:35:18",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bool",
+              "typeString": "bool"
+            },
+            "typeName": {
+              "id": 1455,
+              "name": "bool",
+              "nodeType": "ElementaryTypeName",
+              "src": "138:4:18",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bool",
+                "typeString": "bool"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "66616c7365",
+              "id": 1456,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "bool",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "168:5:18",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_bool",
+                "typeString": "bool"
+              },
+              "value": "false"
+            },
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 1465,
+              "nodeType": "Block",
+              "src": "201:56:18",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 1461,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "nodeType": "UnaryOperation",
+                        "operator": "!",
+                        "prefix": true,
+                        "src": "220:16:18",
+                        "subExpression": {
+                          "argumentTypes": null,
+                          "id": 1460,
+                          "name": "mintingFinished",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 1457,
+                          "src": "221:15:18",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_bool",
+                            "typeString": "bool"
+                          }
+                        },
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      ],
+                      "id": 1459,
+                      "name": "require",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [
+                        8238,
+                        8239
+                      ],
+                      "referencedDeclaration": 8238,
+                      "src": "212:7:18",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
+                        "typeString": "function (bool) pure"
+                      }
+                    },
+                    "id": 1462,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "212:25:18",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 1463,
+                  "nodeType": "ExpressionStatement",
+                  "src": "212:25:18"
+                },
+                {
+                  "id": 1464,
+                  "nodeType": "PlaceholderStatement",
+                  "src": "248:1:18"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 1466,
+            "name": "canMint",
+            "nodeType": "ModifierDefinition",
+            "parameters": {
+              "id": 1458,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "198:2:18"
+            },
+            "src": "182:75:18",
+            "visibility": "internal"
+          },
+          {
+            "body": null,
+            "documentation": null,
+            "id": 1475,
+            "implemented": false,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "mint",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1471,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1468,
+                  "name": "_to",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1475,
+                  "src": "279:11:18",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1467,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "279:7:18",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1470,
+                  "name": "_amount",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1475,
+                  "src": "292:15:18",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1469,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "292:7:18",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "278:30:18"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 1474,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1473,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1475,
+                  "src": "325:4:18",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 1472,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "325:4:18",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "324:6:18"
+            },
+            "scope": 1481,
+            "src": "265:66:18",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": null,
+            "documentation": null,
+            "id": 1480,
+            "implemented": false,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "finishMinting",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1476,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "361:2:18"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 1479,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1478,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1480,
+                  "src": "380:4:18",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 1477,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "380:4:18",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "379:6:18"
+            },
+            "scope": 1481,
+            "src": "339:47:18",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 1482,
+        "src": "28:361:18"
+      }
+    ],
+    "src": "0:389:18"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.4.24+commit.e67f0147.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "2.0.1",
+  "updatedAt": "2018-07-20T13:46:21.489Z"
+}

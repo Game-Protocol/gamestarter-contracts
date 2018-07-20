@@ -1,0 +1,285 @@
+{
+  "contractName": "IWhitelist",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "_address",
+          "type": "address"
+        }
+      ],
+      "name": "isWhitelisted",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "pragma solidity ^0.4.23;\r\n\r\n/*\r\n    Whitelist interface\r\n*/\r\ncontract IWhitelist {\r\n    function isWhitelisted(address _address) public view returns (bool);\r\n}\r\n",
+  "sourcePath": "bancor-contracts\\solidity\\contracts\\utility\\interfaces\\IWhitelist.sol",
+  "ast": {
+    "absolutePath": "bancor-contracts/solidity/contracts/utility/interfaces/IWhitelist.sol",
+    "exportedSymbols": {
+      "IWhitelist": [
+        5692
+      ]
+    },
+    "id": 5693,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 5684,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".23"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:46"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": false,
+        "id": 5692,
+        "linearizedBaseContracts": [
+          5692
+        ],
+        "name": "IWhitelist",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": null,
+            "documentation": null,
+            "id": 5691,
+            "implemented": false,
+            "isConstructor": false,
+            "isDeclaredConst": true,
+            "modifiers": [],
+            "name": "isWhitelisted",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 5687,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5686,
+                  "name": "_address",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5691,
+                  "src": "111:16:46",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 5685,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "111:7:46",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "110:18:46"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 5690,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5689,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5691,
+                  "src": "150:4:46",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 5688,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "150:4:46",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "149:6:46"
+            },
+            "scope": 5692,
+            "src": "88:68:46",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 5693,
+        "src": "61:98:46"
+      }
+    ],
+    "src": "0:161:46"
+  },
+  "legacyAST": {
+    "absolutePath": "bancor-contracts/solidity/contracts/utility/interfaces/IWhitelist.sol",
+    "exportedSymbols": {
+      "IWhitelist": [
+        5692
+      ]
+    },
+    "id": 5693,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 5684,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".23"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:46"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": false,
+        "id": 5692,
+        "linearizedBaseContracts": [
+          5692
+        ],
+        "name": "IWhitelist",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": null,
+            "documentation": null,
+            "id": 5691,
+            "implemented": false,
+            "isConstructor": false,
+            "isDeclaredConst": true,
+            "modifiers": [],
+            "name": "isWhitelisted",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 5687,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5686,
+                  "name": "_address",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5691,
+                  "src": "111:16:46",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 5685,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "111:7:46",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "110:18:46"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 5690,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5689,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5691,
+                  "src": "150:4:46",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 5688,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "150:4:46",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "149:6:46"
+            },
+            "scope": 5692,
+            "src": "88:68:46",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 5693,
+        "src": "61:98:46"
+      }
+    ],
+    "src": "0:161:46"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.4.24+commit.e67f0147.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "2.0.1",
+  "updatedAt": "2018-07-20T13:46:21.507Z"
+}
