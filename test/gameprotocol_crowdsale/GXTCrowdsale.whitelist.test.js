@@ -2,7 +2,7 @@ const advanceBlock = require('../helpers/advanceToBlock');
 const increaseTime = require('../helpers/increaseTime');
 const latestTime = require('../helpers/latestTime');
 const ether = require('../helpers/ether');
-const EVMRevert = "revert";
+const { signHex } = require('../helpers/sign');
 
 const BigNumber = web3.BigNumber;
 
@@ -13,6 +13,12 @@ const should = require('chai')
 
 const GXTCrowdsale = artifacts.require('GXTCrowdsale');
 const GXToken = artifacts.require('GXToken');
+
+
+const getSigner = (contract, signer, data = '') => (addr) => {
+  const message = contract.address.substr(2) + addr.substr(2) + data;
+  return signHex(signer, message);
+};
 
 contract('GXTCrowdsale_Whitelist', function (accounts) {
   const rate = new BigNumber(1000);
@@ -33,13 +39,15 @@ contract('GXTCrowdsale_Whitelist', function (accounts) {
   const authorized = investor;
   const unauthorized = accounts[8]
   const anotherAuthorized = accounts[9];
+  const bouncerAddress = accounts[3];
 
-  before(async function () {
-    // Advance to the next block to correctly read time in the solidity "now" function interpreted by ganache
-    await advanceBlock.advanceBlock();
-  });
+ 
+  describe('whitelisting', function () {
 
-  describe('on chain whitelisting', function () {
+    before(async function () {
+      // Advance to the next block to correctly read time in the solidity "now" function interpreted by ganache
+      await advanceBlock.advanceBlock();
+    });
 
     beforeEach(async function () {
       this.openingTime = latestTime.latestTime() + increaseTime.duration.weeks(1);
@@ -60,14 +68,13 @@ contract('GXTCrowdsale_Whitelist', function (accounts) {
       );
       await this.token.transferOwnership(this.crowdsale.address);
       await this.crowdsale.claimTokenOwnership();
+      await increaseTime.increaseTimeTo(this.openingTime);
     });
-
-    describe('whitelisting', function () {
-      beforeEach(async function () {
-        await increaseTime.increaseTimeTo(this.openingTime);
-      });
+  
+    describe('on chain whitelisting', function () {
 
       describe('single user whitelisting', function () {
+
         beforeEach(async function () {
           await this.crowdsale.addAddressToWhitelist(authorized);
         });
@@ -136,6 +143,47 @@ contract('GXTCrowdsale_Whitelist', function (accounts) {
             let isntAuthorized = await this.crowdsale.whitelist(unauthorized);
             isntAuthorized.should.equal(false);
           });
+        });
+      });
+    });
+    describe('off chain whitelisting', function () {
+
+      beforeEach(async function () {
+        await this.crowdsale.addBouncer(bouncerAddress, { from: owner });
+        this.roleBouncer = await this.crowdsale.ROLE_BOUNCER();
+        this.genSig = getSigner(this.crowdsale, bouncerAddress);
+      });
+
+      it('should have a default owner of self', async function () {
+        const theOwner = await this.crowdsale.owner();
+        theOwner.should.eq(owner);
+      });
+    
+      it('should allow owner to add a bouncer', async function () {
+        await this.crowdsale.addBouncer(bouncerAddress, { from: owner });
+        const hasRole = await this.crowdsale.hasRole(bouncerAddress, this.roleBouncer);
+        hasRole.should.eq(true);
+      });
+    
+      it('should not allow anyone to add a bouncer', async function () {
+        await this.crowdsale.addBouncer(bouncerAddress, { from: unauthorized }).should.be.rejected;
+      });
+
+      describe('modifiers', function () {
+        it('should allow valid signature for sender', async function () {
+          await this.crowdsale.buyTokensSigned(authorized, this.genSig(authorized), { value: value, from: authorized }).should.be.fulfilled;
+        });
+        
+        it('should not allow invalid signature for sender', async function () {
+          await this.crowdsale.buyTokensSigned(authorized, 'abcd', { value: value, from: authorized }).should.be.rejected;
+        });
+
+        it('should not accept invalid message for invalid user', async function () {
+          await this.crowdsale.buyTokensSigned(unauthorized, 'abcd', { value: value, from: unauthorized }).should.be.rejected;
+        });
+
+        it('should not accept valid message for invalid user', async function () {
+          await this.crowdsale.buyTokensSigned(unauthorized, this.genSig(authorized), { value: value, from: unauthorized }).should.be.rejected;
         });
       });
     });

@@ -8,7 +8,7 @@ require('chai')
   .use(require('chai-bignumber')(BigNumber))
   .should();
 
-contract('SmartToken', accounts => {
+contract('GXToken-SmartToken', accounts => {
   it('verifies the token name, symbol and decimal units after construction', async () => {
     let token = await SmartToken.new();
     let name = await token.name.call();

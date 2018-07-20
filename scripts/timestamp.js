@@ -14,7 +14,12 @@ function getTimeStampMinutesFromNow(minutes) {
   return minutesLater / 1000;
 }
 
+function timestampToDate(timestamp) {
+  return new Date(timestamp * 1000);
+}
+
 module.exports = {
   getTimeStamp: getTimeStamp,
-  getTimeStampMinutesFromNow: getTimeStampMinutesFromNow
+  getTimeStampMinutesFromNow: getTimeStampMinutesFromNow,
+  timestampToDate: timestampToDate,
 };

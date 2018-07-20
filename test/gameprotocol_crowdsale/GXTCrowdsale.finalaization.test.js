@@ -58,6 +58,7 @@ contract('GXTCrowdsale_Finalazation', function (accounts) {
       { from: owner }
     );
     await this.token.transferOwnership(this.crowdsale.address);
+    await this.crowdsale.claimTokenOwnership();
     await this.crowdsale.addAddressToWhitelist(investor);
   });
 
@@ -107,6 +108,7 @@ contract('GXTCrowdsale_Finalazation', function (accounts) {
       });
 
       it('token owner transfered', async function () {
+        await this.token.claimOwnership();
         const tokenOwner = await this.token.owner();
         assert.equal(tokenOwner, owner);
       });

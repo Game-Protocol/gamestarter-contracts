@@ -1,16 +1,17 @@
 pragma solidity ^0.4.24;
 
-import "../../access/Whitelist.sol";
 import "../../access/ControlledAccess.sol";
+import "openzeppelin-solidity/contracts/access/Whitelist.sol";
+import "openzeppelin-solidity/contracts/access/SignatureBouncer.sol";
 import "openzeppelin-solidity/contracts/crowdsale/Crowdsale.sol";
 
-contract TwoWayWhitelistedCrowdsale is Crowdsale, Whitelist, ControlledAccess {
+contract TwoWayWhitelistedCrowdsale is Crowdsale, Whitelist, SignatureBouncer {
 
     /**
-    * @dev buyTokensSecure, buy tokens with an off chain whitelisting method.
+    * @dev buyTokensSigned, buy tokens with an off chain whitelisting method using signature.
     */
-    function buyTokensSecure(uint8 _v, bytes32 _r, bytes32 _s) onlyValidAccess(_v,_r,_s) public payable {
-        super.buyTokens(msg.sender);
+    function buyTokensSigned(address _beneficiary, bytes _sig) onlyValidSignature(_sig) public payable {
+        super.buyTokens(_beneficiary);
     }
 
     /**

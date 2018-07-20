@@ -1,5 +1,5 @@
 var verifyCode = require('../scripts/verifyCode');
-var toTimestamp = require('../scripts/toTimestamp');
+var timestamp = require('../scripts/timestamp');
 
 var GXToken = artifacts.require("./GXToken.sol");
 var GXTCrowdsale = artifacts.require("./GXTCrowdsale.sol");
@@ -13,11 +13,11 @@ module.exports = function (deployer) {
   var bountyProgram = process.env.BOUNTYPROGRAM;
   var gameSupportFund = process.env.GAMESUPPORTFUND;
 
-  var start = toTimestamp.getTimeStampMinutesFromNow(5); 
-  var end = toTimestamp.getTimeStampMinutesFromNow(10);
-  // var start = toTimestamp.getTimeStamp('2018-08-01 12:00:00');
-  // var end = toTimestamp.getTimeStamp('2018-09-15 12:00:00');
-  console.log(start + " - " + end);
+  var start = timestamp.getTimeStampMinutesFromNow(5); 
+  var end = timestamp.getTimeStampMinutesFromNow(10);
+  // var start = timestamp.getTimeStamp('2018-08-01 12:00:00');
+  // var end = timestamp.getTimeStamp('2018-09-15 12:00:00');
+  console.log(timestamp.timestampToDate(start) + " - " + timestamp.timestampToDate(end));
 
   var rate = new web3.BigNumber(2000); // exchange rate
 
@@ -30,6 +30,7 @@ module.exports = function (deployer) {
     deployer.deploy(GXTCrowdsale, start, end, rate, wallet, gameSupportFund, bountyProgram, advisors, team, GXToken.address).then(function (){
       GXToken.deployed().then(function (instance){
         instance.transferOwnership(GXTCrowdsale.address); // Transfer ownership to crowdsale
+        GXTCrowdsale.deployed().then(function (cs) { cs.claimTokenOwnership(); });
       });
     });
   });

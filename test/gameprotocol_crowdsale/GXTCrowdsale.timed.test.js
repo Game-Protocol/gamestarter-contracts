@@ -57,6 +57,7 @@ contract('GXTCrowdsale_Timed', function (accounts) {
       { from: owner }
     );
     await this.token.transferOwnership(this.crowdsale.address);
+    await this.crowdsale.claimTokenOwnership();
     await this.crowdsale.addAddressToWhitelist(owner);
     await this.crowdsale.addAddressToWhitelist(investor);
     await this.crowdsale.addAddressToWhitelist(purchaser);

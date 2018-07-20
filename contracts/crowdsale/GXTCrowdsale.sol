@@ -59,11 +59,16 @@ contract GXTCrowdsale is FinalizableCrowdsale, MintedCrowdsale, TokenCappedCrowd
         walletTeam = _walletTeam;
     }
 
-    // Helper function to add a percent of the value to a value
+    /**
+     * @dev Helper function to add a percent of the value to a value
+     */
     function addPercent(uint8 percent, uint256 value) internal pure returns(uint256) {
         return value.add(value.mul(percent).div(100));
     }
 
+    /**
+     * @dev Call to claim ownership of the token after ownership transfer to the crowdsale
+     */
     function claimTokenOwnership() public onlyOwner {
         GXToken(token).claimOwnership();
     }

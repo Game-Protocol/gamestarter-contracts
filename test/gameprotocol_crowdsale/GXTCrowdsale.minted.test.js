@@ -53,6 +53,7 @@ contract('GXTCrowdsale_Minted', function (accounts) {
       { from: owner }
     );
     await this.token.transferOwnership(this.crowdsale.address);
+    await this.crowdsale.claimTokenOwnership();
   });
 
   describe('minting tests', function () {

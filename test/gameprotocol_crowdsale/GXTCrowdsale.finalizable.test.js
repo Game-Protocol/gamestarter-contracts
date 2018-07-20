@@ -52,6 +52,7 @@ contract('GXTCrowdsale_Finalizable', function (accounts) {
       { from: owner }
     );
     await this.token.transferOwnership(this.crowdsale.address);
+    await this.crowdsale.claimTokenOwnership();
   });
 
   describe('finalizable crowdsale', function () {
