@@ -1,9 +1,9 @@
 var verifyCode = require('../scripts/verifyCode');
 var timestamp = require('../scripts/timestamp');
 
-var GXToken = artifacts.require("./GXToken.sol");
-var GXTCrowdsale = artifacts.require("./GXTCrowdsale.sol");
-
+var GXToken = artifacts.require("GXToken");
+var GXTCrowdsale = artifacts.require("GXTCrowdsale");
+var TutorialToken = artifacts.require("TutorialToken");
 
 module.exports = function (deployer) {
   var wallet = process.env.WALLET;
@@ -21,7 +21,9 @@ module.exports = function (deployer) {
 
   var rate = new web3.BigNumber(2000); // exchange rate
 
-  verifyCode.flatten();
+  // verifyCode.flatten();
+
+  deployer.deploy(TutorialToken);
 
   deployer.deploy(GXToken).then(function () {
     var types = ["uint256" ,"uint256" ,"uint256" ,"address" ,"address" ,"address" ,"address" , "address" , "address"];

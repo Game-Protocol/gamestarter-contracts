@@ -74,22 +74,22 @@
   ],
   "bytecode": "0x608060405234801561001057600080fd5b506101cc806100206000396000f30060806040526004361061006c5763ffffffff7c01000000000000000000000000000000000000000000000000000000006000350416635a46f06c81146100715780636d7bd3fc1461009857806383315b6e146100ad5780639232494e146100c25780639249993a146100d7575b600080fd5b34801561007d57600080fd5b506100866100ec565b60408051918252519081900360200190f35b3480156100a457600080fd5b50610086610110565b3480156100b957600080fd5b50610086610134565b3480156100ce57600080fd5b50610086610158565b3480156100e357600080fd5b5061008661017c565b7f42616e636f72436f6e766572746572466163746f72790000000000000000000081565b7f42616e636f72466f726d756c610000000000000000000000000000000000000081565b7f436f6e747261637446656174757265730000000000000000000000000000000081565b7f42616e636f724e6574776f726b0000000000000000000000000000000000000081565b7f42616e636f7247617350726963654c696d697400000000000000000000000000815600a165627a7a72305820d261e7aadcacb571e9770207f17305fba2882b7775f749b2d053d45a6501edaf0029",
   "deployedBytecode": "0x60806040526004361061006c5763ffffffff7c01000000000000000000000000000000000000000000000000000000006000350416635a46f06c81146100715780636d7bd3fc1461009857806383315b6e146100ad5780639232494e146100c25780639249993a146100d7575b600080fd5b34801561007d57600080fd5b506100866100ec565b60408051918252519081900360200190f35b3480156100a457600080fd5b50610086610110565b3480156100b957600080fd5b50610086610134565b3480156100ce57600080fd5b50610086610158565b3480156100e357600080fd5b5061008661017c565b7f42616e636f72436f6e766572746572466163746f72790000000000000000000081565b7f42616e636f72466f726d756c610000000000000000000000000000000000000081565b7f436f6e747261637446656174757265730000000000000000000000000000000081565b7f42616e636f724e6574776f726b0000000000000000000000000000000000000081565b7f42616e636f7247617350726963654c696d697400000000000000000000000000815600a165627a7a72305820d261e7aadcacb571e9770207f17305fba2882b7775f749b2d053d45a6501edaf0029",
-  "sourceMap": "165:418:21:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;165:418:21;;;;;;;",
-  "deployedSourceMap": "165:418:21:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;504:75;;8:9:-1;5:2;;;30:1;27;20:12;5:2;504:75:21;;;;;;;;;;;;;;;;;;;;364:56;;8:9:-1;5:2;;;30:1;27;20:12;5:2;364:56:21;;;;209:62;;8:9:-1;5:2;;;30:1;27;20:12;5:2;209:62:21;;;;301:56;;8:9:-1;5:2;;;30:1;27;20:12;5:2;301:56:21;;;;427:70;;8:9:-1;5:2;;;30:1;27;20:12;5:2;427:70:21;;;;504:75;;;:::o;364:56::-;;;:::o;209:62::-;;;:::o;301:56::-;;;:::o;427:70::-;;;:::o",
+  "sourceMap": "165:418:17:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;165:418:17;;;;;;;",
+  "deployedSourceMap": "165:418:17:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;504:75;;8:9:-1;5:2;;;30:1;27;20:12;5:2;504:75:17;;;;;;;;;;;;;;;;;;;;364:56;;8:9:-1;5:2;;;30:1;27;20:12;5:2;364:56:17;;;;209:62;;8:9:-1;5:2;;;30:1;27;20:12;5:2;209:62:17;;;;301:56;;8:9:-1;5:2;;;30:1;27;20:12;5:2;301:56:17;;;;427:70;;8:9:-1;5:2;;;30:1;27;20:12;5:2;427:70:17;;;;504:75;;;:::o;364:56::-;;;:::o;209:62::-;;;:::o;301:56::-;;;:::o;427:70::-;;;:::o",
   "source": "pragma solidity ^0.4.23;\r\n\r\n/**\r\n    Id definitions for bancor contracts\r\n\r\n    Can be used in conjunction with the contract registry to get contract addresses\r\n*/\r\ncontract ContractIds {\r\n    // generic\r\n    bytes32 public constant CONTRACT_FEATURES = \"ContractFeatures\";\r\n\r\n    // bancor logic\r\n    bytes32 public constant BANCOR_NETWORK = \"BancorNetwork\";\r\n    bytes32 public constant BANCOR_FORMULA = \"BancorFormula\";\r\n    bytes32 public constant BANCOR_GAS_PRICE_LIMIT = \"BancorGasPriceLimit\";\r\n    bytes32 public constant BANCOR_CONVERTER_FACTORY = \"BancorConverterFactory\";\r\n}\r\n",
   "sourcePath": "bancor-contracts\\solidity\\contracts\\ContractIds.sol",
   "ast": {
     "absolutePath": "bancor-contracts/solidity/contracts/ContractIds.sol",
     "exportedSymbols": {
       "ContractIds": [
-        2606
+        2467
       ]
     },
-    "id": 2607,
+    "id": 2468,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 2590,
+        "id": 2451,
         "literals": [
           "solidity",
           "^",
@@ -97,7 +97,7 @@
           ".23"
         ],
         "nodeType": "PragmaDirective",
-        "src": "0:24:21"
+        "src": "0:24:17"
       },
       {
         "baseContracts": [],
@@ -105,20 +105,20 @@
         "contractKind": "contract",
         "documentation": "Id definitions for bancor contracts\r\nCan be used in conjunction with the contract registry to get contract addresses\r",
         "fullyImplemented": true,
-        "id": 2606,
+        "id": 2467,
         "linearizedBaseContracts": [
-          2606
+          2467
         ],
         "name": "ContractIds",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "constant": true,
-            "id": 2593,
+            "id": 2454,
             "name": "CONTRACT_FEATURES",
             "nodeType": "VariableDeclaration",
-            "scope": 2606,
-            "src": "209:62:21",
+            "scope": 2467,
+            "src": "209:62:17",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
@@ -126,10 +126,10 @@
               "typeString": "bytes32"
             },
             "typeName": {
-              "id": 2591,
+              "id": 2452,
               "name": "bytes32",
               "nodeType": "ElementaryTypeName",
-              "src": "209:7:21",
+              "src": "209:7:17",
               "typeDescriptions": {
                 "typeIdentifier": "t_bytes32",
                 "typeString": "bytes32"
@@ -138,14 +138,14 @@
             "value": {
               "argumentTypes": null,
               "hexValue": "436f6e74726163744665617475726573",
-              "id": 2592,
+              "id": 2453,
               "isConstant": false,
               "isLValue": false,
               "isPure": true,
               "kind": "string",
               "lValueRequested": false,
               "nodeType": "Literal",
-              "src": "253:18:21",
+              "src": "253:18:17",
               "subdenomination": null,
               "typeDescriptions": {
                 "typeIdentifier": "t_stringliteral_796d0b4ee8bc6778414ec61193bfe779dc27d99c0242f802ea0a038050b2a15c",
@@ -157,11 +157,11 @@
           },
           {
             "constant": true,
-            "id": 2596,
+            "id": 2457,
             "name": "BANCOR_NETWORK",
             "nodeType": "VariableDeclaration",
-            "scope": 2606,
-            "src": "301:56:21",
+            "scope": 2467,
+            "src": "301:56:17",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
@@ -169,10 +169,10 @@
               "typeString": "bytes32"
             },
             "typeName": {
-              "id": 2594,
+              "id": 2455,
               "name": "bytes32",
               "nodeType": "ElementaryTypeName",
-              "src": "301:7:21",
+              "src": "301:7:17",
               "typeDescriptions": {
                 "typeIdentifier": "t_bytes32",
                 "typeString": "bytes32"
@@ -181,14 +181,14 @@
             "value": {
               "argumentTypes": null,
               "hexValue": "42616e636f724e6574776f726b",
-              "id": 2595,
+              "id": 2456,
               "isConstant": false,
               "isLValue": false,
               "isPure": true,
               "kind": "string",
               "lValueRequested": false,
               "nodeType": "Literal",
-              "src": "342:15:21",
+              "src": "342:15:17",
               "subdenomination": null,
               "typeDescriptions": {
                 "typeIdentifier": "t_stringliteral_e13073a1961b7477f917c9e8fc77a7d64eb68a6e4f8820f41bc0991c65d90aea",
@@ -200,11 +200,11 @@
           },
           {
             "constant": true,
-            "id": 2599,
+            "id": 2460,
             "name": "BANCOR_FORMULA",
             "nodeType": "VariableDeclaration",
-            "scope": 2606,
-            "src": "364:56:21",
+            "scope": 2467,
+            "src": "364:56:17",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
@@ -212,10 +212,10 @@
               "typeString": "bytes32"
             },
             "typeName": {
-              "id": 2597,
+              "id": 2458,
               "name": "bytes32",
               "nodeType": "ElementaryTypeName",
-              "src": "364:7:21",
+              "src": "364:7:17",
               "typeDescriptions": {
                 "typeIdentifier": "t_bytes32",
                 "typeString": "bytes32"
@@ -224,14 +224,14 @@
             "value": {
               "argumentTypes": null,
               "hexValue": "42616e636f72466f726d756c61",
-              "id": 2598,
+              "id": 2459,
               "isConstant": false,
               "isLValue": false,
               "isPure": true,
               "kind": "string",
               "lValueRequested": false,
               "nodeType": "Literal",
-              "src": "405:15:21",
+              "src": "405:15:17",
               "subdenomination": null,
               "typeDescriptions": {
                 "typeIdentifier": "t_stringliteral_f9aac19de3c8e04eb4d0548047a1cd61c5aaafde7cf99ed9c7ed906ce4dddf38",
@@ -243,11 +243,11 @@
           },
           {
             "constant": true,
-            "id": 2602,
+            "id": 2463,
             "name": "BANCOR_GAS_PRICE_LIMIT",
             "nodeType": "VariableDeclaration",
-            "scope": 2606,
-            "src": "427:70:21",
+            "scope": 2467,
+            "src": "427:70:17",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
@@ -255,10 +255,10 @@
               "typeString": "bytes32"
             },
             "typeName": {
-              "id": 2600,
+              "id": 2461,
               "name": "bytes32",
               "nodeType": "ElementaryTypeName",
-              "src": "427:7:21",
+              "src": "427:7:17",
               "typeDescriptions": {
                 "typeIdentifier": "t_bytes32",
                 "typeString": "bytes32"
@@ -267,14 +267,14 @@
             "value": {
               "argumentTypes": null,
               "hexValue": "42616e636f7247617350726963654c696d6974",
-              "id": 2601,
+              "id": 2462,
               "isConstant": false,
               "isLValue": false,
               "isPure": true,
               "kind": "string",
               "lValueRequested": false,
               "nodeType": "Literal",
-              "src": "476:21:21",
+              "src": "476:21:17",
               "subdenomination": null,
               "typeDescriptions": {
                 "typeIdentifier": "t_stringliteral_3e7bc3eb166460f3a2293ce6da81bc3feb84e50c17139e534c8244ed7643600b",
@@ -286,11 +286,11 @@
           },
           {
             "constant": true,
-            "id": 2605,
+            "id": 2466,
             "name": "BANCOR_CONVERTER_FACTORY",
             "nodeType": "VariableDeclaration",
-            "scope": 2606,
-            "src": "504:75:21",
+            "scope": 2467,
+            "src": "504:75:17",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
@@ -298,10 +298,10 @@
               "typeString": "bytes32"
             },
             "typeName": {
-              "id": 2603,
+              "id": 2464,
               "name": "bytes32",
               "nodeType": "ElementaryTypeName",
-              "src": "504:7:21",
+              "src": "504:7:17",
               "typeDescriptions": {
                 "typeIdentifier": "t_bytes32",
                 "typeString": "bytes32"
@@ -310,14 +310,14 @@
             "value": {
               "argumentTypes": null,
               "hexValue": "42616e636f72436f6e766572746572466163746f7279",
-              "id": 2604,
+              "id": 2465,
               "isConstant": false,
               "isLValue": false,
               "isPure": true,
               "kind": "string",
               "lValueRequested": false,
               "nodeType": "Literal",
-              "src": "555:24:21",
+              "src": "555:24:17",
               "subdenomination": null,
               "typeDescriptions": {
                 "typeIdentifier": "t_stringliteral_908920d81ad86776308e392199d27f3dabecf27c534bdaffe0afc90dac72a25d",
@@ -328,24 +328,24 @@
             "visibility": "public"
           }
         ],
-        "scope": 2607,
-        "src": "165:418:21"
+        "scope": 2468,
+        "src": "165:418:17"
       }
     ],
-    "src": "0:585:21"
+    "src": "0:585:17"
   },
   "legacyAST": {
     "absolutePath": "bancor-contracts/solidity/contracts/ContractIds.sol",
     "exportedSymbols": {
       "ContractIds": [
-        2606
+        2467
       ]
     },
-    "id": 2607,
+    "id": 2468,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 2590,
+        "id": 2451,
         "literals": [
           "solidity",
           "^",
@@ -353,7 +353,7 @@
           ".23"
         ],
         "nodeType": "PragmaDirective",
-        "src": "0:24:21"
+        "src": "0:24:17"
       },
       {
         "baseContracts": [],
@@ -361,20 +361,20 @@
         "contractKind": "contract",
         "documentation": "Id definitions for bancor contracts\r\nCan be used in conjunction with the contract registry to get contract addresses\r",
         "fullyImplemented": true,
-        "id": 2606,
+        "id": 2467,
         "linearizedBaseContracts": [
-          2606
+          2467
         ],
         "name": "ContractIds",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "constant": true,
-            "id": 2593,
+            "id": 2454,
             "name": "CONTRACT_FEATURES",
             "nodeType": "VariableDeclaration",
-            "scope": 2606,
-            "src": "209:62:21",
+            "scope": 2467,
+            "src": "209:62:17",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
@@ -382,10 +382,10 @@
               "typeString": "bytes32"
             },
             "typeName": {
-              "id": 2591,
+              "id": 2452,
               "name": "bytes32",
               "nodeType": "ElementaryTypeName",
-              "src": "209:7:21",
+              "src": "209:7:17",
               "typeDescriptions": {
                 "typeIdentifier": "t_bytes32",
                 "typeString": "bytes32"
@@ -394,14 +394,14 @@
             "value": {
               "argumentTypes": null,
               "hexValue": "436f6e74726163744665617475726573",
-              "id": 2592,
+              "id": 2453,
               "isConstant": false,
               "isLValue": false,
               "isPure": true,
               "kind": "string",
               "lValueRequested": false,
               "nodeType": "Literal",
-              "src": "253:18:21",
+              "src": "253:18:17",
               "subdenomination": null,
               "typeDescriptions": {
                 "typeIdentifier": "t_stringliteral_796d0b4ee8bc6778414ec61193bfe779dc27d99c0242f802ea0a038050b2a15c",
@@ -413,11 +413,11 @@
           },
           {
             "constant": true,
-            "id": 2596,
+            "id": 2457,
             "name": "BANCOR_NETWORK",
             "nodeType": "VariableDeclaration",
-            "scope": 2606,
-            "src": "301:56:21",
+            "scope": 2467,
+            "src": "301:56:17",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
@@ -425,10 +425,10 @@
               "typeString": "bytes32"
             },
             "typeName": {
-              "id": 2594,
+              "id": 2455,
               "name": "bytes32",
               "nodeType": "ElementaryTypeName",
-              "src": "301:7:21",
+              "src": "301:7:17",
               "typeDescriptions": {
                 "typeIdentifier": "t_bytes32",
                 "typeString": "bytes32"
@@ -437,14 +437,14 @@
             "value": {
               "argumentTypes": null,
               "hexValue": "42616e636f724e6574776f726b",
-              "id": 2595,
+              "id": 2456,
               "isConstant": false,
               "isLValue": false,
               "isPure": true,
               "kind": "string",
               "lValueRequested": false,
               "nodeType": "Literal",
-              "src": "342:15:21",
+              "src": "342:15:17",
               "subdenomination": null,
               "typeDescriptions": {
                 "typeIdentifier": "t_stringliteral_e13073a1961b7477f917c9e8fc77a7d64eb68a6e4f8820f41bc0991c65d90aea",
@@ -456,11 +456,11 @@
           },
           {
             "constant": true,
-            "id": 2599,
+            "id": 2460,
             "name": "BANCOR_FORMULA",
             "nodeType": "VariableDeclaration",
-            "scope": 2606,
-            "src": "364:56:21",
+            "scope": 2467,
+            "src": "364:56:17",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
@@ -468,10 +468,10 @@
               "typeString": "bytes32"
             },
             "typeName": {
-              "id": 2597,
+              "id": 2458,
               "name": "bytes32",
               "nodeType": "ElementaryTypeName",
-              "src": "364:7:21",
+              "src": "364:7:17",
               "typeDescriptions": {
                 "typeIdentifier": "t_bytes32",
                 "typeString": "bytes32"
@@ -480,14 +480,14 @@
             "value": {
               "argumentTypes": null,
               "hexValue": "42616e636f72466f726d756c61",
-              "id": 2598,
+              "id": 2459,
               "isConstant": false,
               "isLValue": false,
               "isPure": true,
               "kind": "string",
               "lValueRequested": false,
               "nodeType": "Literal",
-              "src": "405:15:21",
+              "src": "405:15:17",
               "subdenomination": null,
               "typeDescriptions": {
                 "typeIdentifier": "t_stringliteral_f9aac19de3c8e04eb4d0548047a1cd61c5aaafde7cf99ed9c7ed906ce4dddf38",
@@ -499,11 +499,11 @@
           },
           {
             "constant": true,
-            "id": 2602,
+            "id": 2463,
             "name": "BANCOR_GAS_PRICE_LIMIT",
             "nodeType": "VariableDeclaration",
-            "scope": 2606,
-            "src": "427:70:21",
+            "scope": 2467,
+            "src": "427:70:17",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
@@ -511,10 +511,10 @@
               "typeString": "bytes32"
             },
             "typeName": {
-              "id": 2600,
+              "id": 2461,
               "name": "bytes32",
               "nodeType": "ElementaryTypeName",
-              "src": "427:7:21",
+              "src": "427:7:17",
               "typeDescriptions": {
                 "typeIdentifier": "t_bytes32",
                 "typeString": "bytes32"
@@ -523,14 +523,14 @@
             "value": {
               "argumentTypes": null,
               "hexValue": "42616e636f7247617350726963654c696d6974",
-              "id": 2601,
+              "id": 2462,
               "isConstant": false,
               "isLValue": false,
               "isPure": true,
               "kind": "string",
               "lValueRequested": false,
               "nodeType": "Literal",
-              "src": "476:21:21",
+              "src": "476:21:17",
               "subdenomination": null,
               "typeDescriptions": {
                 "typeIdentifier": "t_stringliteral_3e7bc3eb166460f3a2293ce6da81bc3feb84e50c17139e534c8244ed7643600b",
@@ -542,11 +542,11 @@
           },
           {
             "constant": true,
-            "id": 2605,
+            "id": 2466,
             "name": "BANCOR_CONVERTER_FACTORY",
             "nodeType": "VariableDeclaration",
-            "scope": 2606,
-            "src": "504:75:21",
+            "scope": 2467,
+            "src": "504:75:17",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
@@ -554,10 +554,10 @@
               "typeString": "bytes32"
             },
             "typeName": {
-              "id": 2603,
+              "id": 2464,
               "name": "bytes32",
               "nodeType": "ElementaryTypeName",
-              "src": "504:7:21",
+              "src": "504:7:17",
               "typeDescriptions": {
                 "typeIdentifier": "t_bytes32",
                 "typeString": "bytes32"
@@ -566,14 +566,14 @@
             "value": {
               "argumentTypes": null,
               "hexValue": "42616e636f72436f6e766572746572466163746f7279",
-              "id": 2604,
+              "id": 2465,
               "isConstant": false,
               "isLValue": false,
               "isPure": true,
               "kind": "string",
               "lValueRequested": false,
               "nodeType": "Literal",
-              "src": "555:24:21",
+              "src": "555:24:17",
               "subdenomination": null,
               "typeDescriptions": {
                 "typeIdentifier": "t_stringliteral_908920d81ad86776308e392199d27f3dabecf27c534bdaffe0afc90dac72a25d",
@@ -584,11 +584,11 @@
             "visibility": "public"
           }
         ],
-        "scope": 2607,
-        "src": "165:418:21"
+        "scope": 2468,
+        "src": "165:418:17"
       }
     ],
-    "src": "0:585:21"
+    "src": "0:585:17"
   },
   "compiler": {
     "name": "solc",
@@ -596,5 +596,5 @@
   },
   "networks": {},
   "schemaVersion": "2.0.1",
-  "updatedAt": "2018-07-20T13:46:21.494Z"
+  "updatedAt": "2018-07-24T08:59:53.357Z"
 }

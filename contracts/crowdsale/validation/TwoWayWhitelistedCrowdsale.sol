@@ -1,6 +1,5 @@
 pragma solidity ^0.4.24;
 
-import "../../access/ControlledAccess.sol";
 import "openzeppelin-solidity/contracts/access/Whitelist.sol";
 import "openzeppelin-solidity/contracts/access/SignatureBouncer.sol";
 import "openzeppelin-solidity/contracts/crowdsale/Crowdsale.sol";
