@@ -8,7 +8,11 @@ Game Protocol crowdsale and token contracts, using OpenZeppelin v1.9.0
 * solidity : v0.4.24
 * ganache-cli : v6.1.0
 
-To run test > npm test
+To run test
+
+```sol
+npm test
+```
 
 ## Game Starter
 

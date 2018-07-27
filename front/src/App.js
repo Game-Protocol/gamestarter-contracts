@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
 import "./App.css";
 
 import { drizzleConnect } from "drizzle-react";
@@ -14,16 +13,20 @@ class App extends Component {
       return (
         <div className="App">
           <header className="App-header">
-            <h1 className="App-title">Tutorial Token</h1>
+            <h1 className="App-title">GXToken</h1>
+            <p>
+              <strong>Account</strong>:{" "}
+              {accounts[0]}
+            </p>
             <p>
               <strong>Total Supply</strong>:{" "}
               <ContractData
-                contract="TutorialToken"
+                contract="GXToken"
                 method="totalSupply"
                 methodArgs={[{ from: accounts[0] }]}
               />{" "}
               <ContractData
-                contract="TutorialToken"
+                contract="GXToken"
                 method="symbol"
                 hideIndicator
               />
@@ -31,16 +34,31 @@ class App extends Component {
             <p>
               <strong>My Balance</strong>:{" "}
               <ContractData
-                contract="TutorialToken"
+                contract="GXToken"
                 method="balanceOf"
                 methodArgs={[accounts[0]]}
+              />
+              {" "}
+              <ContractData
+                contract="GXToken"
+                method="symbol"
+                hideIndicator
               />
             </p>
             <h3>Send Tokens</h3>
           </header>
           <div className="App-intro">
+            mint
             <ContractForm
-              contract="TutorialToken"
+              contract="GXToken"
+              method="mint"
+              labels={["To Address", "Amount"]}
+            />
+          </div>
+          <div className="App-intro">
+            transfer
+            <ContractForm
+              contract="GXToken"
               method="transfer"
               labels={["To Address", "Amount to Send"]}
             />
@@ -57,7 +75,8 @@ const mapStateToProps = state => {
   return {
     accounts: state.accounts,
     drizzleStatus: state.drizzleStatus,
-    TutorialToken: state.contracts.TutorialToken
+    Token: state.contracts.Token,
+    Crowdsale: state.contracts.Crowdsale
   };
 };
 

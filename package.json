@@ -7,7 +7,8 @@
     "test": "test"
   },
   "scripts": {
-    "test": "sh scripts/test.sh"
+    "test": "sh scripts/test.sh",
+    "start": "cd front/ && npm start"
   },
   "repository": {
     "type": "git",

@@ -1,9 +1,7 @@
 import Token from "./contracts/GXToken.json";
 import Crowdsale from "./contracts/GXTCrowdsale.json";
-// Import contract
-import TutorialToken from "./contracts/TutorialToken.json";
+// import Crowdsale from "./contracts/MockGXTCrowdsale.json";
 
-console.log("TutorialToken: " + TutorialToken);
 console.log("Token: " + Token);
 console.log("Crowdsale: " + Crowdsale);
 
@@ -17,8 +15,7 @@ const drizzleOptions = {
   },
   contracts: [
     Token,
-    Crowdsale,
-    TutorialToken,
+    // Crowdsale,
   ],
   events: {
   },

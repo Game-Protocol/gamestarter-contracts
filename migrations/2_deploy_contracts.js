@@ -3,9 +3,8 @@ var timestamp = require('../scripts/timestamp');
 
 var GXToken = artifacts.require("GXToken");
 var GXTCrowdsale = artifacts.require("GXTCrowdsale");
-var TutorialToken = artifacts.require("TutorialToken");
 
-module.exports = function (deployer) {
+module.exports = async deployer => {
   var wallet = process.env.WALLET;
   var feeWallet = process.env.FEEWALLET;
   var team = process.env.TEAM;
@@ -21,19 +20,13 @@ module.exports = function (deployer) {
 
   var rate = new web3.BigNumber(2000); // exchange rate
 
-  // verifyCode.flatten();
+  verifyCode.flatten();
 
-  deployer.deploy(TutorialToken);
-
-  deployer.deploy(GXToken).then(function () {
-    var types = ["uint256" ,"uint256" ,"uint256" ,"address" ,"address" ,"address" ,"address" , "address" , "address"];
-    var params = [start, end, rate, wallet, gameSupportFund, bountyProgram, advisors, team, GXToken.address];
-    verifyCode.toABI("GXTCrowdsale.abi.txt", types, params);
-    deployer.deploy(GXTCrowdsale, start, end, rate, wallet, gameSupportFund, bountyProgram, advisors, team, GXToken.address).then(function (){
-      GXToken.deployed().then(function (instance){
-        instance.transferOwnership(GXTCrowdsale.address); // Transfer ownership to crowdsale
-        GXTCrowdsale.deployed().then(function (cs) { cs.claimTokenOwnership(); });
-      });
-    });
-  });
+  await deployer.deploy(GXToken);
+  var types = ["uint256" ,"uint256" ,"uint256" ,"address" ,"address" ,"address" ,"address" , "address" , "address"];
+  var params = [start, end, rate, wallet, gameSupportFund, bountyProgram, advisors, team, GXToken.address];
+  verifyCode.toABI("GXTCrowdsale.abi.txt", types, params);
+  await deployer.deploy(GXTCrowdsale, start, end, rate, wallet, gameSupportFund, bountyProgram, advisors, team, GXToken.address);
+  await GXToken.deployed().then(i => i.transferOwnership(GXTCrowdsale.address)); // Transfer ownership to crowdsale
+  await GXTCrowdsale.deployed().then(c => c.claimTokenOwnership());
 };
