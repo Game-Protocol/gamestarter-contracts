@@ -14,6 +14,12 @@ const should = require('chai')
 const GameTokenCrowdsale = artifacts.require('GameTokenCrowdsale');
 const MockGameToken = artifacts.require('MockGameToken');
 
+/*
+ * Testing GameTokenCrowdsale
+ * 1. init packages
+ * 2. whitelisting
+ * 3. buy token with package
+ */
 contract('GameTokenCrowdsale', function (accounts) {
   const rate = new BigNumber(1000);
   const value = ether.ether(2);

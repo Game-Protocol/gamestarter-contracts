@@ -2,19 +2,17 @@ pragma solidity ^0.4.24;
 
 import "openzeppelin-solidity/contracts/crowdsale/emission/MintedCrowdsale.sol";
 import "openzeppelin-solidity/contracts/crowdsale/Crowdsale.sol";
+import "openzeppelin-solidity/contracts/access/Whitelist.sol";
+import "openzeppelin-solidity/contracts/access/SignatureBouncer.sol";
 import "../token/GameToken.sol";
 import "../payment/RefundEscrowWithFee.sol";
 import "../crowdsale/distribution/RefundableCrowdsale.sol";
 import "../crowdsale/validation/TwoWayWhitelistedCrowdsale.sol";
-import "openzeppelin-solidity/contracts/access/Whitelist.sol";
-import "openzeppelin-solidity/contracts/access/SignatureBouncer.sol";
+import "../library/AutoIncrementing.sol";
 
 /**
  * @title GameTokenCrowdsale
  * @dev GameToken Crowdsale contract.
- * The way to add new features to a base crowdsale is by multiple inheritance.
- * After adding multiple features it's good practice to run integration tests
- * to ensure that subcontracts works together as intended.
  */
 contract GameTokenCrowdsale is RefundableCrowdsale, MintedCrowdsale, SignatureBouncer {
 
@@ -33,6 +31,8 @@ contract GameTokenCrowdsale is RefundableCrowdsale, MintedCrowdsale, SignatureBo
 
     address public feeWallet;
     uint8 public feePercent;
+
+    AutoIncrementing.Counter internal packageIdCounter;
 
     mapping(uint256 => Package) public packages;
 
@@ -55,6 +55,24 @@ contract GameTokenCrowdsale is RefundableCrowdsale, MintedCrowdsale, SignatureBo
     {
         feeWallet = _feeWallet;
         feePercent = _feePercent;
+    }
+
+    function addPackage(
+        uint256 start_time,
+        uint256 end_time,
+        string package_name,
+        uint256 min_wei,
+        uint rate,
+        uint total_amount,
+        uint amount_left,
+        uint256 total_wei,
+        uint256 wei_left
+    ) 
+    public 
+    {
+        uint256 id = AutoIncrementing.nextId(packageIdCounter);
+        Package memory p = Package(id, start_time, end_time, package_name, min_wei, rate, total_amount, amount_left, total_wei, wei_left);
+        packages[id] = p;
     }
 
     // =================================================================================================================
@@ -100,9 +118,20 @@ contract GameTokenCrowdsale is RefundableCrowdsale, MintedCrowdsale, SignatureBo
     // =================================================================================================================
 
     /**
+     * @dev Disable standard validation - use only buyPackage(address _beneficiary, uint256 _packageId, bytes _sig)
+     * @param _beneficiary Token purchaser
+     * @param _weiAmount Amount of wei contributed
+     */
+    function _preValidatePurchase(address _beneficiary, uint256 _weiAmount) internal {
+        revert();
+    }
+
+    /**
      * @dev Extend parent behavior requiring purchase to validate package
      * @param _beneficiary Token purchaser
      * @param _weiAmount Amount of wei contributed
+     * @param _packageId Package id of the package being purchased
+     * @param _sig Signature for whitelisting
      */
     function _preValidatePurchase(address _beneficiary, uint256 _weiAmount, uint256 _packageId, bytes _sig) internal 
         onlyValidSignature(_sig) 
@@ -118,9 +147,10 @@ contract GameTokenCrowdsale is RefundableCrowdsale, MintedCrowdsale, SignatureBo
      * @dev Executed when a purchase has been validated and is ready to be executed. Not necessarily emits/sends tokens.
      * @param _beneficiary Address receiving the tokens
      * @param _tokenAmount Number of tokens to be purchased
+     * @param _packageId Package id of the package being purchased
      */
-    function _processPurchase(address _beneficiary, uint256 _tokens, uint256 _packageId) internal {
-        super._processPurchase(_beneficiary, _tokens);
+    function _processPurchase(address _beneficiary, uint256 _tokenAmount, uint256 _packageId) internal {
+        super._processPurchase(_beneficiary, _tokenAmount);
         Package storage p = packages[_packageId];
         p.amount_left = p.amount_left - 1;
         emit PackageIssued(_beneficiary, _packageId);
@@ -129,11 +159,17 @@ contract GameTokenCrowdsale is RefundableCrowdsale, MintedCrowdsale, SignatureBo
     /**
      * @return The token amount according to the rate of the package
      */
-    function _getTokenAmount(uint256 _weiAmount, uint256 _packageId) internal returns(uint256 tokens) {
+    function _getTokenAmount(uint256 _weiAmount, uint256 _packageId) internal view returns(uint256) {
         Package storage p = packages[_packageId];
         return _weiAmount.mul(p.rate); 
     }
 
+    /**
+   * @dev low level token purchase - Overriden to add parameters
+   * @param _beneficiary Address performing the token purchase
+   * @param _packageId Package id of the package being purchased
+   * @param _sig Signature for whitelisting
+   */
     function buyPackage(address _beneficiary, uint256 _packageId, bytes _sig)  public payable {
         uint256 weiAmount = msg.value;
         _preValidatePurchase(_beneficiary, weiAmount, _packageId, _sig);
@@ -156,12 +192,5 @@ contract GameTokenCrowdsale is RefundableCrowdsale, MintedCrowdsale, SignatureBo
 
         _forwardFunds();
         _postValidatePurchase(_beneficiary, weiAmount);
-    }
-
-    /**
-     * @dev fallback function ***DO NOT OVERRIDE***
-     */
-    function () external payable {
-        buyTokens(msg.sender);
     }
 }
