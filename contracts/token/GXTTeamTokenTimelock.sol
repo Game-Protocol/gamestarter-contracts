@@ -58,9 +58,9 @@ contract GXTTeamTokenTimelock {
     /**
     * @dev Post release function. called after tokens are released.
     */
-    function _postRelease(uint256 tokenAmount) internal {
-        emit Released(tokenAmount);
-        releasedTokens = releasedTokens.add(tokenAmount);
+    function _postRelease(uint256 _tokenAmount) internal {
+        emit Released(_tokenAmount);
+        releasedTokens = releasedTokens.add(_tokenAmount);
     }
 
     /**

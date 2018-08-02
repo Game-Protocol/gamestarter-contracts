@@ -1,4 +1,3 @@
-var verifyCode = require('../scripts/verifyCode');
 var timestamp = require('../scripts/timestamp');
 
 var GXToken = artifacts.require("GXToken");
@@ -19,8 +18,6 @@ module.exports = async deployer => {
   console.log(timestamp.timestampToDate(start) + " - " + timestamp.timestampToDate(end));
 
   var rate = new web3.BigNumber(2000); // exchange rate
-
-  verifyCode.flatten();
 
   await deployer.deploy(GXToken);
   var types = ["uint256" ,"uint256" ,"uint256" ,"address" ,"address" ,"address" ,"address" , "address" , "address"];

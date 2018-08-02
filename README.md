@@ -14,6 +14,14 @@ To run test
 npm test
 ```
 
+## Deploying
+
+Migrate single deploy file
+
+```sh
+truffle migrate --network ropsten -f 3 --to 3 --reset
+```
+
 ## Game Starter
 
 GameStarter is a one-stop crowdfunding platform based on the blockchain for new game projects.
@@ -52,7 +60,7 @@ GameStarter is a one-stop crowdfunding platform based on the blockchain for new 
 2. Bonus crowdsale will add to the Basic crowdsale bonuses depending on the time invested.
 3. ...
 
-## Questions
+## Talking points
 
 1. Virtual balance?
 2. Just one converter?
@@ -62,3 +70,13 @@ GameStarter is a one-stop crowdfunding platform based on the blockchain for new 
 6. can we use bancors deployed converter factory to create our converter?
 7. If you want to buy GXT using subtoken, is GXT minted in the converter?
 8. How are conversion paths saved?
+
+## Questions
+
+1. Good morning. I have question about the converters if you can answer please.
+We have a main Smart token that needs to be traded with subtokens we create.
+As far as i understand once the convertor is active we cant add more subtokens to it.
+So do we have to create a new converter for each new subtoken we create?
+If so how do we create a conversion path if we want to trade between 2 subtokens (since they are on different converters)?
+
+2. 

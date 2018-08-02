@@ -24,7 +24,7 @@ contract GameStarterFactory {
 
     event NewGame(address indexed _owner, address indexed _token, address _crowdsale);
     
-    constructor (GXToken _gpToken,IContractRegistry _registery, BancorConverterFactory _factory, address _feeWallet, uint8 _feePercent) public {
+    constructor (GXToken _gpToken, IContractRegistry _registery, BancorConverterFactory _factory, address _feeWallet, uint8 _feePercent) public {
         gpToken = _gpToken;
         registery = _registery;
         factory = _factory;
