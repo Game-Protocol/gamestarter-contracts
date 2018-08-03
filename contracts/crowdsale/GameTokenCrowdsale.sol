@@ -1,20 +1,17 @@
 pragma solidity ^0.4.24;
 
 import "openzeppelin-solidity/contracts/crowdsale/emission/MintedCrowdsale.sol";
-import "openzeppelin-solidity/contracts/crowdsale/Crowdsale.sol";
-import "openzeppelin-solidity/contracts/access/Whitelist.sol";
 import "openzeppelin-solidity/contracts/access/SignatureBouncer.sol";
 import "../token/GameToken.sol";
 import "../payment/RefundEscrowWithFee.sol";
-import "../crowdsale/distribution/RefundableCrowdsale.sol";
-import "../crowdsale/validation/TwoWayWhitelistedCrowdsale.sol";
+import "../crowdsale/distribution/RefundableCrowdsaleWithFee.sol";
 import "../library/AutoIncrementing.sol";
 
 /**
  * @title GameTokenCrowdsale
  * @dev GameToken Crowdsale contract.
  */
-contract GameTokenCrowdsale is RefundableCrowdsale, MintedCrowdsale, SignatureBouncer {
+contract GameTokenCrowdsale is RefundableCrowdsaleWithFee, MintedCrowdsale, SignatureBouncer {
 
     struct Package {
         uint256 package_id;
@@ -28,9 +25,6 @@ contract GameTokenCrowdsale is RefundableCrowdsale, MintedCrowdsale, SignatureBo
         uint256 total_wei;
         uint256 wei_sold;
     }
-
-    address public feeWallet;
-    uint8 public feePercent;
 
     AutoIncrementing.Counter internal packageIdCounter;
 
@@ -50,11 +44,9 @@ contract GameTokenCrowdsale is RefundableCrowdsale, MintedCrowdsale, SignatureBo
     ) 
         public
         Crowdsale(_rate, _wallet, _token)
-        RefundableCrowdsale(_goal)
         TimedCrowdsale(_openingTime, _closingTime)
+        RefundableCrowdsaleWithFee(_goal, _feeWallet, _feePercent)
     {
-        feeWallet = _feeWallet;
-        feePercent = _feePercent;
     }
 
     function addPackage(
@@ -67,6 +59,7 @@ contract GameTokenCrowdsale is RefundableCrowdsale, MintedCrowdsale, SignatureBo
         uint256 _totalWei
     ) 
     public 
+    onlyOwner
     {
         uint256 id = AutoIncrementing.nextId(packageIdCounter);
         Package memory p = Package(id, _startTime, _endTime, _packageName, _minWei, _rate, _totalAmount, 0, _totalWei, 0);
@@ -84,14 +77,6 @@ contract GameTokenCrowdsale is RefundableCrowdsale, MintedCrowdsale, SignatureBo
         require(p.amount_sold < p.total_amount);
         require(p.min_wei <= _weiAmount && p.wei_sold.add(_weiAmount) <= p.total_wei);
         _;
-    }
-
-    // =================================================================================================================
-    //                                      Impl RefundableCrowdsale
-    // =================================================================================================================
-
-    function _createEscrow() internal {
-        escrow = new RefundEscrowWithFee(wallet, feeWallet, feePercent);
     }
 
     // =================================================================================================================

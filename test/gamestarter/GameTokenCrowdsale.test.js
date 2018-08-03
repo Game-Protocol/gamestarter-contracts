@@ -2,6 +2,7 @@ const advanceBlock = require('../helpers/advanceToBlock');
 const increaseTime = require('../helpers/increaseTime');
 const latestTime = require('../helpers/latestTime');
 const ether = require('../helpers/ether');
+const { signHex } = require('../helpers/sign');
 const EVMRevert = "revert";
 
 const BigNumber = web3.BigNumber;
@@ -25,7 +26,7 @@ contract('GameTokenCrowdsale', function (accounts) {
   const value = ether.ether(2);
   const value2 = ether.ether(5000);
   const tokenSupply = new BigNumber('15e25');
-  const goal = new BigNumber(10000);
+  const goal = ether.ether(10000);
 
   const expectedFeeAmount = value.mul(0.05);
   const expectedValueAfterDeduction = value.mul(0.95);
@@ -60,57 +61,97 @@ contract('GameTokenCrowdsale', function (accounts) {
       { from: owner }
     );
     await this.token.transferOwnership(this.crowdsale.address);
-    await this.crowdsale.addAddressToWhitelist(investor);
-    await this.crowdsale.addAddressToWhitelist(investor2);
   });
 
-  describe('transfers', function () {
-    beforeEach(async function () {
-      await increaseTime.increaseTimeTo(this.openingTime);
-    });
+  describe('initialize packages', function () {
 
-    it('should assign tokens to sender', async function () {
-      await this.crowdsale.sendTransaction({ value: value, from: investor });
-      let balance = await this.token.balanceOf(investor);
-      balance.should.be.bignumber.equal(expectedTokenAmount);
+    it('should add package', async function () {
+      // uint256 _startTime, uint256 _endTime, string _packageName, uint256 _minWei, uint _rate, uint _totalAmount, uint256 _totalWei 
+      await this.crowdsale.addPackage(this.openingTime, this.closingTime, "Package1", 5, 1000, 3, ether.ether(1000)).should.be.fulfilled;
     });
+  });
+
+  // describe('purchase package', function () {
+  //   beforeEach(async function () {
+  //     await this.crowdsale.addBouncer(bouncerAddress, { from: owner });
+  //     this.roleBouncer = await this.crowdsale.ROLE_BOUNCER();
+  //     this.genSig = getSigner(this.crowdsale, bouncerAddress);
+  //   });
+
+  //   it('should have a default owner of self', async function () {
+  //     const theOwner = await this.crowdsale.owner();
+  //     theOwner.should.eq(owner);
+  //   });
   
-    it('should forward funds to wallet', async function () {
-      const pre = web3.eth.getBalance(wallet);
-      await this.crowdsale.sendTransaction({ value, from: investor });
-      const post = web3.eth.getBalance(wallet);
-      post.minus(pre).should.be.bignumber.equal(expectedValueAfterDeduction);
-    });
-  });
+  //   it('should allow owner to add a bouncer', async function () {
+  //     await this.crowdsale.addBouncer(bouncerAddress, { from: owner });
+  //     const hasRole = await this.crowdsale.hasRole(bouncerAddress, this.roleBouncer);
+  //     hasRole.should.eq(true);
+  //   });
 
-  describe('finalization', function () {
-    beforeEach(async function () {
-      await increaseTime.increaseTimeTo(this.afterClosingTime);
-      await this.crowdsale.finalize({ from: owner }).should.be.fulfilled;
-    });
+  //   it('should not allow anyone to add a bouncer', async function () {
+  //     await this.crowdsale.addBouncer(bouncerAddress, { from: unauthorized }).should.be.rejected;
+  //   });
 
-    it('token unpaused', async function () {
-      const paused = await this.token.paused();
-      assert.equal(paused, false);
-    });
+  //   it('should allow valid signature for sender', async function () {
+  //     await this.crowdsale.buyPackage(authorized, this.genSig(authorized), { value: value, from: authorized }).should.be.fulfilled;
+  //   });
+    
+  //   it('should not allow invalid signature for sender', async function () {
+  //     await this.crowdsale.buyPackage(authorized, 'abcd', { value: value, from: authorized }).should.be.rejected;
+  //   });
+  // });
 
-    it('token owner transfered', async function () {
-      const tokenOwner = await this.token.owner();
-      assert.equal(tokenOwner, owner);
-    });
-  });
+  // describe('transfers', function () {
+  //   beforeEach(async function () {
+  //     await increaseTime.increaseTimeTo(this.openingTime);
+  //   });
 
-  describe('failed to raise goal', function () {
-    beforeEach(async function () {
-      await this.crowdsale.sendTransaction({ value: value, from: investor });
-      await this.crowdsale.sendTransaction({ value: value2, from: investor2 });
-      await increaseTime.increaseTimeTo(this.afterClosingTime);
-      await this.crowdsale.finalize({ from: owner }).should.be.fulfilled;
-    });
+  //   it('should assign tokens to sender', async function () {
 
-    it('verify refund', async function () {
-      await this.crowdsale.claimRefund({ from: investor }).should.be.fulfilled;
+  //     await this.crowdsale.sendTransaction({ value: value, from: investor });
+  //     let balance = await this.token.balanceOf(investor);
+  //     balance.should.be.bignumber.equal(expectedTokenAmount);
+  //   });
+  
+  //   it('should forward funds to wallet', async function () {
+  //     const pre = web3.eth.getBalance(wallet);
+  //     await this.crowdsale.sendTransaction({ value, from: investor });
+  //     const post = web3.eth.getBalance(wallet);
+  //     post.minus(pre).should.be.bignumber.equal(expectedValueAfterDeduction);
+  //   });
+  // });
 
-    });
-  });
+  
+
+  // describe('finalization', function () {
+  //   beforeEach(async function () {
+  //     await increaseTime.increaseTimeTo(this.afterClosingTime);
+  //     await this.crowdsale.finalize({ from: owner }).should.be.fulfilled;
+  //   });
+
+  //   it('token unpaused', async function () {
+  //     const paused = await this.token.paused();
+  //     assert.equal(paused, false);
+  //   });
+
+  //   it('token owner transfered', async function () {
+  //     const tokenOwner = await this.token.owner();
+  //     assert.equal(tokenOwner, owner);
+  //   });
+  // });
+
+  // describe('failed to raise goal', function () {
+  //   beforeEach(async function () {
+  //     await this.crowdsale.sendTransaction({ value: value, from: investor });
+  //     await this.crowdsale.sendTransaction({ value: value2, from: investor2 });
+  //     await increaseTime.increaseTimeTo(this.afterClosingTime);
+  //     await this.crowdsale.finalize({ from: owner }).should.be.fulfilled;
+  //   });
+
+  //   it('verify refund', async function () {
+  //     await this.crowdsale.claimRefund({ from: investor }).should.be.fulfilled;
+
+  //   });
+  // });
 });

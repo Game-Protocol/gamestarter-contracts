@@ -1,16 +1,16 @@
 pragma solidity ^0.4.24;
 
 
-import "openzeppelin-solidity/contracts/payment/RefundEscrow.sol";
 import "openzeppelin-solidity/contracts/crowdsale/distribution/FinalizableCrowdsale.sol";
 import "openzeppelin-solidity/contracts/math/SafeMath.sol";
+import "../../payment/RefundEscrowWithFee.sol";
 
 /**
  * @title RefundableCrowdsale
  * @dev Extension of Crowdsale contract that adds a funding goal, and
  * the possibility of users getting a refund if goal is not met.
  */
-contract RefundableCrowdsale is FinalizableCrowdsale {
+contract RefundableCrowdsaleWithFee is FinalizableCrowdsale {
     using SafeMath for uint256;
 
     // minimum amount of funds to be raised in weis
@@ -23,18 +23,10 @@ contract RefundableCrowdsale is FinalizableCrowdsale {
     * @dev Constructor, creates RefundEscrow.
     * @param _goal Funding goal
     */
-    constructor(uint256 _goal) public {
+    constructor(uint256 _goal, address _feeWallet, uint8 _feePercent) public {
         require(_goal > 0);
-        _createEscrow();
+        escrow = new RefundEscrowWithFee(wallet, _feeWallet, _feePercent);
         goal = _goal;
-    }
-
-    /**
-    * @dev Create an Escrow
-    * Override to create other types of RefundEscrow
-    */
-    function _createEscrow() internal {
-        escrow = new RefundEscrow(wallet);  
     }
 
     /**

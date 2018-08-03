@@ -1,4 +1,5 @@
 var timestamp = require('../scripts/timestamp');
+var verifyCode = require('../scripts/verifyCode');
 
 var GXToken = artifacts.require("GXToken");
 var GXTCrowdsale = artifacts.require("GXTCrowdsale");

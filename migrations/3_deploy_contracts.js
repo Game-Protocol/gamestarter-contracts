@@ -1,4 +1,5 @@
 var timestamp = require('../scripts/timestamp');
+var verifyCode = require('../scripts/verifyCode');
 
 var BackgammonToken = artifacts.require("BackgammonToken");
 var Wagering = artifacts.require("Wagering");
