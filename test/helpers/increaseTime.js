@@ -51,7 +51,7 @@ const duration = {
 
 
 module.exports = {
-  increaseTime: increaseTime,
-  increaseTimeTo: increaseTimeTo,
-  duration: duration,
+  increaseTime,
+  increaseTimeTo,
+  duration,
 };

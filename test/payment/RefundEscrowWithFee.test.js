@@ -1,5 +1,5 @@
 const expectEvent = require('../helpers/expectEvent');
-const EVMRevert = "revert";
+const { EVMRevert } = require('../helpers/EVMRevert');
 
 const BigNumber = web3.BigNumber;
 

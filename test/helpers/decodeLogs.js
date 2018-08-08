@@ -8,5 +8,5 @@ function decodeLogs (logs, contract, address) {
 }
 
 module.exports = {
-  decodeLogs: decodeLogs,
+  decodeLogs,
 };

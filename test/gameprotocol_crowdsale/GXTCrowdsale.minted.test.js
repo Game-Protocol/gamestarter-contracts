@@ -1,8 +1,7 @@
-const advanceBlock = require('../helpers/advanceToBlock');
-const increaseTime = require('../helpers/increaseTime');
-const latestTime = require('../helpers/latestTime');
-const ether = require('../helpers/ether');
-const EVMRevert = "revert";
+const { advanceBlock } = require('../helpers/advanceToBlock');
+const { increaseTimeTo, duration } = require('../helpers/increaseTime');
+const { latestTime } = require('../helpers/latestTime');
+const { ether } = require('../helpers/ether');
 
 const BigNumber = web3.BigNumber;
 
@@ -16,7 +15,7 @@ const GXToken = artifacts.require('GXToken');
 
 contract('GXTCrowdsale_Minted', function (accounts) {
   const rate = new BigNumber(1000);
-  const value = ether.ether(2);
+  const value = ether(2);
   const tokenSupply = new BigNumber('15e25');
   const expectedTokenAmount = rate.mul(value).mul(1.2);
 
@@ -32,13 +31,13 @@ contract('GXTCrowdsale_Minted', function (accounts) {
 
   before(async function () {
     // Advance to the next block to correctly read time in the solidity "now" function interpreted by ganache
-    await advanceBlock.advanceBlock();
+    await advanceBlock();
   });
 
   beforeEach(async function () {
-    this.openingTime = latestTime.latestTime() + increaseTime.duration.weeks(1);
-    this.closingTime = this.openingTime + increaseTime.duration.weeks(5);
-    this.afterClosingTime = this.closingTime + increaseTime.duration.seconds(1);
+    this.openingTime = latestTime() + duration.weeks(1);
+    this.closingTime = this.openingTime + duration.weeks(5);
+    this.afterClosingTime = this.closingTime + duration.seconds(1);
     this.token = await GXToken.new();
     this.crowdsale = await GXTCrowdsale.new(
       this.openingTime, 
@@ -58,7 +57,7 @@ contract('GXTCrowdsale_Minted', function (accounts) {
 
   describe('minting tests', function () {
     beforeEach(async function () {
-      await increaseTime.increaseTimeTo(this.openingTime);
+      await increaseTimeTo(this.openingTime);
       await this.crowdsale.addAddressToWhitelist(owner);
       await this.crowdsale.addAddressToWhitelist(investor);
       await this.crowdsale.addAddressToWhitelist(purchaser);

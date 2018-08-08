@@ -1,12 +1,12 @@
-const advanceBlock = require('../helpers/advanceToBlock');
-const increaseTime = require('../helpers/increaseTime');
-const latestTime = require('../helpers/latestTime');
-const ether = require('../helpers/ether');
-const EVMRevert = "revert";
+const { advanceBlock } = require('../helpers/advanceToBlock');
+const { increaseTimeTo, duration } = require('../helpers/increaseTime');
+const { latestTime } = require('../helpers/latestTime');
+const { ether } = require('../helpers/ether');
+const { EVMRevert } = require('../helpers/EVMRevert');
 
 const BigNumber = web3.BigNumber;
 
-const should = require('chai')
+require('chai')
   .use(require('chai-as-promised'))
   .use(require('chai-bignumber')(BigNumber))
   .should();
@@ -16,7 +16,7 @@ const GXToken = artifacts.require('GXToken');
 
 contract('GXTCrowdsale_Timed', function (accounts) {
   const rate = new BigNumber(1000);
-  const value = ether.ether(2);
+  const value = ether(2);
   const tokenSupply = new BigNumber('15e25');
   const expectedTokenAmount = rate.mul(value).mul(1.2);
 
@@ -36,13 +36,13 @@ contract('GXTCrowdsale_Timed', function (accounts) {
 
   before(async function () {
     // Advance to the next block to correctly read time in the solidity "now" function interpreted by ganache
-    await advanceBlock.advanceBlock();
+    await advanceBlock();
   });
 
   beforeEach(async function () {
-    this.openingTime = latestTime.latestTime() + increaseTime.duration.weeks(1);
-    this.closingTime = this.openingTime + increaseTime.duration.weeks(5);
-    this.afterClosingTime = this.closingTime + increaseTime.duration.seconds(1);
+    this.openingTime = latestTime() + duration.weeks(1);
+    this.closingTime = this.openingTime + duration.weeks(5);
+    this.afterClosingTime = this.closingTime + duration.seconds(1);
     this.token = await GXToken.new();
     this.crowdsale = await GXTCrowdsale.new(
       this.openingTime,
@@ -68,7 +68,7 @@ contract('GXTCrowdsale_Timed', function (accounts) {
     it('should be ended only after end', async function () {
       let ended = await this.crowdsale.hasClosed();
       ended.should.equal(false);
-      await increaseTime.increaseTimeTo(this.afterClosingTime);
+      await increaseTimeTo(this.afterClosingTime);
       ended = await this.crowdsale.hasClosed();
       ended.should.equal(true);
     });
@@ -80,13 +80,13 @@ contract('GXTCrowdsale_Timed', function (accounts) {
       });
 
       it('should accept payments after start', async function () {
-        await increaseTime.increaseTimeTo(this.openingTime);
+        await increaseTimeTo(this.openingTime);
         await this.crowdsale.send(value).should.be.fulfilled;
         await this.crowdsale.buyTokens(investor, { value: value, from: purchaser }).should.be.fulfilled;
       });
 
       it('should reject payments after end', async function () {
-        await increaseTime.increaseTimeTo(this.afterClosingTime);
+        await increaseTimeTo(this.afterClosingTime);
         await this.crowdsale.send(value).should.be.rejectedWith(EVMRevert);
         await this.crowdsale.buyTokens(investor, { value: value, from: purchaser }).should.be.rejectedWith(EVMRevert);
       });

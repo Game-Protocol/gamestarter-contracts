@@ -1,4 +1,4 @@
-const ether = require('../helpers/ether');
+const { ether } = require('../helpers/ether');
 const { signHex } = require('../helpers/sign');
 
 const BigNumber = web3.BigNumber;
@@ -18,7 +18,7 @@ const getSigner = (contract, signer, data = '') => (addr) => {
 
 contract('TwoWayWhitelistedCrowdsale', function ([owner, wallet, authorized, unauthorized, anotherAuthorized, bouncerAddress, anyone]) {
   const rate = 1;
-  const value = ether.ether(42);
+  const value = ether(42);
   const tokenSupply = new BigNumber('1e22');
 
   beforeEach(async function () {

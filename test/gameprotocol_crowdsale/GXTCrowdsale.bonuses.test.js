@@ -1,12 +1,11 @@
-const advanceBlock = require('../helpers/advanceToBlock');
-const increaseTime = require('../helpers/increaseTime');
-const latestTime = require('../helpers/latestTime');
-const ether = require('../helpers/ether');
-const EVMRevert = "revert";
+const { advanceBlock } = require('../helpers/advanceToBlock');
+const { increaseTimeTo, duration } = require('../helpers/increaseTime');
+const { latestTime } = require('../helpers/latestTime');
+const { ether } = require('../helpers/ether');
 
 const BigNumber = web3.BigNumber;
 
-const should = require('chai')
+require('chai')
   .use(require('chai-as-promised'))
   .use(require('chai-bignumber')(BigNumber))
   .should();
@@ -16,7 +15,7 @@ const GXToken = artifacts.require('GXToken');
 
 contract('GXTCrowdsale_Bonuses', function (accounts) {
   const rate = new BigNumber(1000);
-  const value = ether.ether(2);
+  const value = ether(2);
   const tokenSupply = new BigNumber('15e25');
 
   const expectedFirstWeekTokenAmount = rate.mul(value);
@@ -37,7 +36,7 @@ contract('GXTCrowdsale_Bonuses', function (accounts) {
   
   before(async function () {
     // Advance to the next block to correctly read time in the solidity "now" function interpreted by ganache
-    await advanceBlock.advanceBlock();
+    await advanceBlock();
   });
 
   // each week we will test 3 cases:
@@ -46,15 +45,15 @@ contract('GXTCrowdsale_Bonuses', function (accounts) {
   // 3. just before weeks end (5 sec before end)
   beforeEach(async function () {
     // opens a week from now
-    this.openingTime = latestTime.latestTime() + increaseTime.duration.weeks(1);
+    this.openingTime = latestTime() + duration.weeks(1);
     // ends 5 weeks from opening time it means we can test all the bonuses from 20% to 0%
-    this.closingTime = this.openingTime + increaseTime.duration.weeks(5);
+    this.closingTime = this.openingTime + duration.weeks(5);
 
     // tests from latest to earliest
-    this.firstWeekBeforeClosing = this.closingTime - increaseTime.duration.weeks(1);
-    this.secondWeekBeforeClosing = this.closingTime - increaseTime.duration.weeks(2);
-    this.thirdWeekBeforeClosing = this.closingTime - increaseTime.duration.weeks(3);
-    this.fourthWeekBeforeClosing = this.closingTime - increaseTime.duration.weeks(4);
+    this.firstWeekBeforeClosing = this.closingTime - duration.weeks(1);
+    this.secondWeekBeforeClosing = this.closingTime - duration.weeks(2);
+    this.thirdWeekBeforeClosing = this.closingTime - duration.weeks(3);
+    this.fourthWeekBeforeClosing = this.closingTime - duration.weeks(4);
 
     this.token = await GXToken.new();
     this.crowdsale = await GXTCrowdsale.new(
@@ -80,24 +79,24 @@ contract('GXTCrowdsale_Bonuses', function (accounts) {
     // first week from the end
     describe('first week from the end: no bonus', function () {
       it('just after start', async function () {
-        timeTo = this.firstWeekBeforeClosing + increaseTime.duration.seconds(5);
-        await increaseTime.increaseTimeTo(timeTo);
+        timeTo = this.firstWeekBeforeClosing + duration.seconds(5);
+        await increaseTimeTo(timeTo);
         await this.crowdsale.sendTransaction({ value: value, from: investor });
         let balance = await this.token.balanceOf(investor);
         balance.should.be.bignumber.equal(expectedFirstWeekTokenAmount);
       });
 
       it('during', async function () {
-        timeTo = this.firstWeekBeforeClosing + increaseTime.duration.days(1);
-        await increaseTime.increaseTimeTo(timeTo);
+        timeTo = this.firstWeekBeforeClosing + duration.days(1);
+        await increaseTimeTo(timeTo);
         await this.crowdsale.sendTransaction({ value: value, from: investor });
         let balance = await this.token.balanceOf(investor);
         balance.should.be.bignumber.equal(expectedFirstWeekTokenAmount);
       });
 
       it('just before end', async function () {
-        timeTo = this.closingTime - increaseTime.duration.seconds(1);
-        await increaseTime.increaseTimeTo(timeTo);
+        timeTo = this.closingTime - duration.seconds(1);
+        await increaseTimeTo(timeTo);
         await this.crowdsale.sendTransaction({ value: value, from: investor });
         let balance = await this.token.balanceOf(investor);
         balance.should.be.bignumber.equal(expectedFirstWeekTokenAmount);
@@ -106,24 +105,24 @@ contract('GXTCrowdsale_Bonuses', function (accounts) {
 
     describe('second week from the end: 5% bonus', function () {
       it('just after start', async function () {
-        timeTo = this.secondWeekBeforeClosing + increaseTime.duration.seconds(5);
-        await increaseTime.increaseTimeTo(timeTo);
+        timeTo = this.secondWeekBeforeClosing + duration.seconds(5);
+        await increaseTimeTo(timeTo);
         await this.crowdsale.sendTransaction({ value: value, from: investor });
         let balance = await this.token.balanceOf(investor);
         balance.should.be.bignumber.equal(expectedSecondWeekTokenAmount);
       });
 
       it('during', async function () {
-        timeTo = this.secondWeekBeforeClosing + increaseTime.duration.days(1);
-        await increaseTime.increaseTimeTo(timeTo);
+        timeTo = this.secondWeekBeforeClosing + duration.days(1);
+        await increaseTimeTo(timeTo);
         await this.crowdsale.sendTransaction({ value: value, from: investor });
         let balance = await this.token.balanceOf(investor);
         balance.should.be.bignumber.equal(expectedSecondWeekTokenAmount);
       });
 
       it('just before end', async function () {
-        timeTo = this.firstWeekBeforeClosing - increaseTime.duration.seconds(5);
-        await increaseTime.increaseTimeTo(timeTo);
+        timeTo = this.firstWeekBeforeClosing - duration.seconds(5);
+        await increaseTimeTo(timeTo);
         await this.crowdsale.sendTransaction({ value: value, from: investor });
         let balance = await this.token.balanceOf(investor);
         balance.should.be.bignumber.equal(expectedSecondWeekTokenAmount);
@@ -132,24 +131,24 @@ contract('GXTCrowdsale_Bonuses', function (accounts) {
 
     describe('third week from the end: 10% bonus', function () {
       it('just after start', async function () {
-        timeTo = this.thirdWeekBeforeClosing + increaseTime.duration.seconds(5);
-        await increaseTime.increaseTimeTo(timeTo);
+        timeTo = this.thirdWeekBeforeClosing + duration.seconds(5);
+        await increaseTimeTo(timeTo);
         await this.crowdsale.sendTransaction({ value: value, from: investor });
         let balance = await this.token.balanceOf(investor);
         balance.should.be.bignumber.equal(expectedThirdWeekTokenAmount);
       });
 
       it('during', async function () {
-        timeTo = this.thirdWeekBeforeClosing + increaseTime.duration.days(1);
-        await increaseTime.increaseTimeTo(timeTo);
+        timeTo = this.thirdWeekBeforeClosing + duration.days(1);
+        await increaseTimeTo(timeTo);
         await this.crowdsale.sendTransaction({ value: value, from: investor });
         let balance = await this.token.balanceOf(investor);
         balance.should.be.bignumber.equal(expectedThirdWeekTokenAmount);
       });
 
       it('just before end', async function () {
-        timeTo = this.secondWeekBeforeClosing - increaseTime.duration.seconds(5);
-        await increaseTime.increaseTimeTo(timeTo);
+        timeTo = this.secondWeekBeforeClosing - duration.seconds(5);
+        await increaseTimeTo(timeTo);
         await this.crowdsale.sendTransaction({ value: value, from: investor });
         let balance = await this.token.balanceOf(investor);
         balance.should.be.bignumber.equal(expectedThirdWeekTokenAmount);
@@ -158,24 +157,24 @@ contract('GXTCrowdsale_Bonuses', function (accounts) {
 
     describe('fourth week from the end: 15% bonus', function () {
       it('just after start', async function () {
-        timeTo = this.fourthWeekBeforeClosing + increaseTime.duration.seconds(5);
-        await increaseTime.increaseTimeTo(timeTo);
+        timeTo = this.fourthWeekBeforeClosing + duration.seconds(5);
+        await increaseTimeTo(timeTo);
         await this.crowdsale.sendTransaction({ value: value, from: investor });
         let balance = await this.token.balanceOf(investor);
         balance.should.be.bignumber.equal(expectedFourthWeekTokenAmount);
       });
 
       it('during', async function () {
-        timeTo = this.fourthWeekBeforeClosing + increaseTime.duration.days(1);
-        await increaseTime.increaseTimeTo(timeTo);
+        timeTo = this.fourthWeekBeforeClosing + duration.days(1);
+        await increaseTimeTo(timeTo);
         await this.crowdsale.sendTransaction({ value: value, from: investor });
         let balance = await this.token.balanceOf(investor);
         balance.should.be.bignumber.equal(expectedFourthWeekTokenAmount);
       });
 
       it('just before end', async function () {
-        timeTo = this.thirdWeekBeforeClosing - increaseTime.duration.seconds(5);
-        await increaseTime.increaseTimeTo(timeTo);
+        timeTo = this.thirdWeekBeforeClosing - duration.seconds(5);
+        await increaseTimeTo(timeTo);
         await this.crowdsale.sendTransaction({ value: value, from: investor });
         let balance = await this.token.balanceOf(investor);
         balance.should.be.bignumber.equal(expectedFourthWeekTokenAmount);
@@ -184,24 +183,24 @@ contract('GXTCrowdsale_Bonuses', function (accounts) {
 
     describe('fifth week from the end: 20% bonus', function () {
       it('just after start', async function () {
-        timeTo = this.openingTime + increaseTime.duration.seconds(5);
-        await increaseTime.increaseTimeTo(timeTo);
+        timeTo = this.openingTime + duration.seconds(5);
+        await increaseTimeTo(timeTo);
         await this.crowdsale.sendTransaction({ value: value, from: investor });
         let balance = await this.token.balanceOf(investor);
         balance.should.be.bignumber.equal(expectedFifthWeekTokenAmount);
       });
 
       it('during', async function () {
-        timeTo = this.openingTime + increaseTime.duration.days(1);
-        await increaseTime.increaseTimeTo(timeTo);
+        timeTo = this.openingTime + duration.days(1);
+        await increaseTimeTo(timeTo);
         await this.crowdsale.sendTransaction({ value: value, from: investor });
         let balance = await this.token.balanceOf(investor);
         balance.should.be.bignumber.equal(expectedFifthWeekTokenAmount);
       });
 
       it('just before end', async function () {
-        timeTo = this.fourthWeekBeforeClosing - increaseTime.duration.seconds(5);
-        await increaseTime.increaseTimeTo(timeTo);
+        timeTo = this.fourthWeekBeforeClosing - duration.seconds(5);
+        await increaseTimeTo(timeTo);
         await this.crowdsale.sendTransaction({ value: value, from: investor });
         let balance = await this.token.balanceOf(investor);
         balance.should.be.bignumber.equal(expectedFifthWeekTokenAmount);

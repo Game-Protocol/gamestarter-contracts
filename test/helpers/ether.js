@@ -3,5 +3,5 @@ function ether (n) {
 }
 
 module.exports = {
-  ether: ether,
+  ether,
 };

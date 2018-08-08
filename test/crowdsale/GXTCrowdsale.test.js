@@ -1,4 +1,4 @@
-const ether = require('../helpers/ether');
+const { ether } = require('../helpers/ether');
 
 const BigNumber = web3.BigNumber;
 
@@ -11,7 +11,7 @@ const Token = artifacts.require('GXToken');
 
 contract('GXTCrowdsale', function ([owner, wallet, authorized, unauthorized, anotherAuthorized]) {
   const rate = 1;
-  const value = ether.ether(42);
+  const value = ether(42);
   const tokenSupply = new BigNumber('1e22');
 
   describe('on chain whitelisting', function () {

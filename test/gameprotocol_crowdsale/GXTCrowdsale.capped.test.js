@@ -1,12 +1,12 @@
-const advanceBlock = require('../helpers/advanceToBlock');
-const increaseTime = require('../helpers/increaseTime');
-const latestTime = require('../helpers/latestTime');
-const ether = require('../helpers/ether');
-const EVMRevert = "revert";
+const { advanceBlock } = require('../helpers/advanceToBlock');
+const { increaseTimeTo, duration } = require('../helpers/increaseTime');
+const { latestTime } = require('../helpers/latestTime');
+const { ether } = require('../helpers/ether');
+const { EVMRevert } = require('../helpers/EVMRevert');
 
 const BigNumber = web3.BigNumber;
 
-const should = require('chai')
+require('chai')
   .use(require('chai-as-promised'))
   .use(require('chai-bignumber')(BigNumber))
   .should();
@@ -16,11 +16,11 @@ const GXToken = artifacts.require('GXToken');
 
 contract('GXTCrowdsale_Capped', function (accounts) {
   const rate = new BigNumber(1000);
-  const firstValue = ether.ether(40000);
-  const secondValue = ether.ether(40000);
-  const firstAndSecondValue = ether.ether(80000);
-  const thirdValue = ether.ether(60000);
-  const fourthValue = ether.ether(100000);
+  const firstValue = ether(40000);
+  const secondValue = ether(40000);
+  const firstAndSecondValue = ether(80000);
+  const thirdValue = ether(60000);
+  const fourthValue = ether(100000);
   const tokenSupply = new BigNumber('15e25');
 
   const expectedFirstTokenAmount = rate.mul(firstValue);
@@ -38,13 +38,13 @@ contract('GXTCrowdsale_Capped', function (accounts) {
 
   before(async function () {
     // Advance to the next block to correctly read time in the solidity "now" function interpreted by ganache
-    await advanceBlock.advanceBlock();
+    await advanceBlock();
   });
 
   beforeEach(async function () {
-    this.openingTime = latestTime.latestTime() + increaseTime.duration.weeks(1);
-    this.closingTime = this.openingTime + increaseTime.duration.weeks(5);
-    this.beforeClosing = this.closingTime - increaseTime.duration.days(1);
+    this.openingTime = latestTime() + duration.weeks(1);
+    this.closingTime = this.openingTime + duration.weeks(5);
+    this.beforeClosing = this.closingTime - duration.days(1);
 
     this.token = await GXToken.new();
     this.crowdsale = await GXTCrowdsale.new(
@@ -64,7 +64,7 @@ contract('GXTCrowdsale_Capped', function (accounts) {
     await this.crowdsale.addAddressToWhitelist(owner);
     await this.crowdsale.addAddressToWhitelist(investor);
     await this.crowdsale.addAddressToWhitelist(purchaser);
-    await increaseTime.increaseTimeTo(this.beforeClosing);
+    await increaseTimeTo(this.beforeClosing);
   });
 
   describe('crowdsale token capped', function () {

@@ -8,5 +8,5 @@ function latestTime () {
 }
 
 module.exports = {
-  latestTime: latestTime,
+  latestTime,
 };

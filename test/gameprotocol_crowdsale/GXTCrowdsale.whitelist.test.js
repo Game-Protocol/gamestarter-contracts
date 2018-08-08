@@ -1,12 +1,12 @@
-const advanceBlock = require('../helpers/advanceToBlock');
-const increaseTime = require('../helpers/increaseTime');
-const latestTime = require('../helpers/latestTime');
-const ether = require('../helpers/ether');
+const { advanceBlock } = require('../helpers/advanceToBlock');
+const { increaseTimeTo, duration } = require('../helpers/increaseTime');
+const { latestTime } = require('../helpers/latestTime');
+const { ether } = require('../helpers/ether');
 const { signHex } = require('../helpers/sign');
 
 const BigNumber = web3.BigNumber;
 
-const should = require('chai')
+require('chai')
   .use(require('chai-as-promised'))
   .use(require('chai-bignumber')(BigNumber))
   .should();
@@ -22,7 +22,7 @@ const getSigner = (contract, signer, data = '') => (addr) => {
 
 contract('GXTCrowdsale_Whitelist', function (accounts) {
   const rate = new BigNumber(1000);
-  const value = ether.ether(2);
+  const value = ether(2);
   const tokenSupply = new BigNumber('15e25');
   const expectedTokenAmount = rate.mul(value).mul(1.2);
 
@@ -46,13 +46,13 @@ contract('GXTCrowdsale_Whitelist', function (accounts) {
 
     before(async function () {
       // Advance to the next block to correctly read time in the solidity "now" function interpreted by ganache
-      await advanceBlock.advanceBlock();
+      await advanceBlock();
     });
 
     beforeEach(async function () {
-      this.openingTime = latestTime.latestTime() + increaseTime.duration.weeks(1);
-      this.closingTime = this.openingTime + increaseTime.duration.weeks(5);
-      this.afterClosingTime = this.closingTime + increaseTime.duration.seconds(1);
+      this.openingTime = latestTime() + duration.weeks(1);
+      this.closingTime = this.openingTime + duration.weeks(5);
+      this.afterClosingTime = this.closingTime + duration.seconds(1);
       this.token = await GXToken.new();
       this.crowdsale = await GXTCrowdsale.new(
         this.openingTime,
@@ -68,7 +68,7 @@ contract('GXTCrowdsale_Whitelist', function (accounts) {
       );
       await this.token.transferOwnership(this.crowdsale.address);
       await this.crowdsale.claimTokenOwnership();
-      await increaseTime.increaseTimeTo(this.openingTime);
+      await increaseTimeTo(this.openingTime);
     });
   
     describe('on chain whitelisting', function () {

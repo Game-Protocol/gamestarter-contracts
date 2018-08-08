@@ -1,4 +1,3 @@
-const decodeLogs = require('../helpers/decodeLogs');
 const MockGameToken = artifacts.require('MockGameToken');
 
 const BigNumber = web3.BigNumber;

@@ -1,12 +1,11 @@
-const advanceBlock = require('../helpers/advanceToBlock');
-const increaseTime = require('../helpers/increaseTime');
-const latestTime = require('../helpers/latestTime');
-const ether = require('../helpers/ether');
-const EVMRevert = "revert";
+const { advanceBlock } = require('../helpers/advanceToBlock');
+const { increaseTimeTo, duration } = require('../helpers/increaseTime');
+const { latestTime } = require('../helpers/latestTime');
+const { ether } = require('../helpers/ether');
 
 const BigNumber = web3.BigNumber;
 
-const should = require('chai')
+require('chai')
   .use(require('chai-as-promised'))
   .use(require('chai-bignumber')(BigNumber))
   .should();
@@ -16,15 +15,10 @@ const Factory = artifacts.require('GameStarterFactory');
 contract('GameStarterFactory', function (accounts) {
 
   before(async function () {
-    await advanceBlock.advanceBlock();
+    await advanceBlock();
   });
 
   beforeEach(async function () {
-
+    
   });
-
-  describe('transfers', function () {
-
-  });
-  
 });

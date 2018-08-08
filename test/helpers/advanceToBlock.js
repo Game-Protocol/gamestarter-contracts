@@ -22,6 +22,6 @@ async function advanceToBlock (number) {
 }
 
 module.exports = {
-  advanceBlock: advanceBlock,
-  advanceToBlock: advanceToBlock,
+  advanceBlock,
+  advanceToBlock,
 };

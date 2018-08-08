@@ -5,7 +5,6 @@ import "openzeppelin-solidity/contracts/access/SignatureBouncer.sol";
 import "openzeppelin-solidity/contracts/token/ERC20/MintableToken.sol";
 import "../payment/RefundEscrowWithFee.sol";
 import "../crowdsale/distribution/RefundableCrowdsaleWithFee.sol";
-import "../library/AutoIncrementing.sol";
 
 /**
  * @title MockCrowdsale

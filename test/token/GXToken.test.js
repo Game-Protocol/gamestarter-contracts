@@ -1,4 +1,3 @@
-const decodeLogs = require('../helpers/decodeLogs');
 const GXToken = artifacts.require('GXToken');
 
 const BigNumber = web3.BigNumber;

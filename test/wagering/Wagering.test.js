@@ -1,11 +1,11 @@
-const advanceBlock = require('../helpers/advanceToBlock');
-const increaseTime = require('../helpers/increaseTime');
-const latestTime = require('../helpers/latestTime');
+const { advanceBlock } = require('../helpers/advanceToBlock');
+const { increaseTimeTo, duration } = require('../helpers/increaseTime');
+const { latestTime } = require('../helpers/latestTime');
 const expectEvent = require('../helpers/expectEvent');
 
 const BigNumber = web3.BigNumber;
 
-const should = require('chai')
+require('chai')
   .use(require('chai-as-promised'))
   .use(require('chai-bignumber')(BigNumber))
   .should();
@@ -29,7 +29,7 @@ contract('Wagering', function ([owner, player1, player2, player3]) {
   const bet3 = new BigNumber(5000);
 
   before(async function () {
-    await advanceBlock.advanceBlock();
+    await advanceBlock();
   });
 
   beforeEach(async function () {
@@ -168,8 +168,8 @@ contract('Wagering', function ([owner, player1, player2, player3]) {
     });
 
     it('refund after 1 hour', async function () {
-      afterTimeout = latestTime.latestTime() + increaseTime.duration.minutes(61);
-      await increaseTime.increaseTimeTo(afterTimeout);
+      afterTimeout = latestTime() + duration.minutes(61);
+      await increaseTimeTo(afterTimeout);
       await this.wagering.refundMatch(matchId).should.be.fulfilled;
     });
 
@@ -177,8 +177,8 @@ contract('Wagering', function ([owner, player1, player2, player3]) {
       const player1BalanceBefore = await this.token.balanceOf(player1);
       const player2BalanceBefore = await this.token.balanceOf(player2);
 
-      afterTimeout = latestTime.latestTime() + increaseTime.duration.minutes(61);
-      await increaseTime.increaseTimeTo(afterTimeout);
+      afterTimeout = latestTime() + duration.minutes(61);
+      await increaseTimeTo(afterTimeout);
       await this.wagering.refundMatch(matchId).should.be.fulfilled;
 
       const player1BalanceAfter = await this.token.balanceOf(player1);
@@ -189,8 +189,8 @@ contract('Wagering', function ([owner, player1, player2, player3]) {
     });
 
     it('should fail before 1 hour', async function () {
-      afterTimeout = latestTime.latestTime() + increaseTime.duration.minutes(59);
-      await increaseTime.increaseTimeTo(afterTimeout);
+      afterTimeout = latestTime() + duration.minutes(59);
+      await increaseTimeTo(afterTimeout);
       await this.wagering.refundMatch(matchId).should.be.rejected;
     });
   });
