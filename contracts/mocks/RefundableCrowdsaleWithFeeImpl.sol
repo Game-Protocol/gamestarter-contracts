@@ -1,7 +1,6 @@
 pragma solidity ^0.4.24;
 
 import "openzeppelin-solidity/contracts/crowdsale/emission/MintedCrowdsale.sol";
-import "openzeppelin-solidity/contracts/access/SignatureBouncer.sol";
 import "openzeppelin-solidity/contracts/token/ERC20/MintableToken.sol";
 import "../crowdsale/distribution/RefundableCrowdsaleWithFee.sol";
 
@@ -9,7 +8,7 @@ import "../crowdsale/distribution/RefundableCrowdsaleWithFee.sol";
  * @title RefundableCrowdsaleWithFeeImpl
  * @dev Refundable crowdsale with fee contract.
  */
-contract RefundableCrowdsaleWithFeeImpl is RefundableCrowdsaleWithFee, MintedCrowdsale, SignatureBouncer {
+contract RefundableCrowdsaleWithFeeImpl is RefundableCrowdsaleWithFee, MintedCrowdsale {
 
     constructor (
         uint256 _openingTime,
