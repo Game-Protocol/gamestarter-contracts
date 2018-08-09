@@ -1,4 +1,3 @@
-const decodeLogs = require('../helpers/decodeLogs');
 const SmartToken = artifacts.require('SmartToken.sol');
 
 const BigNumber = web3.BigNumber;

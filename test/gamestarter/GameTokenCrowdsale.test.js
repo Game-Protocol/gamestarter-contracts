@@ -70,7 +70,7 @@ contract('GameTokenCrowdsale', function ([owner, authorized, unauthorized, walle
     });
 
     it('should not add if sender is not the owner', async function () {
-      await this.crowdsale.addPackage(this.openingTime, this.closingTime, "Package", 5, 1000, 3, ether(1000), { from: wallet}).should.be.rejected;
+      await this.crowdsale.addPackage(this.openingTime, this.closingTime, "Package", 5, 1000, 3, ether(1000), { from: wallet }).should.be.rejected;
     });
 
     it('should not add if end date is passed', async function () {
@@ -138,29 +138,6 @@ contract('GameTokenCrowdsale', function ([owner, authorized, unauthorized, walle
     });
   });
 
-  // describe('transfers', function () {
-  //   beforeEach(async function () {
-  //     await this.crowdsale.addPackage(this.openingTime, this.closingTime, "Package1", 5, 1000, 3, ether(1000));
-  //     await increaseTimeTo(this.openingTime);
-  //   });
-
-  //   it('should assign tokens to sender', async function () {
-
-  //     await this.crowdsale.sendTransaction({ value: value, from: investor });
-  //     let balance = await this.token.balanceOf(investor);
-  //     balance.should.be.bignumber.equal(expectedTokenAmount);
-  //   });
-  
-  //   it('should forward funds to wallet', async function () {
-  //     const pre = web3.eth.getBalance(wallet);
-  //     await this.crowdsale.sendTransaction({ value, from: investor });
-  //     const post = web3.eth.getBalance(wallet);
-  //     post.minus(pre).should.be.bignumber.equal(expectedValueAfterDeduction);
-  //   });
-  // });
-
-  
-
   describe('finalization', function () {
     beforeEach(async function () {
       await increaseTimeTo(this.afterClosingTime);
@@ -177,18 +154,4 @@ contract('GameTokenCrowdsale', function ([owner, authorized, unauthorized, walle
       assert.equal(tokenOwner, owner);
     });
   });
-
-  // describe('failed to raise goal', function () {
-  //   beforeEach(async function () {
-  //     await this.crowdsale.sendTransaction({ value: value, from: investor });
-  //     await this.crowdsale.sendTransaction({ value: value2, from: investor2 });
-  //     await increaseTimeTo(this.afterClosingTime);
-  //     await this.crowdsale.finalize({ from: owner }).should.be.fulfilled;
-  //   });
-
-  //   it('verify refund', async function () {
-  //     await this.crowdsale.claimRefund({ from: investor }).should.be.fulfilled;
-
-  //   });
-  // });
 });

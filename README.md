@@ -73,10 +73,6 @@ GameStarter is a one-stop crowdfunding platform based on the blockchain for new 
 
 ## Questions
 
-1. Good morning. I have question about the converters if you can answer please.
-We have a main Smart token that needs to be traded with subtokens we create.
-As far as i understand once the convertor is active we cant add more subtokens to it.
-So do we have to create a new converter for each new subtoken we create?
-If so how do we create a conversion path if we want to trade between 2 subtokens (since they are on different converters)?
+1. 
 
 2. 
