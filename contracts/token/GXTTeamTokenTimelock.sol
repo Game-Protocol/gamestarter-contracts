@@ -33,7 +33,7 @@ contract GXTTeamTokenTimelock {
 
 
     constructor(ERC20Basic _token, address _beneficiary, uint256 _releaseTime) public {
-        require(_beneficiary != address(0));
+        require(_beneficiary != address(0), "Invalid beneficiary");
         token = _token;
         beneficiary = _beneficiary;
         releaseTime = _releaseTime;
@@ -44,11 +44,11 @@ contract GXTTeamTokenTimelock {
     */
     function release() public {
         // solium-disable-next-line security/no-block-members
-        require(block.timestamp >= releaseTime);
+        require(block.timestamp >= releaseTime, "Before release time");
 
         // uint256 amount = token.balanceOf(this); 
         uint256 amount = _getReleasedAmount();
-        require(amount > 0);
+        require(amount > 0, "Amount to release is zero");
 
         token.safeTransfer(beneficiary, amount);
 

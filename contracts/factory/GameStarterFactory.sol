@@ -16,18 +16,19 @@ import "bancor-contracts/solidity/contracts/helpers/TestERC20Token.sol";
 
 contract GameStarterFactory {
 
-    BancorConverterFactory factory;
     address public feeWallet;
     uint8 public feePercent;
-    GXToken public gpToken;
-    IContractRegistry public registery;
+    // GXToken public gpToken;
+    // BancorConverterFactory factory;
+    // IContractRegistry public registery;
 
     event NewGame(address indexed _owner, address indexed _token, address _crowdsale);
-    
-    constructor (GXToken _gpToken, IContractRegistry _registery, BancorConverterFactory _factory, address _feeWallet, uint8 _feePercent) public {
-        gpToken = _gpToken;
-        registery = _registery;
-        factory = _factory;
+
+    // constructor (GXToken _gpToken, IContractRegistry _registery, BancorConverterFactory _factory, address _feeWallet, uint8 _feePercent) public {
+    constructor (address _feeWallet, uint8 _feePercent) public {
+        // gpToken = _gpToken;
+        // registery = _registery;
+        // factory = _factory;
         feeWallet = _feeWallet;
         feePercent = _feePercent;
     }
@@ -57,11 +58,13 @@ contract GameStarterFactory {
             feePercent,
             token
         );
+        address crowdsaleAddress = address(crowdsale);
+        token.transferOwnership(crowdsaleAddress);
+
         // Add a connector between the Game Protocol Token 
         // and the created GameToken using the converter
-        factory.createConverter(gpToken, registery, 0, token, 200000);
+        // factory.createConverter(gpToken, registery, 0, token, 200000);
 
-        address crowdsaleAddress = address(crowdsale);
         emit NewGame(_owner, tokenAddress, crowdsaleAddress);
 
         return tokenAddress;
