@@ -1,12 +1,13 @@
 # Game Protocol Contracts
 
-Game Protocol crowdsale and token contracts, using OpenZeppelin v1.9.0
+Game Protocol crowdsale and token contracts, using OpenZeppelin v1.11.0
 
 ## Testing
 
-* truffle : v4.1.11
+* truffle : v4.1.14
 * solidity : v0.4.24
 * ganache-cli : v6.1.0
+* ganache : v1.2.1
 
 To run test
 
@@ -70,6 +71,14 @@ GameStarter is a one-stop crowdfunding platform based on the blockchain for new 
 6. can we use bancors deployed converter factory to create our converter?
 7. If you want to buy GXT using subtoken, is GXT minted in the converter?
 8. How are conversion paths saved?
+
+## Deploying website - front
+
+* Recompile contracts and symlink the build to front/src - ```cd front/src && ln -s ../../build/contracts contracts```
+* Run ganache client
+* Migrate contract to local chain - ```truffle migrate --reset```
+* Open metamsk and make sure the chain is local and balance is correct
+* Run website - ```npm start```
 
 ## Questions
 
