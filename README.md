@@ -1,6 +1,6 @@
 # Game Protocol Contracts
 
-Game Protocol crowdsale and token contracts, using OpenZeppelin v1.11.0
+Game Protocol crowdsale and token contracts, using OpenZeppelin v1.12.0
 
 ## Testing
 
@@ -74,7 +74,7 @@ GameStarter is a one-stop crowdfunding platform based on the blockchain for new 
 
 ## Deploying website - front
 
-* Recompile contracts and symlink the build to front/src - ```cd front/src && ln -s ../../build/contracts contracts```
+* Recompile contracts and symlink the build to front/src - ```cd front/src/build && ln -s ../../../build/contracts contracts && cd ../../..```
 * Run ganache client
 * Migrate contract to local chain - ```truffle migrate --reset```
 * Open metamsk and make sure the chain is local and balance is correct

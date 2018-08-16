@@ -1,5 +1,5 @@
-import Token from "./contracts/GXToken.json";
-import Crowdsale from "./contracts/GXTCrowdsale.json";
+import Token from "./build/contracts/GXToken.json";
+import Crowdsale from "./build/contracts/GXTCrowdsale.json";
 
 console.log("Token: " + Token);
 console.log("Crowdsale: " + Crowdsale);

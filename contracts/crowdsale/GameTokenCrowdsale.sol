@@ -66,9 +66,9 @@ contract GameTokenCrowdsale is RefundableCrowdsaleWithFee, MintedCrowdsale, Sign
     onlyOwner
     {
         // solium-disable-next-line security/no-block-members
-        require(now < _endTime);
-        require(_totalAmount > 0);
-        require(_totalWei > 0);
+        require(now < _endTime, "Expiry date of the package is passed");
+        require(_totalAmount > 0, "Total amount is zero");
+        require(_totalWei > 0, "Total wei is zero");
         Package memory p = Package(packageCount, _startTime, _endTime, _packageName, _minWei, _rate, _totalAmount, 0, _totalWei, 0);
         packages.push(p);
         emit PackageAdded(packageCount, _packageName);
@@ -78,9 +78,9 @@ contract GameTokenCrowdsale is RefundableCrowdsaleWithFee, MintedCrowdsale, Sign
     modifier _validatePackage(uint256 _weiAmount, uint _packageIdx) {
         Package storage p = packages[_packageIdx];
         // solium-disable-next-line security/no-block-members
-        require(now >= p.start_time && now <= p.end_time);
-        require(p.amount_sold < p.total_amount);
-        require(p.min_wei <= _weiAmount && p.wei_sold.add(_weiAmount) <= p.total_wei);
+        require(now >= p.start_time && now <= p.end_time, "Outside package active time");
+        require(p.amount_sold < p.total_amount, "Amount limit reached");
+        require(p.min_wei <= _weiAmount && p.wei_sold.add(_weiAmount) <= p.total_wei, "Wei limit reached");
         _;
     }
 
@@ -109,7 +109,7 @@ contract GameTokenCrowdsale is RefundableCrowdsaleWithFee, MintedCrowdsale, Sign
      * @dev Disable standard validation - use only buyPackage(address _beneficiary, uint256 _packageIdx, bytes _sig)
      */
     function _preValidatePurchase(address, uint256) internal {
-        revert();
+        revert("Can unly buy packages with buyPackage function");
     }
 
     /**

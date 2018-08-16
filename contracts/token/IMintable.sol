@@ -8,7 +8,7 @@ contract IMintable {
     bool public mintingFinished = false;
 
     modifier canMint() {
-        require(!mintingFinished);
+        require(!mintingFinished, "Minting is finished");
         _;
     }
 

@@ -21,7 +21,7 @@ contract TokenCappedCrowdsale is Crowdsale {
     * @param _tokenCap Max amount of wei to be contributed
     */
     constructor(uint256 _tokenCap) public {
-        require(_tokenCap > 0);
+        require(_tokenCap > 0, "Token cap is zero");
         tokenCap = _tokenCap;
     }
 
@@ -30,7 +30,7 @@ contract TokenCappedCrowdsale is Crowdsale {
     */
     modifier underTokenCap(uint256 _weiAmount) {
         uint256 tokens = _getTokenAmount(_weiAmount);
-        require(tokensAllocated.add(tokens) < tokenCap);
+        require(tokensAllocated.add(tokens) < tokenCap, "Token cap limit reached");
         _;
     }
 

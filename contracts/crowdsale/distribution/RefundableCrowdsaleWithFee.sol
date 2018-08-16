@@ -24,7 +24,7 @@ contract RefundableCrowdsaleWithFee is FinalizableCrowdsale {
     * @param _goal Funding goal
     */
     constructor(uint256 _goal, address _feeWallet, uint8 _feePercent) public {
-        require(_goal > 0);
+        require(_goal > 0, "Goal is negative or zero");
         escrow = new RefundEscrowWithFee(wallet, _feeWallet, _feePercent);
         goal = _goal;
     }
@@ -33,8 +33,8 @@ contract RefundableCrowdsaleWithFee is FinalizableCrowdsale {
     * @dev Investors can claim refunds here if crowdsale is unsuccessful
     */
     function claimRefund() public {
-        require(isFinalized);
-        require(!goalReached());
+        require(isFinalized, "Crowdsale is not finalized yet");
+        require(!goalReached(), "Goal of the crowdsale is reached");
 
         escrow.withdraw(msg.sender);
     }

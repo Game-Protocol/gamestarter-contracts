@@ -21,7 +21,8 @@ contract SmartToken is ERC20, IMintable, ISmartToken, DetailedERC20, BurnableTok
 
 
     constructor(string _name, string _symbol, uint8 _decimals) public DetailedERC20(_name, _symbol, _decimals) {
-        require(bytes(_name).length > 0 && bytes(_symbol).length > 0);
+        require(bytes(_name).length > 0, "Name is too short");
+        require(bytes(_symbol).length > 0, "Symbol is too short");
         emit NewSmartToken(address(this));
     }
 
@@ -39,14 +40,14 @@ contract SmartToken is ERC20, IMintable, ISmartToken, DetailedERC20, BurnableTok
     }
 
     function issue(address _to, uint256 _amount) public {
-        require(_to != address(0));
-        require(_to != address(this));
-        require(super.mint(_to, _amount));
+        require(_to != address(0), "_to is '0x0'");
+        require(_to != address(this), "_to is this contract's address");
+        require(super.mint(_to, _amount), "failed to mint token");
         emit Issuance(_amount);
     }
 
     function destroy(address _from, uint256 _amount) public onlyOwner {
-        require(_from != address(0));
+        require(_from != address(0), "_from is '0x0'");
         super._burn(_from, _amount);
         emit Destruction(_amount);
     }

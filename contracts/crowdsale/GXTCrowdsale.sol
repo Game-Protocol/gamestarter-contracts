@@ -2,6 +2,8 @@ pragma solidity ^0.4.24;
 
 import "openzeppelin-solidity/contracts/crowdsale/distribution/FinalizableCrowdsale.sol";
 import "openzeppelin-solidity/contracts/crowdsale/emission/MintedCrowdsale.sol";
+import "openzeppelin-solidity/contracts/crowdsale/Crowdsale.sol";
+import "openzeppelin-solidity/contracts/ownership/Ownable.sol";
 import "../crowdsale/validation/TwoWayWhitelistedCrowdsale.sol";
 import "./validation/TokenCappedCrowdsale.sol";
 import "../token/GXToken.sol";
@@ -48,10 +50,10 @@ contract GXTCrowdsale is FinalizableCrowdsale, MintedCrowdsale, TokenCappedCrowd
         TimedCrowdsale(_openingTime, _closingTime)
         TokenCappedCrowdsale(CROWDSALE_ALLOCATION)
     {
-        require(_walletGameSupportFund != address(0));
-        require(_walletBountyProgram != address(0));
-        require(_walletAdvisorsAndPartnership != address(0));
-        require(_walletTeam != address(0));
+        require(_walletGameSupportFund != address(0), "walletGameSupportFund is '0x0'");
+        require(_walletBountyProgram != address(0), "walletBountyProgram is '0x0'");
+        require(_walletAdvisorsAndPartnership != address(0), "walletAdvisorsAndPartnership is '0x0'");
+        require(_walletTeam != address(0), "walletTeam is '0x0'");
 
         walletGameSupportFund = _walletGameSupportFund;
         walletBountyProgram = _walletBountyProgram;
