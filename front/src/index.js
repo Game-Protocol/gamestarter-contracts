@@ -5,12 +5,14 @@ import App from "./App";
 import registerServiceWorker from "./registerServiceWorker";
 import { DrizzleProvider } from "drizzle-react";
 
-import drizzleOptions from "./drizzleOptions.js"
-
+import drizzleOptions from "./drizzleOptions.js";
+import "bootstrap/dist/css/bootstrap.css";
+import Token from "./components/token";
 
 ReactDOM.render(
   <DrizzleProvider options={drizzleOptions}>
-    <App />
+    <Token />
+    {/* <App /> */}
   </DrizzleProvider>,
   document.getElementById("root")
 );

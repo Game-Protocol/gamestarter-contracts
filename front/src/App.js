@@ -3,6 +3,7 @@ import "./App.css";
 
 import { drizzleConnect } from "drizzle-react";
 import { ContractData, ContractForm } from "drizzle-react-components";
+import Token from "./components/token";
 
 class App extends Component {
   render() {
@@ -15,8 +16,7 @@ class App extends Component {
           <header className="App-header">
             <h1 className="App-title">GXToken</h1>
             <p>
-              <strong>Account</strong>:{" "}
-              {accounts[0]}
+              <strong>Account</strong>: {accounts[0]}
             </p>
             <p>
               <strong>Total Supply</strong>:{" "}
@@ -25,11 +25,7 @@ class App extends Component {
                 method="totalSupply"
                 methodArgs={[{ from: accounts[0] }]}
               />{" "}
-              <ContractData
-                contract="GXToken"
-                method="symbol"
-                hideIndicator
-              />
+              <ContractData contract="GXToken" method="symbol" hideIndicator />
             </p>
             <p>
               <strong>My Balance</strong>:{" "}
@@ -37,13 +33,12 @@ class App extends Component {
                 contract="GXToken"
                 method="balanceOf"
                 methodArgs={[accounts[0]]}
-              />
-              {" "}
-              <ContractData
-                contract="GXToken"
-                method="symbol"
-                hideIndicator
-              />
+              />{" "}
+              <ContractData contract="GXToken" method="symbol" hideIndicator />
+            </p>
+            <p>
+              <strong>Owner of token</strong>:{" "}
+              <ContractData contract="GXToken" method="owner" methodArgs={[]} />
             </p>
             <h3>Send Tokens</h3>
           </header>
@@ -74,9 +69,6 @@ class App extends Component {
         </div>
       );
     }
-    // await this.crowdsale.sendTransaction({ value, from: authorized }).should.be.fulfilled;
-    // await this.crowdsale.buyTokens(authorized, { value: value, from: authorized }).should.be.fulfilled;
-    // await this.crowdsale.buyTokens(authorized, { value: value, from: unauthorized }).should.be.fulfilled;
     return <div>Loading dapp...</div>;
   }
 }
