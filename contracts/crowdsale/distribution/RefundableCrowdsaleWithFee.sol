@@ -24,7 +24,7 @@ contract RefundableCrowdsaleWithFee is FinalizableCrowdsale {
     * @param _goal Funding goal
     */
     constructor(uint256 _goal, address _feeWallet, uint8 _feePercent) public {
-        require(_goal > 0, "Goal is negative or zero");
+        require(_goal > 0, "Goal is zero");
         escrow = new RefundEscrowWithFee(wallet, _feeWallet, _feePercent);
         goal = _goal;
     }

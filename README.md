@@ -72,16 +72,12 @@ GameStarter is a one-stop crowdfunding platform based on the blockchain for new 
 7. If you want to buy GXT using subtoken, is GXT minted in the converter?
 8. How are conversion paths saved?
 
-## Deploying website - front
+## Deploying website - front checklist
 
-* Recompile contracts and symlink the build to front/src - ```cd front/src/build && ln -s ../../../build/contracts contracts && cd ../../..```
-* Run ganache client
-* Migrate contract to local chain - ```truffle migrate --reset```
+* Run ganache cli or client - ```ganache-cli --defaultBalanceEther 1000000```
 * Open metamsk and make sure the chain is local and balance is correct
+* Migrate contract to local chain - ```truffle migrate --reset```
+* Symlink the build to front/src - ```cd front/src/build && ln -s ../../../build/contracts contracts && cd ../../..```
 * Run website - ```npm start```
 
 ## Questions
-
-1. 
-
-2. 

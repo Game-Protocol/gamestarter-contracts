@@ -20,11 +20,22 @@ module.exports = async deployer => {
 
   var rate = new web3.BigNumber(2000); // exchange rate
 
-  await deployer.deploy(GXToken);
-  var types = ["uint256" ,"uint256" ,"uint256" ,"address" ,"address" ,"address" ,"address" , "address" , "address"];
-  var params = [start, end, rate, wallet, gameSupportFund, bountyProgram, advisors, team, GXToken.address];
-  verifyCode.toABI("GXTCrowdsale.abi.txt", types, params);
-  await deployer.deploy(GXTCrowdsale, start, end, rate, wallet, gameSupportFund, bountyProgram, advisors, team, GXToken.address);
-  await GXToken.deployed().then(i => i.transferOwnership(GXTCrowdsale.address)); // Transfer ownership to crowdsale
-  await GXTCrowdsale.deployed().then(c => c.claimTokenOwnership());
+  deployer.then(async () => {
+    await deployer.deploy(GXToken);
+    await deployer.link(GXToken, [GXTCrowdsale]);
+
+    var types = ["uint256" ,"uint256" ,"uint256" ,"address" ,"address" ,"address" ,"address" , "address" , "address"];
+    var params = [start, end, rate, wallet, gameSupportFund, bountyProgram, advisors, team, GXToken.address];
+    verifyCode.toABI("GXTCrowdsale.abi.txt", types, params);
+
+    await deployer.deploy(GXTCrowdsale, start, end, rate, wallet, gameSupportFund, bountyProgram, advisors, team, GXToken.address);
+    await deployer.link(GXTCrowdsale, [GXToken]);
+
+    let tokenInstance = await GXToken.deployed();
+    let crowdsaleInstance = await GXTCrowdsale.deployed();
+    return Promise.all([
+      tokenInstance.transferOwnership(GXTCrowdsale.address),
+      crowdsaleInstance.claimTokenOwnership()
+    ]);
+  });
 };

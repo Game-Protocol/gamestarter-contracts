@@ -63,10 +63,20 @@ class App extends Component {
               labels={["To Address", "Amount to Send"]}
             />
           </div>
+          <div className="App-intro">
+            buy tokens from crowdsale
+            <ContractForm
+              contract="GXTCrowdsale"
+              method="buyTokens"
+              labels={["Amount to Send"]}
+            />
+          </div>
         </div>
       );
     }
-
+    // await this.crowdsale.sendTransaction({ value, from: authorized }).should.be.fulfilled;
+    // await this.crowdsale.buyTokens(authorized, { value: value, from: authorized }).should.be.fulfilled;
+    // await this.crowdsale.buyTokens(authorized, { value: value, from: unauthorized }).should.be.fulfilled;
     return <div>Loading dapp...</div>;
   }
 }
