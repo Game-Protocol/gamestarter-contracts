@@ -3,7 +3,9 @@ import "./App.css";
 
 import { drizzleConnect } from "drizzle-react";
 import { ContractData, ContractForm } from "drizzle-react-components";
-import Token from "./components/token";
+import Token from "./components/token.jsx";
+import Token from "./components/infoWars.jsx";
+import Token from "./components/crowdsale.jsx";
 
 class App extends Component {
   render() {
@@ -66,6 +68,7 @@ class App extends Component {
               labels={["Amount to Send"]}
             />
           </div>
+          <Token />
         </div>
       );
     }
