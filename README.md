@@ -53,24 +53,13 @@ GameStarter is a one-stop crowdfunding platform based on the blockchain for new 
 
 ## Tokens Graph
 
-![tokens_graph](images/tokens_graph.png)
+![tokens_graph](images/tokens_graph.svg)
 
 ## Crowdsale contract types
 
 1. Basic crowdsale will be mintable and refundable.
 2. Bonus crowdsale will add to the Basic crowdsale bonuses depending on the time invested.
 3. ...
-
-## Talking points
-
-1. Virtual balance?
-2. Just one converter?
-3. Connector vs converter?
-4. Active converter?
-5. After the converter is activated how can we add new subtokens to trade with the main token?
-6. can we use bancors deployed converter factory to create our converter?
-7. If you want to buy GXT using subtoken, is GXT minted in the converter?
-8. How are conversion paths saved?
 
 ## Deploying website - front checklist
 
@@ -79,28 +68,3 @@ GameStarter is a one-stop crowdfunding platform based on the blockchain for new 
 - Migrate contract to local chain - `truffle migrate --reset`
 - Symlink the build to front/src - `cd front/src/build && ln -s ../../../build/contracts contracts && cd ../../..`
 - Run website - `npm start`
-
-## Questions
-
-## GXToken Architecture
-
-GXToken is mintable, burnable, pausble and claimable token using the openzeppelin framework.
-GXToken implements the bancor ISmartToken interface by adapting the openzeppelin tokens functionality.
-
-## GXToken Crowdsale Architecture
-
-The crowdsale is implementing the openzeppelin crowdsale with some additions.
-The crowdsale combines off chain and on chain whitelisting options,  
-and has a token cap(the maximum amount of tokens that can be issued).
-
-## GameToken Architecture
-
-GameToken is a ERC20 compatible token assembled using the openzeppelin framework.
-GameToken is created together with GameTokenCrowdsale when a game project is launched.
-
-## GameToken Crowdsale Architecture
-
-GameToken Crowdsale uses openzeppelin framework, impmenting a RefundableCrowdsaleWithFee,
-a modified Refundable crowdsale that redirects upon a successful crowdsale, a portion of the raised ether.
-The owner can add packages and the puschasing of the crowdsale carried out using these packages.
-The crowdsale also uses an off chain whitelisting.
