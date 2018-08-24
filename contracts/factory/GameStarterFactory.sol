@@ -18,15 +18,15 @@ contract GameStarterFactory {
 
     address public feeWallet;
     uint8 public feePercent;
-    // GXToken public gpToken;
+    // GXToken public gxToken;
     // BancorConverterFactory factory;
     // IContractRegistry public registery;
 
     event NewGame(address indexed _owner, address indexed _token, address _crowdsale);
 
-    // constructor (GXToken _gpToken, IContractRegistry _registery, BancorConverterFactory _factory, address _feeWallet, uint8 _feePercent) public {
+    // constructor (GXToken _gxToken, IContractRegistry _registery, BancorConverterFactory _factory, address _feeWallet, uint8 _feePercent) public {
     constructor (address _feeWallet, uint8 _feePercent) public {
-        // gpToken = _gpToken;
+        // gxToken = _gxToken;
         // registery = _registery;
         // factory = _factory;
         feeWallet = _feeWallet;
@@ -63,7 +63,7 @@ contract GameStarterFactory {
 
         // Add a connector between the Game Protocol Token 
         // and the created GameToken using the converter
-        // factory.createConverter(gpToken, registery, 0, token, 200000);
+        // factory.createConverter(gxToken, registery, 0, token, 200000);
 
         emit NewGame(_owner, tokenAddress, crowdsaleAddress);
 

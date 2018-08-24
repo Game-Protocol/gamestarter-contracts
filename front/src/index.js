@@ -8,8 +8,7 @@ import "bootstrap/dist/css/bootstrap.css";
 
 // Layouts
 import App from "./App";
-import Token from "./components/token.jsx";
-// import HomeContainer from "./layouts/home/HomeContainer";
+import HomeContainer from "./components/home/HomeContainer";
 import { LoadingContainer } from "drizzle-react-components";
 
 import store from "./store";
@@ -23,8 +22,7 @@ ReactDOM.render(
     <LoadingContainer>
       <Router history={history}>
         <Route path="/" component={App}>
-          {/* <IndexRoute component={HomeContainer} /> */}
-          <IndexRoute component={Token} />
+          <IndexRoute component={HomeContainer} />
         </Route>
       </Router>
     </LoadingContainer>

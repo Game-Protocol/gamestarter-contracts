@@ -24,4 +24,4 @@ class InfoBar extends Component {
   }
 }
 
-export default Token;
+export default InfoBar;

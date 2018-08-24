@@ -24,4 +24,4 @@ class Crowdsale extends Component {
   }
 }
 
-export default Token;
+export default Crowdsale;

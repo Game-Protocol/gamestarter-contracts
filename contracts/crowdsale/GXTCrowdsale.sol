@@ -3,7 +3,6 @@ pragma solidity ^0.4.24;
 import "openzeppelin-solidity/contracts/crowdsale/distribution/FinalizableCrowdsale.sol";
 import "openzeppelin-solidity/contracts/crowdsale/emission/MintedCrowdsale.sol";
 import "openzeppelin-solidity/contracts/crowdsale/Crowdsale.sol";
-import "openzeppelin-solidity/contracts/ownership/Ownable.sol";
 import "../crowdsale/validation/TwoWayWhitelistedCrowdsale.sol";
 import "./validation/TokenCappedCrowdsale.sol";
 import "../token/GXToken.sol";
