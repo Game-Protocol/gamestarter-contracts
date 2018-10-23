@@ -5,8 +5,9 @@ import { drizzleConnect } from "drizzle-react";
 const mapStateToProps = state => {
   return {
     accounts: state.accounts,
-    Token: state.contracts.Token,
-    Crowdsale: state.contracts.Crowdsale
+    GXToken: state.contracts.GXToken,
+    GXTCrowdsale: state.contracts.GXTCrowdsale,
+    drizzleStatus: state.drizzleStatus
   };
 };
 
